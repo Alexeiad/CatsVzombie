@@ -18,6 +18,7 @@ public class PlayerInput
 
     private bool IsMobilePlatform()
     {
-        return Application.isMobilePlatform;
+        //return Application.isMobilePlatform;
+        return true;
     }
 }
