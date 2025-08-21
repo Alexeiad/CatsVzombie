@@ -30,6 +30,7 @@ public class PlayerBehaviour : MonoBehaviour
     void Start()
     {
         _playerInput = new PlayerInput(_joystick);
+  
     }
 
     void Update()
@@ -90,7 +91,6 @@ public class PlayerBehaviour : MonoBehaviour
         // Тут логика смерти игрока
     }
 
-    
 
 
 }

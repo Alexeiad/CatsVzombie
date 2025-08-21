@@ -12,6 +12,7 @@ public class JoystickInput : IPlayerInput
 
     public Vector2 GetMovement()
     {
+
         Vector2 dir = new Vector2(_joystick.Horizontal, _joystick.Vertical);
         return dir.magnitude > 1 ? dir.normalized : dir;
     }
