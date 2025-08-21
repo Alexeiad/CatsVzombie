@@ -5,7 +5,7 @@ using Zenject;
 
 public class HUD_Preview : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _food, _water, _materials,_diamonds;
+    [SerializeField] private TextMeshProUGUI _food, _water, _materials,_diamonds,_catsCount;
 
 
     [Inject]
