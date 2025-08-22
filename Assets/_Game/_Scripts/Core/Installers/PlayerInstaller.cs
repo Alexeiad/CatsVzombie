@@ -29,7 +29,7 @@ public class PlayerInstaller : MonoInstaller
 
         //спавн и регистрация игрока
         var player = Container.InstantiatePrefab(_playerPrefab, Vector3.zero, Quaternion.identity, null);
-        Container.Bind<PlayerBehaviour>().FromInstance(player.GetComponent<PlayerBehaviour>()).AsSingle();
+        Container.Bind<PlayerMovement>().FromInstance(player.GetComponent<PlayerMovement>()).AsSingle();
     }
 
 

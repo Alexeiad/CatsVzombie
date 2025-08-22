@@ -13,6 +13,14 @@ public class SimpleUIAnimator : MonoBehaviour
 
     private void Awake()
     {
+        // Устанавливаем частоту обновления для всех твинов
+        DOTween.SetTweensCapacity(500, 50); // Опционально: увеличиваем capacity
+        DOTween.defaultUpdateType = UpdateType.Normal;
+
+        // Основная настройка FPS
+        DOTween.timeScale = 1f; // Убеждаемся, что timeScale = 1
+        Application.targetFrameRate = 120;
+
         foreach (var trigger in _triggers)
         {
             // Сохраняем оригинальный scale для каждого объекта
