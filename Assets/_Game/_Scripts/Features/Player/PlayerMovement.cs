@@ -3,7 +3,7 @@ using UnityEngine;
 using Zenject;
 
 
-public class PlayerMovement : MonoBehaviour,IDamageable
+public class PlayerMovement : MonoBehaviour,IDamageable<float>
 {
     public float Speed;
     public float MaxHealth = 100;
@@ -47,8 +47,9 @@ public class PlayerMovement : MonoBehaviour,IDamageable
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
-        throw new System.NotImplementedException();
+        _currentHealth-=damage;
+        Debug.Log("player: "+ _currentHealth);
     }
 }

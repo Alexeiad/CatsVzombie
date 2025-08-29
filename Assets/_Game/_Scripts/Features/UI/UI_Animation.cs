@@ -11,6 +11,8 @@ public class SimpleUIAnimator : MonoBehaviour
 
     private Dictionary<GameObject, Vector3> _originalScales = new Dictionary<GameObject, Vector3>();
 
+    
+
     private void Awake()
     {
         // ”станавливаем частоту обновлени€ дл€ всех твинов
@@ -58,6 +60,8 @@ public class SimpleUIAnimator : MonoBehaviour
 
             clickSequence.Append(clickedObject.transform.DOScale(originalScale, animationDuration * 0.7f)
                 .SetEase(Ease.OutElastic));
+           
+            
         }
     }
 

@@ -1,9 +1,5 @@
 
-using UnityEngine;
-
-public interface IDamageable 
+public interface IDamageable<T>
 {
-    
-    void TakeDamage(int damage);
-
+    void TakeDamage(T damageAmount);
 }

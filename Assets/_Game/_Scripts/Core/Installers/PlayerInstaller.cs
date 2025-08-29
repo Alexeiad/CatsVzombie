@@ -1,4 +1,5 @@
 
+using System.Collections.Generic;
 using UnityEngine;
 
 using Zenject;
@@ -10,6 +11,8 @@ public class PlayerInstaller : MonoInstaller
     [SerializeField] private GameObject _canvasesPrefab;
 
     private GameObject _joystick;
+
+    [Inject] private List<Transform> _entities;
 
 
     public override void InstallBindings()
@@ -30,6 +33,8 @@ public class PlayerInstaller : MonoInstaller
         //спавн и регистрация игрока
         var player = Container.InstantiatePrefab(_playerPrefab, Vector3.zero, Quaternion.identity, null);
         Container.Bind<PlayerMovement>().FromInstance(player.GetComponent<PlayerMovement>()).AsSingle();
+        _entities.Add(player.transform);
+        
     }
 
 

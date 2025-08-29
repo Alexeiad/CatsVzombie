@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7268419583428083041}
   - component: {fileID: 7292287844382132679}
-  - component: {fileID: -6643163479676222646}
+  - component: {fileID: 416804822727340971}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.81, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-6643163479676222646
+--- !u!114 &416804822727340971
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,6 +94,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 2906837780647826812}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a57e28259ccf5f34cb3cccc288d43ab4, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c8a1ad2cb904c041aa5aeb12b3a10b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerDamage: 10
+  enemyDamage: 5
