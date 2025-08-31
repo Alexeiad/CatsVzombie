@@ -5,7 +5,7 @@ using Zenject;
 public class EnemyAI : MonoBehaviour,IDamageable<float>
 {
     public float MaxHealth = 100;
-    private float _currentHealth;
+    public float currentHealth;
 
     [Header("AI Settings")]
     public float detectionRange = 8f;
@@ -38,9 +38,9 @@ public class EnemyAI : MonoBehaviour,IDamageable<float>
     {
         enemyInput = GetComponent<EnemyInput>();
         enemyAttack = GetComponent<EnemyAttack>();
+
         _entities.Add(transform);
-       
-        _currentHealth = MaxHealth;
+        currentHealth = MaxHealth;
         
     }
 
@@ -58,8 +58,9 @@ public class EnemyAI : MonoBehaviour,IDamageable<float>
         }
 
         UpdateState();
+       
     }
-
+    
     private void MakeDecision()
     {
         if (_playerTransform == null) return;
@@ -124,6 +125,9 @@ public class EnemyAI : MonoBehaviour,IDamageable<float>
 
             case EnemyState.Retreat:
                 RetreatBehavior();
+                break;
+            case EnemyState.Dead:
+                Die();
                 break;
         }
     }
@@ -217,17 +221,23 @@ public class EnemyAI : MonoBehaviour,IDamageable<float>
     public void SetState(EnemyState newState)
     {
         currentState = newState;
-        OnStateChanged(newState);
+        
     }
 
-    private void OnStateChanged(EnemyState newState)
+    private void Die()
     {
-        // Можно добавить логику при смене состояния
+        Destroy(gameObject);
     }
 
     public void TakeDamage(float damageAmount)
     {
-        _currentHealth-=damageAmount;
-        Debug.Log("enemy: "+_currentHealth);
+        currentHealth-=damageAmount;
+
+        if (currentHealth < 0)
+        {
+            SetState(EnemyState.Dead);
+        }
+        Debug.Log("enemy: "+currentHealth);
     }
+
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
@@ -5,34 +6,45 @@ using Zenject;
 
 public class Gun : MonoBehaviour
 {
+    
+
     [SerializeField] private Bullet _bulletPrefab;
 
     [Inject] private List<Transform> _entities;
 
-    private bool _isEnemy;
+    private EntityType _entityType = EntityType.Player;
 
 
-    public void Container(bool isEnemy)
+    public void Container(EntityType entityType)
     {
-        _isEnemy=isEnemy;
+        _entityType = entityType;
     }
-
+    private void OnEnable()
+    {
+        StatsPreview.OnClick += PrepareShoot;
+    }
+    private void OnDisable()
+    {
+        StatsPreview.OnClick -= PrepareShoot;
+    }
 
     private void Start()
     {
         Debug.Log("entity: " + _entities.Count);
     }
 
-    private void Update()
+    private void PrepareShoot()
     {
-        if (Input.GetMouseButtonDown(0)&&_isEnemy==false)
+        if (_entityType.Equals(EntityType.Player))
         {
             Transform closestEntity = FindClosestEntity();
+
             if (closestEntity != null)
             {
                 Shoot(closestEntity);
             }
         }
+        
     }
 
     private Transform FindClosestEntity()
@@ -77,4 +89,6 @@ public class Gun : MonoBehaviour
         var bullet = Instantiate(_bulletPrefab.gameObject, transform.position, Quaternion.identity);
         bullet.GetComponent<Bullet>().MoveToContainer(entity);
     }
+
+   
 }

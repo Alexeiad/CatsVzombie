@@ -15,7 +15,7 @@ public class EnemyAttack : MonoBehaviour
     {
         _player = player;
         _shoot = shoot;
-        _gun.Container(true);
+        _gun.Container(EntityType.Zombie);
     }
 
     private void Update()
