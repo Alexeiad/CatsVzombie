@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 505308921}
   - component: {fileID: 505308920}
   m_Layer: 0
-  m_Name: Grid
+  m_Name: Grids
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -420,7 +420,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerPrefab: {fileID: 3928872983729171847, guid: 912a8228498283649a2165757d23cb9c, type: 3}
-  _canvasesPrefab: {fileID: 8213887343784929088, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
   _joystick: {fileID: 1242735425}
 --- !u!114 &990506670
 MonoBehaviour:
