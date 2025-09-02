@@ -16,7 +16,7 @@ public class PlayerInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-
+        _entities.Clear();
         //регистрация джойтика
         Container.Bind<DynamicJoystick>().FromInstance(_joystick).AsSingle();
 

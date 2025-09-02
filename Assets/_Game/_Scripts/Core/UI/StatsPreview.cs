@@ -38,7 +38,7 @@ public class StatsPreview : MonoBehaviour
 
     private void Update()
     {
-        _playerStats.sliderHealth.value = _playerMovement.CurrentHealth * 0.01f;
+        _playerStats.sliderHealth.value = _playerMovement.CurrentHealth.Value * 0.01f;
 
         if (_enemys == null || _enemys.Count == 0)
         {
@@ -65,7 +65,7 @@ public class StatsPreview : MonoBehaviour
         if (closestEnemy != null && closestEnemy.gameObject != null)
         {
             _enemyStats.sliderHealth.gameObject.SetActive(true);
-            _enemyStats.sliderHealth.value = closestEnemy.currentHealth * 0.01f;
+            _enemyStats.sliderHealth.value =closestEnemy.currentHealth.Value * 0.01f;
         }
         else
         {
