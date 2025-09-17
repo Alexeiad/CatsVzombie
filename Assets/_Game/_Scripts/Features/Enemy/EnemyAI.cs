@@ -1,11 +1,15 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+using UniRx;
+using System;
+using System.Collections;
 
-public class EnemyAI : MonoBehaviour,IDamageable<float>
+
+public class EnemyAI : MonoBehaviour, IDamageable<float>
 {
     public float MaxHealth = 100;
-    public float currentHealth;
+    public FloatReactiveProperty currentHealth = new FloatReactiveProperty();
 
     [Header("AI Settings")]
     public float detectionRange = 8f;
@@ -18,12 +22,12 @@ public class EnemyAI : MonoBehaviour,IDamageable<float>
     public float dodgeChance = 0.3f;
     public float repositionChance = 0.4f;
 
-    private EnemyState currentState;
+    private ReactiveProperty<EnemyState> currentState = new ReactiveProperty<EnemyState>();
     private Transform _playerTransform;
     private EnemyInput enemyInput;
     private EnemyAttack enemyAttack;
 
-    private float nextDecisionTime;
+    private CompositeDisposable disposables = new CompositeDisposable();
 
     [Inject] private List<Transform> _entities;
 
@@ -33,34 +37,44 @@ public class EnemyAI : MonoBehaviour,IDamageable<float>
         _playerTransform = player.transform;
     }
 
-
     private void Awake()
     {
         enemyInput = GetComponent<EnemyInput>();
         enemyAttack = GetComponent<EnemyAttack>();
 
         _entities.Add(transform);
-        currentHealth = MaxHealth;
-        
+        currentHealth.Value = MaxHealth;
     }
 
     private void Start()
     {
+        // Реактивная подписка на изменения состояния
+        currentState.Subscribe(state => OnStateChanged(state)).AddTo(disposables);
+
+        // Реактивная подписка на здоровье
+        currentHealth
+            .Where(health => health <= 0)
+            .Subscribe(_ => SetState(EnemyState.Dead))
+            .AddTo(disposables);
+
+        // Периодическое принятие решений
+        Observable.Interval(TimeSpan.FromSeconds(decisionRate))
+            .Subscribe(_ => MakeDecision())
+            .AddTo(disposables);
+
+        // Непрерывное обновление состояния
+        Observable.EveryUpdate()
+            .Subscribe(_ => UpdateState())
+            .AddTo(disposables);
+
         SetState(EnemyState.Patrol);
     }
 
-    private void Update()
+    private void OnDestroy()
     {
-        if (Time.time >= nextDecisionTime)
-        {
-            MakeDecision();
-            nextDecisionTime = Time.time + decisionRate;
-        }
-
-        UpdateState();
-       
+        disposables.Dispose();
     }
-    
+
     private void MakeDecision()
     {
         if (_playerTransform == null) return;
@@ -68,7 +82,7 @@ public class EnemyAI : MonoBehaviour,IDamageable<float>
         float distanceToPlayer = Vector2.Distance(transform.position, _playerTransform.position);
         bool hasLineOfSight = CheckLineOfSight();
 
-        switch (currentState)
+        switch (currentState.Value)
         {
             case EnemyState.Patrol:
                 if (distanceToPlayer <= detectionRange && hasLineOfSight)
@@ -87,13 +101,15 @@ public class EnemyAI : MonoBehaviour,IDamageable<float>
                     SetState(EnemyState.Chase);
                 else if (distanceToPlayer <= retreatRange)
                     SetState(EnemyState.Retreat);
-                else if (Random.value < dodgeChance)
+                else if (UnityEngine.Random.value < dodgeChance)
                     SetState(EnemyState.Dodge);
                 break;
 
             case EnemyState.Dodge:
-                
-                    SetState(EnemyState.Attack);
+                // Автоматический возврат к атаке после уворота
+                Observable.Timer(TimeSpan.FromSeconds(1f))
+                    .TakeUntilDisable(this)
+                    .Subscribe(_ => SetState(EnemyState.Attack));
                 break;
 
             case EnemyState.Retreat:
@@ -105,7 +121,7 @@ public class EnemyAI : MonoBehaviour,IDamageable<float>
 
     private void UpdateState()
     {
-        switch (currentState)
+        switch (currentState.Value)
         {
             case EnemyState.Patrol:
                 PatrolBehavior();
@@ -132,9 +148,26 @@ public class EnemyAI : MonoBehaviour,IDamageable<float>
         }
     }
 
+    private void OnStateChanged(EnemyState newState)
+    {
+ 
+        if (newState == EnemyState.Dodge)
+        {
+            StartCoroutine(FlashEffect());
+        }
+    }
+
+    private IEnumerator FlashEffect()
+    {
+        var renderer = GetComponent<SpriteRenderer>();
+        Color originalColor = renderer.color;
+        renderer.color = Color.yellow;
+        yield return new WaitForSeconds(0.2f);
+        renderer.color = originalColor;
+    }
+
     private void PatrolBehavior()
     {
-        // Простое патрулирование или ожидание
         enemyInput.SetMovementInput(Vector2.zero);
         enemyAttack.SetShoot(_playerTransform, false);
     }
@@ -149,8 +182,7 @@ public class EnemyAI : MonoBehaviour,IDamageable<float>
 
     private void AttackBehavior()
     {
-        // Маневрирование во время атаки
-        if (Random.value < repositionChance)
+        if (UnityEngine.Random.value < repositionChance)
         {
             Vector2 repositionDirection = GetRepositionDirection();
             enemyInput.SetMovementInput(repositionDirection);
@@ -165,12 +197,9 @@ public class EnemyAI : MonoBehaviour,IDamageable<float>
 
     private void DodgeBehavior()
     {
-        // Уворот от снарядов или игрока
         Vector2 dodgeDir = GetDodgeDirection();
         enemyInput.SetMovementInput(dodgeDir);
         enemyAttack.SetShoot(_playerTransform, false);
-
-
     }
 
     private void RetreatBehavior()
@@ -192,12 +221,11 @@ public class EnemyAI : MonoBehaviour,IDamageable<float>
             obstacleMask
         );
 
-        return hit.collider == null || hit.collider.CompareTag("Player");
+        return hit.collider == null;
     }
 
     private Vector2 GetObstacleAvoidanceDirection(Vector2 desiredDirection)
     {
-        // Упрощенное избегание препятствий
         RaycastHit2D hit = Physics2D.Raycast(
             transform.position,
             desiredDirection,
@@ -210,34 +238,50 @@ public class EnemyAI : MonoBehaviour,IDamageable<float>
 
     private Vector2 GetDodgeDirection()
     {
-        return new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
+        return new Vector2(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized;
     }
 
     private Vector2 GetRepositionDirection()
     {
-        return new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f));
+        return new Vector2(UnityEngine.Random.Range(-0.5f, 0.5f), UnityEngine.Random.Range(-0.5f, 0.5f));
     }
 
     public void SetState(EnemyState newState)
     {
-        currentState = newState;
-        
+        currentState.Value = newState;
     }
 
     private void Die()
     {
-        Destroy(gameObject);
+        // Реактивные события при смерти
+        Observable.Timer(TimeSpan.FromSeconds(0.5f))
+            .Subscribe(_ => Destroy(gameObject))
+            .AddTo(disposables);
     }
 
     public void TakeDamage(float damageAmount)
     {
-        currentHealth-=damageAmount;
+        currentHealth.Value -= damageAmount;
+        Debug.Log("enemy: " + currentHealth.Value);
 
-        if (currentHealth < 0)
+        // Реакция на получение урона
+        if (currentState.Value != EnemyState.Dead)
         {
-            SetState(EnemyState.Dead);
+            StartCoroutine(DamageFlash());
         }
-        Debug.Log("enemy: "+currentHealth);
     }
 
+    private IEnumerator DamageFlash()
+    {
+        var renderer = GetComponent<SpriteRenderer>();
+        Color originalColor = renderer.color;
+        renderer.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        renderer.color = originalColor;
+    }
+
+    // Реактивное свойство для внешнего доступа к состоянию
+    public IReadOnlyReactiveProperty<EnemyState> CurrentState => currentState;
+    public IReadOnlyReactiveProperty<float> Health => currentHealth;
 }
+

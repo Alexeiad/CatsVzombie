@@ -182,7 +182,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 100
-  currentHealth: 0
+  currentHealth:
+    value: 0
   detectionRange: 12
   attackRange: 10
   retreatRange: 1
@@ -692,7 +693,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 100
-  currentHealth: 0
+  currentHealth:
+    value: 0
   detectionRange: 12
   attackRange: 10
   retreatRange: 1
@@ -72270,7 +72272,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 100
-  currentHealth: 0
+  currentHealth:
+    value: 0
   detectionRange: 12
   attackRange: 10
   retreatRange: 1

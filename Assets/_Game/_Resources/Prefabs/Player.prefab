@@ -344,6 +344,8 @@ GameObject:
   - component: {fileID: 4346137688519439723}
   - component: {fileID: 4002396781526244415}
   - component: {fileID: 8487088063245617759}
+  - component: {fileID: 548096243579654796}
+  - component: {fileID: 2067103372464614340}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -410,7 +412,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: 702775933, guid: 19e920bd7c703aa49b5ff36c2927957e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -461,6 +463,41 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &548096243579654796
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3928872983729171847}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 800534833f456e94f984a02a21217fb8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2067103372464614340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3928872983729171847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f8904cbcf1a7514da9eee778b6b33e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 548096243579654796}
+  minMovementThreshold: 0
 --- !u!1001 &1508065968688127947
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -472,6 +509,10 @@ PrefabInstance:
     - target: {fileID: 2056668481506627188, guid: 2514c0c9baad56241a8b899110c249c2, type: 3}
       propertyPath: m_Name
       value: Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 4269896800463609838, guid: 2514c0c9baad56241a8b899110c249c2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6829526052736510470, guid: 2514c0c9baad56241a8b899110c249c2, type: 3}
       propertyPath: m_LocalPosition.x
