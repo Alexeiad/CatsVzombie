@@ -1,7 +1,8 @@
+п»їusing DG.Tweening;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using System.Collections.Generic;
-using DG.Tweening;
+using FMODUnity;
 
 public class SimpleUIAnimator : MonoBehaviour
 {
@@ -11,21 +12,19 @@ public class SimpleUIAnimator : MonoBehaviour
 
     private Dictionary<GameObject, Vector3> _originalScales = new Dictionary<GameObject, Vector3>();
 
-    
-
     private void Awake()
     {
-        // Устанавливаем частоту обновления для всех твинов
-        DOTween.SetTweensCapacity(500, 50); // Опционально: увеличиваем capacity
+        // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј С‡Р°СЃС‚РѕС‚Сѓ РѕР±РЅРѕРІР»РµРЅРёСЏ РґР»СЏ РІСЃРµС… С‚РІРёРЅРѕРІ
+        DOTween.SetTweensCapacity(500, 50); // РћРїС†РёРѕРЅР°Р»СЊРЅРѕ: СѓРІРµР»РёС‡РёРІР°РµРј capacity
         DOTween.defaultUpdateType = UpdateType.Normal;
 
-        // Основная настройка FPS
-        DOTween.timeScale = 1f; // Убеждаемся, что timeScale = 1
+        // РћСЃРЅРѕРІРЅР°СЏ РЅР°СЃС‚СЂРѕР№РєР° FPS
+        DOTween.timeScale = 1f; // РЈР±РµР¶РґР°РµРјСЃСЏ, С‡С‚Рѕ timeScale = 1
         Application.targetFrameRate = 120;
 
         foreach (var trigger in _triggers)
         {
-            // Сохраняем оригинальный scale для каждого объекта
+            // РЎРѕС…СЂР°РЅСЏРµРј РѕСЂРёРіРёРЅР°Р»СЊРЅС‹Р№ scale РґР»СЏ РєР°Р¶РґРѕРіРѕ РѕР±СЉРµРєС‚Р°
             if (trigger.gameObject != null && !_originalScales.ContainsKey(trigger.gameObject))
             {
                 _originalScales[trigger.gameObject] = trigger.gameObject.transform.localScale;
@@ -37,14 +36,14 @@ public class SimpleUIAnimator : MonoBehaviour
 
     private void OnClick(BaseEventData data)
     {
-        // Получаем объект, на котором произошел клик
+        // РџРѕР»СѓС‡Р°РµРј РѕР±СЉРµРєС‚, РЅР° РєРѕС‚РѕСЂРѕРј РїСЂРѕРёР·РѕС€РµР» РєР»РёРє
         GameObject clickedObject = ((PointerEventData)data).pointerCurrentRaycast.gameObject;
         if (clickedObject != null && _originalScales.ContainsKey(clickedObject))
         {
-            // Останавливаем все предыдущие анимации
+            // РћСЃС‚Р°РЅР°РІР»РёРІР°РµРј РІСЃРµ РїСЂРµРґС‹РґСѓС‰РёРµ Р°РЅРёРјР°С†РёРё
             clickedObject.transform.DOKill();
 
-            // Сохраняем оригинальный scale если его еще нет
+            // РЎРѕС…СЂР°РЅСЏРµРј РѕСЂРёРіРёРЅР°Р»СЊРЅС‹Р№ scale РµСЃР»Рё РµРіРѕ РµС‰Рµ РЅРµС‚
             if (!_originalScales.ContainsKey(clickedObject))
             {
                 _originalScales[clickedObject] = clickedObject.transform.localScale;
@@ -52,7 +51,7 @@ public class SimpleUIAnimator : MonoBehaviour
 
             Vector3 originalScale = _originalScales[clickedObject];
 
-            // Анимация клика: уменьшить -> вернуться к оригиналу
+            // РђРЅРёРјР°С†РёСЏ РєР»РёРєР°: СѓРјРµРЅСЊС€РёС‚СЊ -> РІРµСЂРЅСѓС‚СЊСЃСЏ Рє РѕСЂРёРіРёРЅР°Р»Сѓ
             Sequence clickSequence = DOTween.Sequence();
 
             clickSequence.Append(clickedObject.transform.DOScale(originalScale * clickScale, animationDuration * 0.3f)
@@ -60,9 +59,16 @@ public class SimpleUIAnimator : MonoBehaviour
 
             clickSequence.Append(clickedObject.transform.DOScale(originalScale, animationDuration * 0.7f)
                 .SetEase(Ease.OutElastic));
-           
-            
+
+            // рџ”€ Р’РћРЎРџР РћРР—Р’Р•Р”Р•РќРР• FMOD РЎРћР‘Р«РўРРЇ "ClickButton"
+            PlayFMODClickSound();
         }
+    }
+
+    // рџ”€ РњР•РўРћР” Р”Р›РЇ Р’РћРЎРџР РћРР—Р’Р•Р”Р•РќРРЇ Р—Р’РЈРљРђ
+    private void PlayFMODClickSound()
+    {
+        RuntimeManager.PlayOneShot("event:/ClickButton");
     }
 
     private void AddEventTriggerListener(EventTrigger trigger, EventTriggerType eventType, UnityEngine.Events.UnityAction<BaseEventData> callback)
@@ -73,7 +79,7 @@ public class SimpleUIAnimator : MonoBehaviour
         trigger.triggers.Add(entry);
     }
 
-    // Метод для ручного добавления объекта (на случай динамического создания)
+    // РњРµС‚РѕРґ РґР»СЏ СЂСѓС‡РЅРѕРіРѕ РґРѕР±Р°РІР»РµРЅРёСЏ РѕР±СЉРµРєС‚Р° (РЅР° СЃР»СѓС‡Р°Р№ РґРёРЅР°РјРёС‡РµСЃРєРѕРіРѕ СЃРѕР·РґР°РЅРёСЏ)
     public void AddTrigger(EventTrigger trigger)
     {
         if (trigger != null && !_triggers.Contains(trigger))
@@ -86,7 +92,7 @@ public class SimpleUIAnimator : MonoBehaviour
 
     private void OnDestroy()
     {
-        // Восстанавливаем оригинальные scale при уничтожении
+        // Р’РѕСЃСЃС‚Р°РЅР°РІР»РёРІР°РµРј РѕСЂРёРіРёРЅР°Р»СЊРЅС‹Рµ scale РїСЂРё СѓРЅРёС‡С‚РѕР¶РµРЅРёРё
         foreach (var kvp in _originalScales)
         {
             if (kvp.Key != null)
