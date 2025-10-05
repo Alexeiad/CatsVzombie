@@ -11,6 +11,7 @@ public class PlayerInstaller : MonoInstaller
 
     [SerializeField] private DynamicJoystick _joystick;
 
+
     [Inject] private EntityList _entities;
 
 
@@ -18,7 +19,13 @@ public class PlayerInstaller : MonoInstaller
     {
         _entities.Clear();
         //регистрация джойтика
-        Container.Bind<DynamicJoystick>().FromInstance(_joystick).AsSingle();
+        Container.Bind<DynamicJoystick>()
+            .FromInstance(_joystick)
+                .AsSingle();
+
+
+
+
 
         if (!IsMobilePlatform())
             _joystick.gameObject.SetActive(false);//если это пк

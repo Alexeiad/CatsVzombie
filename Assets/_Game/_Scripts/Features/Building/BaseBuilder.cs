@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 using Zenject;
 
 public class BaseBuilder : MonoBehaviour
@@ -10,7 +12,6 @@ public class BaseBuilder : MonoBehaviour
 
     [SerializeField] private GameObject fishBase,waterBase;
 
-    public int Bases;//
 
     private GameObject selectedObjectType; // Выбранный тип объекта для строительства
     private Dictionary<Vector3Int, GameObject> builtObjects = new Dictionary<Vector3Int, GameObject>(); // Словарь построенных объектов
@@ -22,6 +23,10 @@ public class BaseBuilder : MonoBehaviour
 
     private BaseList _bases;
 
+    private BaseType _baseType;
+
+    private bool isBuildPanel;
+
     
     [Inject]
     private void Construct(PlayerMovement player)
@@ -32,6 +37,7 @@ public class BaseBuilder : MonoBehaviour
     private void Start()
     {
         _bases=BaseLoadSaveData.Bases;
+
         foreach (BaseElementsSaveData baseData in _bases)
         {
             if (baseData.ID == _FishKey)
@@ -52,7 +58,7 @@ public class BaseBuilder : MonoBehaviour
 
     void Update()
     {
-        Bases = _bases.Count;//
+    
         if (Input.GetMouseButtonDown(0)) // Левая кнопка мыши
         {
             // Проверяем, что кликнули не по UI элементу
@@ -66,15 +72,20 @@ public class BaseBuilder : MonoBehaviour
                 Vector3 buildPosition = tilemap.GetCellCenterWorld(tilePosition);
 
                 // Проверяем, можно ли строить
-                if (CanBuildHere(tilePosition))
+                if (CanBuildHere(tilePosition)&& isBuildPanel)
                 {
                     // Спавним объект
                     GameObject newObject = Instantiate(selectedObjectType, buildPosition+new Vector3(0,0,10f),
                         Quaternion.identity);
                     builtObjects[tilePosition] = newObject;
 
-                    _bases.Add(new BaseElementsSaveData(_FishKey, newObject.transform.position));
-                    
+
+                   
+                    if (_baseType == BaseType.FishBase)
+                        _bases.Add(new BaseElementsSaveData(_FishKey, newObject.transform.position));
+                    if (_baseType == BaseType.WaterBase)
+                        _bases.Add(new BaseElementsSaveData(_WaterKey, newObject.transform.position));
+
                 }
             }
         }
@@ -85,13 +96,13 @@ public class BaseBuilder : MonoBehaviour
             DeselectObject();
         }
     }
-
-    Vector3 CalculateBuildPosition(Vector3Int tilePos)
+    public void BuildedOn()
     {
-        // Для изометрического тайлмапа используем GetCellCenterWorld
-        Vector3 worldPos = tilemap.GetCellCenterWorld(tilePos);
-
-        return worldPos;
+        isBuildPanel=true;
+    }
+    public void BuildedOff()
+    {
+        isBuildPanel=false;
     }
 
     bool CanBuildHere(Vector3Int tilePosition)
@@ -104,23 +115,20 @@ public class BaseBuilder : MonoBehaviour
         return true;
     }
 
-    bool IsPointerOverUI()
-    {
-        // Простая проверка на UI (можно заменить на более продвинутую)
-        return UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
-    }
-
     // Методы для выбора объекта для строительства (вызывайте из UI)
     public void SelectAquarium()
     {
         selectedObjectType = buildableObjects[0];
         Debug.Log("Выбран аквариум. Кликните по тайлу для размещения.");
+
+        _baseType=BaseType.FishBase;
     }
 
     public void SelectWater()
     {
         selectedObjectType = buildableObjects[1];
         Debug.Log("Выбрана вода. Кликните по тайлу для размещения.");
+        _baseType = BaseType.WaterBase;
     }
 
     public void SelectWorkbench()
