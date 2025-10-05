@@ -29,7 +29,7 @@ public class EnemyAI : MonoBehaviour, IDamageable<float>
 
     private CompositeDisposable disposables = new CompositeDisposable();
 
-    [Inject] private List<Transform> _entities;
+    [Inject] private EntityList _entities;
 
     [Inject]
     private void Construct(PlayerMovement player)

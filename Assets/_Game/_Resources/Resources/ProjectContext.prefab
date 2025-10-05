@@ -89,9 +89,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bbd7a89604554e4dac119c17cec26b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startFood: 100
-  _startWater: 100
-  _startMaterials: 100
+  _startFood: 10
+  _startWater: 10
+  _startMaterials: 0
 --- !u!114 &-3762084733375387741
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ public class StatsPreview : MonoBehaviour
     [SerializeField] private StatsBar _kentStats;
     [SerializeField] private StatsBar _enemyStats;
 
-    [Inject] private List<Transform> _entities;
+    [Inject] private EntityList _entities;
 
     private PlayerMovement _playerMovement;
 

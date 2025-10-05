@@ -11,7 +11,7 @@ public class PlayerInstaller : MonoInstaller
 
     [SerializeField] private DynamicJoystick _joystick;
 
-    [Inject] private List<Transform> _entities;
+    [Inject] private EntityList _entities;
 
 
     public override void InstallBindings()

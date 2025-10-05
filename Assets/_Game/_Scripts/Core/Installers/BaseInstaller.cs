@@ -10,10 +10,10 @@ public class BaseInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        // Регистрируем менеджер ресурсов с начальными значениями
         ResourceManager resourceManager = new ResourceManager(_startFood, _startWater, _startMaterials);
         Container.Bind<ResourceManager>().FromInstance(resourceManager).AsSingle();
 
- 
+        // Optional: Load saved data immediately
+        resourceManager.LoadFromJson();
     }
 }
