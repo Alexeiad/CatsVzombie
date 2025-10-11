@@ -28,7 +28,7 @@ public class UltraSensitiveDirectionController : MonoBehaviour
 
     private void UpdateAnimator()
     {
-        bool isMoving = currentDirection.magnitude > 0.0001f;
+        bool isMoving = currentDirection.magnitude > 0;
         animator.SetBool(MOVING_BOOL, isMoving);
 
         if (!isMoving)

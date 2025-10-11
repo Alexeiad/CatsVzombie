@@ -4,6 +4,7 @@ using UniRx;
 using System;
 using UnityEngine.SceneManagement;
 
+
 public class PlayerMovement : MonoBehaviour, IDamageable<float>
 {
     public float Speed;
@@ -87,7 +88,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
             .Subscribe(_ =>
             {
                 _currentHealth.Value -= damage;
-                Debug.Log("player: " + _currentHealth.Value);
+
 
                 // Визуальный эффект при получении урона
                 OnDamageTaken(damage);
@@ -98,7 +99,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
     private void OnDamageTaken(float damage)
     {
         // Можно добавить визуальные эффекты, звуки и т.д.
-        Debug.Log($"Player took {damage} damage!");
+
 
         // Мигание спрайта при получении урона
         StartCoroutine(DamageFlashCoroutine());
@@ -118,7 +119,6 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
 
     private void OnDeath()
     {
-        Debug.Log("Player died!");
 
         // Отключаем управление и коллайдер
         enabled = false;
@@ -133,9 +133,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
 
     private void OnMovement()
     {
-        // Дополнительные эффекты при движении
-        // Например, частицы, звуки шагов и т.д.
-        Debug.Log("Player is moving");
+      
     }
 
     // Реактивный метод для лечения
@@ -145,7 +143,6 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
             .Subscribe(_ =>
             {
                 _currentHealth.Value = Mathf.Min(_currentHealth.Value + amount, MaxHealth);
-                Debug.Log("Player healed: " + _currentHealth.Value);
             })
             .AddTo(_disposables);
     }

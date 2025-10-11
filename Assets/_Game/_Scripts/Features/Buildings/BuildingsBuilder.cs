@@ -5,29 +5,35 @@ using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using Zenject;
 
-public class BaseBuilder : MonoBehaviour
+public class BuildingsBuilder : MonoBehaviour
 {
     public Tilemap tilemap; // Ссылка на ваш тайлмап
-    public GameObject[] buildableObjects; // Массив префабов: [аквариум, вода, верстак]
-
-    [SerializeField] private GameObject fishBase,waterBase;
 
 
-    private GameObject selectedObjectType; // Выбранный тип объекта для строительства
-    private Dictionary<Vector3Int, GameObject> builtObjects = new Dictionary<Vector3Int, GameObject>(); // Словарь построенных объектов
+    [SerializeField] private GameObject aquarium,barrel,workbench;
+
+
+    private GameObject selectedObjectType;
+    private GameObject _instantiateObject;
+    private Dictionary<Vector3Int, GameObject> builtObjects = new Dictionary<Vector3Int, GameObject>();
 
     private PlayerMovement _playerMovement;
     private Camera _camera;
 
-    private string _FishKey="FishKey", _WaterKey = "WaterKey";
+    private string _AquariumKey= "AquariumKey",
+        _BarrelKey = "BarrelKey",
+        _WorkbenchKey = "WorkbenchKey";
 
     private BaseList _bases;
 
-    private BaseType _baseType;
+    private BuildingType _baseType;
+
+
+    private DiContainer _diContainer;
 
     private bool isBuildPanel;
 
-    
+
     [Inject]
     private void Construct(PlayerMovement player)
     {
@@ -40,16 +46,21 @@ public class BaseBuilder : MonoBehaviour
 
         foreach (BaseElementsSaveData baseData in _bases)
         {
-            if (baseData.ID == _FishKey)
+            if (baseData.ID == _AquariumKey)
             {
-                Instantiate(fishBase, baseData.Position, Quaternion.identity);
+                _instantiateObject = aquarium;
             }
-            else if (baseData.ID == _WaterKey)
+            else if (baseData.ID == _BarrelKey)
             {
-                Instantiate(waterBase, baseData.Position, Quaternion.identity);
+                _instantiateObject = barrel;
+            }
+            else if (baseData.ID == _WorkbenchKey)
+            {
+                _instantiateObject = workbench;
             }
 
-
+            var go = Instantiate(_instantiateObject, baseData.Position, Quaternion.identity);
+   
         }
         
     }
@@ -77,15 +88,17 @@ public class BaseBuilder : MonoBehaviour
                     // Спавним объект
                     GameObject newObject = Instantiate(selectedObjectType, buildPosition+new Vector3(0,0,10f),
                         Quaternion.identity);
+
                     builtObjects[tilePosition] = newObject;
 
 
                    
-                    if (_baseType == BaseType.FishBase)
-                        _bases.Add(new BaseElementsSaveData(_FishKey, newObject.transform.position));
-                    if (_baseType == BaseType.WaterBase)
-                        _bases.Add(new BaseElementsSaveData(_WaterKey, newObject.transform.position));
-
+                    if (_baseType == BuildingType.Aquarium)
+                        _bases.Add(new BaseElementsSaveData(_AquariumKey, newObject.transform.position));
+                    if (_baseType == BuildingType.Barrel)
+                        _bases.Add(new BaseElementsSaveData(_BarrelKey, newObject.transform.position));
+                    if (_baseType == BuildingType.Workbench)
+                        _bases.Add(new BaseElementsSaveData(_WorkbenchKey, newObject.transform.position));
                 }
             }
         }
@@ -118,29 +131,27 @@ public class BaseBuilder : MonoBehaviour
     // Методы для выбора объекта для строительства (вызывайте из UI)
     public void SelectAquarium()
     {
-        selectedObjectType = buildableObjects[0];
-        Debug.Log("Выбран аквариум. Кликните по тайлу для размещения.");
+        selectedObjectType = aquarium;
 
-        _baseType=BaseType.FishBase;
+        _baseType= BuildingType.Aquarium;
     }
 
-    public void SelectWater()
+    public void SelectBarrel()
     {
-        selectedObjectType = buildableObjects[1];
-        Debug.Log("Выбрана вода. Кликните по тайлу для размещения.");
-        _baseType = BaseType.WaterBase;
+        selectedObjectType = barrel;
+
+        _baseType = BuildingType.Barrel;
     }
 
     public void SelectWorkbench()
     {
-        selectedObjectType = buildableObjects[2];
-        Debug.Log("Выбран верстак. Кликните по тайлу для размещения.");
+        selectedObjectType = workbench;
+        _baseType = BuildingType.Workbench;
     }
 
     public void DeselectObject()
     {
         selectedObjectType = null;
-        Debug.Log("Объект deselected");
     }
 
     // Визуализация выбранной позиции (опционально)

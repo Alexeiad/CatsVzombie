@@ -383,8 +383,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 847.4187, y: 0}
-  m_SizeDelta: {x: 311.85706, y: 0}
+  m_AnchoredPosition: {x: 1232.6951, y: 0}
+  m_SizeDelta: {x: 1082.4099, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1097637271
 MonoBehaviour:
@@ -399,7 +399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3537736, g: 0.861523, b: 1, a: 0.27058825}
+  m_Color: {r: 0.051886797, g: 0.79888505, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -541,8 +541,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 115231705253361406, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_Name
+      value: Barrel
+      objectReference: {fileID: 0}
+    - target: {fileID: 115231705253361406, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 424295579818670903, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_Name
+      value: Aquarium
       objectReference: {fileID: 0}
     - target: {fileID: 424295579818670903, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_Layer
@@ -561,9 +569,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1076829022909692528, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: barrel
+      value: 
+      objectReference: {fileID: 8346101613348907668, guid: 2a0909563da800d43a738fec4f87c8f4, type: 3}
+    - target: {fileID: 1076829022909692528, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: tilemap
       value: 
       objectReference: {fileID: 1796007627}
+    - target: {fileID: 1076829022909692528, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: aquarium
+      value: 
+      objectReference: {fileID: 4258981923913178660, guid: 987197c8497aa1741ab8785ffbf9eb10, type: 3}
+    - target: {fileID: 1076829022909692528, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: workbench
+      value: 
+      objectReference: {fileID: 8346101613348907668, guid: fd702e70cac53464c973c8c52ff67c04, type: 3}
+    - target: {fileID: 1076829022909692528, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: buildableObjects.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1111816447010411970, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -621,6 +645,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2706966472399928293, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_Name
+      value: event
+      objectReference: {fileID: 0}
+    - target: {fileID: 2706966472399928293, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
@@ -641,6 +669,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4895572839804581886, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_Name
+      value: event
+      objectReference: {fileID: 0}
+    - target: {fileID: 4895572839804581886, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
@@ -656,6 +688,42 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5667906185861471377, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 27110a33eb3f9244fbd15ecb464f82bf, type: 3}
+    - target: {fileID: 6154495263258804382, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6154495263258804382, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6154495263258804382, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1242735430}
+    - target: {fileID: 6154495263258804382, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6154495263258804382, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectWorkbench
+      objectReference: {fileID: 0}
+    - target: {fileID: 6154495263258804382, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BuildingsBuilder, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6154495263258804382, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6217797905589373322, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_Name
+      value: event
+      objectReference: {fileID: 0}
     - target: {fileID: 6217797905589373322, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -666,7 +734,11 @@ PrefabInstance:
       objectReference: {fileID: 1242735430}
     - target: {fileID: 6524151547009006024, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SelectWater
+      value: SelectBarrel
+      objectReference: {fileID: 0}
+    - target: {fileID: 6524151547009006024, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BuildingsBuilder, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7079390060886965832, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -677,7 +749,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7465189626143221827, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_Name
+      value: Workbench
+      objectReference: {fileID: 0}
+    - target: {fileID: 7465189626143221827, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479817040870146287, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7557550416068920714, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
@@ -856,8 +936,8 @@ Transform:
   m_GameObject: {fileID: 1796007624}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3, y: -8, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 2}
+  m_LocalPosition: {x: -3, y: -8, z: 10}
+  m_LocalScale: {x: 6, y: 6, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 505308921}
@@ -12567,16 +12647,16 @@ Tilemap:
   m_Origin: {x: -90, y: -62, z: 0}
   m_Size: {x: 159, y: 119, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
-  m_TileOrientation: 0
+  m_TileOrientation: 6
   m_TileOrientationMatrix:
     e00: 1
     e01: 0
     e02: 0
-    e03: 0
+    e03: 0.5
     e10: 0
     e11: 1
     e12: 0
-    e13: 0
+    e13: 0.6
     e20: 0
     e21: 0
     e22: 1

@@ -57,7 +57,7 @@ public class EnemyAI : MonoBehaviour, IDamageable<float>
             .Subscribe(_ => SetState(EnemyState.Dead))
             .AddTo(disposables);
 
-        // Периодическое принятие решений
+        
         Observable.Interval(TimeSpan.FromSeconds(decisionRate))
             .Subscribe(_ => MakeDecision())
             .AddTo(disposables);

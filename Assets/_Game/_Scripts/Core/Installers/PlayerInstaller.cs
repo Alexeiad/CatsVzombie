@@ -6,6 +6,7 @@ using Zenject;
 
 public class PlayerInstaller : MonoInstaller
 {
+    public static  EntityList entityList { get; private set; }
 
     [SerializeField] private GameObject _playerPrefab;
 
@@ -18,10 +19,11 @@ public class PlayerInstaller : MonoInstaller
     public override void InstallBindings()
     {
         _entities.Clear();
+
         //регистрация джойтика
         Container.Bind<DynamicJoystick>()
             .FromInstance(_joystick)
-                .AsSingle();
+            .AsSingle();
 
 
 
@@ -35,9 +37,14 @@ public class PlayerInstaller : MonoInstaller
         var player = Container.InstantiatePrefab(_playerPrefab, Vector3.zero, Quaternion.identity, null);
         Container.Bind<PlayerMovement>().FromInstance(player.GetComponent<PlayerMovement>()).AsSingle();
         _entities.Add(player.transform);
-        
-    }
 
+
+
+    }
+    private void Update()
+    {
+        entityList = _entities;
+    }
 
     private bool IsMobilePlatform()
     {
