@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseType: 0
-  safeDistance: 1.25
+  isAheadOfThePlayer: 1
+  safeDistance: 0.8
   pushForce: 100
   teleportDuration: 0.25

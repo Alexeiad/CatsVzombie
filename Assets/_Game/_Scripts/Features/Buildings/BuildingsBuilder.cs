@@ -8,9 +8,9 @@ using Zenject;
 public class BuildingsBuilder : MonoBehaviour
 {
     public Tilemap tilemap; // Ссылка на ваш тайлмап
+   
 
-
-    [SerializeField] private GameObject aquarium,barrel,workbench;
+    [SerializeField] private GameObject aquarium,barrel,workbench,tire,headquarters,medUnit,barrak;
 
 
     private GameObject selectedObjectType;
@@ -20,9 +20,14 @@ public class BuildingsBuilder : MonoBehaviour
     private PlayerMovement _playerMovement;
     private Camera _camera;
 
-    private string _AquariumKey= "AquariumKey",
+    private string 
+        _AquariumKey= "AquariumKey",
         _BarrelKey = "BarrelKey",
-        _WorkbenchKey = "WorkbenchKey";
+        _WorkbenchKey = "WorkbenchKey",
+        _TireKey = "TireKey",
+        _HeadquartersKey = "HeadquartersKey",
+        _MedUnitKey = "MedUnitKey",
+        _BarrakKey = "BarrakKey";
 
     private BaseList _bases;
 
@@ -32,6 +37,8 @@ public class BuildingsBuilder : MonoBehaviour
     private DiContainer _diContainer;
 
     private bool isBuildPanel;
+
+    private Dictionary<string, GameObject> _objectMap;
 
 
     [Inject]
@@ -46,20 +53,22 @@ public class BuildingsBuilder : MonoBehaviour
 
         foreach (BaseElementsSaveData baseData in _bases)
         {
-            if (baseData.ID == _AquariumKey)
+            _objectMap = new Dictionary<string, GameObject>
             {
-                _instantiateObject = aquarium;
-            }
-            else if (baseData.ID == _BarrelKey)
-            {
-                _instantiateObject = barrel;
-            }
-            else if (baseData.ID == _WorkbenchKey)
-            {
-                _instantiateObject = workbench;
-            }
+                { _AquariumKey, aquarium },
+                { _BarrelKey, barrel },
+                { _WorkbenchKey, workbench },
+                { _TireKey, tire },
+                { _HeadquartersKey, headquarters },
+                { _MedUnitKey, medUnit },
+                { _BarrakKey, barrak }
 
-            var go = Instantiate(_instantiateObject, baseData.Position, Quaternion.identity);
+            };
+            if (_objectMap.TryGetValue(baseData.ID, out _instantiateObject))
+            {
+                var go = Instantiate(_instantiateObject, baseData.Position, Quaternion.identity);
+            }
+            
    
         }
         
@@ -69,39 +78,45 @@ public class BuildingsBuilder : MonoBehaviour
 
     void Update()
     {
-    
-        if (Input.GetMouseButtonDown(0)) // Левая кнопка мыши
+        if (selectedObjectType != null)
         {
-            // Проверяем, что кликнули не по UI элементу
-            if (selectedObjectType != null)
+            // Получаем позицию клика и преобразуем в позицию на тайлмапе
+            Vector3 mouseWorldPos = _camera.ScreenToWorldPoint(Input.mousePosition);
+            Vector3Int tilePosition = tilemap.WorldToCell(mouseWorldPos);
+
+            // Получаем позицию в центре тайла
+            Vector3 buildPosition = tilemap.GetCellCenterWorld(tilePosition);
+
+            // Проверяем, можно ли строить
+            if (CanBuildHere(tilePosition) && isBuildPanel)
             {
-                // Получаем позицию клика и преобразуем в позицию на тайлмапе
-                Vector3 mouseWorldPos = _camera.ScreenToWorldPoint(Input.mousePosition);
-                Vector3Int tilePosition = tilemap.WorldToCell(mouseWorldPos);
+                // Спавним объект
+                GameObject newObject = Instantiate(selectedObjectType, buildPosition + new Vector3(0, 0, 10f),
+                    Quaternion.identity);
 
-                // Получаем позицию в центре тайла
-                Vector3 buildPosition = tilemap.GetCellCenterWorld(tilePosition);
-
-                // Проверяем, можно ли строить
-                if (CanBuildHere(tilePosition)&& isBuildPanel)
-                {
-                    // Спавним объект
-                    GameObject newObject = Instantiate(selectedObjectType, buildPosition+new Vector3(0,0,10f),
-                        Quaternion.identity);
-
-                    builtObjects[tilePosition] = newObject;
+                builtObjects[tilePosition] = newObject;
 
 
-                   
-                    if (_baseType == BuildingType.Aquarium)
-                        _bases.Add(new BaseElementsSaveData(_AquariumKey, newObject.transform.position));
-                    if (_baseType == BuildingType.Barrel)
-                        _bases.Add(new BaseElementsSaveData(_BarrelKey, newObject.transform.position));
-                    if (_baseType == BuildingType.Workbench)
-                        _bases.Add(new BaseElementsSaveData(_WorkbenchKey, newObject.transform.position));
-                }
+
+                if (_baseType == BuildingType.Aquarium)
+                    _bases.Add(new BaseElementsSaveData(_AquariumKey, newObject.transform.position));
+                if (_baseType == BuildingType.Barrel)
+                    _bases.Add(new BaseElementsSaveData(_BarrelKey, newObject.transform.position));
+                if (_baseType == BuildingType.Workbench)
+                    _bases.Add(new BaseElementsSaveData(_WorkbenchKey, newObject.transform.position));
+                if (_baseType == BuildingType.Tire)
+                    _bases.Add(new BaseElementsSaveData(_TireKey, newObject.transform.position));
+                if (_baseType == BuildingType.Headquarters)
+                    _bases.Add(new BaseElementsSaveData(_HeadquartersKey, newObject.transform.position));
+                if (_baseType == BuildingType.MedUnit)
+                    _bases.Add(new BaseElementsSaveData(_MedUnitKey, newObject.transform.position));
+                if (_baseType == BuildingType.Barrak)
+                    _bases.Add(new BaseElementsSaveData(_BarrakKey, newObject.transform.position));
             }
         }
+
+
+
 
         // Отмена выбора по правой кнопке мыши или Escape
         if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape))
@@ -132,14 +147,12 @@ public class BuildingsBuilder : MonoBehaviour
     public void SelectAquarium()
     {
         selectedObjectType = aquarium;
-
         _baseType= BuildingType.Aquarium;
     }
 
     public void SelectBarrel()
     {
         selectedObjectType = barrel;
-
         _baseType = BuildingType.Barrel;
     }
 
@@ -147,6 +160,26 @@ public class BuildingsBuilder : MonoBehaviour
     {
         selectedObjectType = workbench;
         _baseType = BuildingType.Workbench;
+    }
+    public void SelectTire()
+    {
+        selectedObjectType = tire;
+        _baseType = BuildingType.Tire;
+    }
+    public void SelectHeadquarters()
+    {
+        selectedObjectType = headquarters;
+        _baseType = BuildingType.Headquarters;
+    }
+    public void SelectMedicalUnit()
+    {
+        selectedObjectType = medUnit;
+        _baseType = BuildingType.MedUnit;
+    }
+    public void SelectBarrak()
+    {
+        selectedObjectType = barrak;
+        _baseType = BuildingType.Barrak;
     }
 
     public void DeselectObject()

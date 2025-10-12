@@ -7,6 +7,8 @@ using Zenject;
 public class BuildingBehaviour : MonoBehaviour
 {
     public BuildingType baseType;
+    public bool isAheadOfThePlayer = true;
+
     public float safeDistance = 1f;
     public float pushForce = 2f;
     public float teleportDuration = 0.5f;
@@ -34,7 +36,9 @@ public class BuildingBehaviour : MonoBehaviour
     private void Update()
     {
         HandlePlayerDetection();
-        HandleSortingOrder();
+
+        if(isAheadOfThePlayer)
+            HandleSortingOrder();
     }
 
     private void HandlePlayerDetection()

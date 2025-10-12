@@ -2,5 +2,9 @@
 {
     Aquarium,
     Barrel,
-    Workbench
+    Workbench,
+    Tire,
+    Headquarters,
+    MedUnit,
+    Barrak
 }
