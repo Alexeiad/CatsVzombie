@@ -26,11 +26,13 @@ public class BuildingBehaviour : MonoBehaviour
 
     private void Start()
     {
+
         _spriteRenderer = GetComponent<SpriteRenderer>();
         if (_spriteRenderer != null)
         {
             _defaultSortingOrder = _spriteRenderer.sortingOrder;
         }
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
     }
 
     private void Update()
