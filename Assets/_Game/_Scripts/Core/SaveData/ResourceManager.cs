@@ -47,7 +47,7 @@ public class ResourceManager
     {
         string json = JsonUtility.ToJson(_resourceData, true);
         System.IO.File.WriteAllText(GetFilePath(filename), json);
-        Debug.Log($"Resources saved to: {GetFilePath(filename)}");
+
     }
 
     public void LoadFromJson(string filename = "resources.json")
@@ -58,7 +58,6 @@ public class ResourceManager
         {
             string json = System.IO.File.ReadAllText(filePath);
             _resourceData = JsonUtility.FromJson<ResourceData>(json);
-            Debug.Log($"Resources loaded from: {filePath}");
         }
         else
         {

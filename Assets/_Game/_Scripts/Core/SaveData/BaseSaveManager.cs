@@ -4,9 +4,9 @@ using System.IO;
 using UnityEngine;
 using Zenject;
 
-public class BaseLoadSaveData : MonoBehaviour
+public class BaseSaveManager : MonoBehaviour
 {
-    public static BaseList Bases;
+    public static BuildingsList Bases;
 
     private const string FileText = "BASELIST"; // можно оставить или поменять
     private const string FileExtension = ".json";
@@ -15,7 +15,7 @@ public class BaseLoadSaveData : MonoBehaviour
     private string FullPath => Path.Combine(Application.persistentDataPath, FileText + FileExtension);
 
     [Inject]
-    private void Construct(BaseList bases)
+    private void Construct(BuildingsList bases)
     {
         // Если Zenject предоставляет инстанс — используем его, иначе создаём новый
        Bases = bases;
@@ -112,11 +112,11 @@ public class BaseLoadSaveData : MonoBehaviour
     }
 
     // Сохранение с обёрткой для JsonUtility
-    public void SaveBaseListToJson(BaseList baseList, string filename)
+    public void SaveBaseListToJson(BuildingsList baseList, string filename)
     {
         try
         {
-            if (baseList == null) baseList = new BaseList();
+            if (baseList == null) baseList = new BuildingsList();
 
             var wrapper = new BaseListWrapper { items = baseList.ToArray() };
             string jsonString = JsonUtility.ToJson(wrapper, true);
@@ -132,7 +132,7 @@ public class BaseLoadSaveData : MonoBehaviour
     }
 
     // Загрузка и разворачивание обратно в BaseList
-    public BaseList LoadBaseListFromJson(string filename)
+    public BuildingsList LoadBaseListFromJson(string filename)
     {
         string filePath = Path.Combine(Application.persistentDataPath, filename + FileExtension);
         if (File.Exists(filePath))
@@ -141,7 +141,7 @@ public class BaseLoadSaveData : MonoBehaviour
             {
                 string jsonString = File.ReadAllText(filePath);
                 var wrapper = JsonUtility.FromJson<BaseListWrapper>(jsonString);
-                var result = new BaseList();
+                var result = new BuildingsList();
                 if (wrapper != null && wrapper.items != null)
                 {
                     result.AddRange(wrapper.items);
@@ -152,13 +152,13 @@ public class BaseLoadSaveData : MonoBehaviour
             catch (Exception ex)
             {
                 Debug.LogError("Error loading base list: " + ex);
-                return new BaseList();
+                return new BuildingsList();
             }
         }
         else
         {
             Debug.LogWarning("File not found: " + filePath);
-            return new BaseList(); // Возвращаем новый пустой список
+            return new BuildingsList(); // Возвращаем новый пустой список
         }
     }
 
@@ -166,16 +166,16 @@ public class BaseLoadSaveData : MonoBehaviour
     [Serializable]
     private class BaseListWrapper
     {
-        public BaseElementsSaveData[] items;
+        public BuildingsSaveData[] items;
     }
 
     // Дополнительные методы для работы с _bases
-    public BaseList GetBases() => Bases;
-    public void SetBases(BaseList list) => Bases = list ?? new BaseList();
+    public BuildingsList GetBases() => Bases;
+    public void SetBases(BuildingsList list) => Bases = list ?? new BuildingsList();
 
-    public void AddBase(BaseElementsSaveData element)
+    public void AddBase(BuildingsSaveData element)
     {
-        if (Bases == null) Bases = new BaseList();
+        if (Bases == null) Bases = new BuildingsList();
         Bases.Add(element);
     }
 

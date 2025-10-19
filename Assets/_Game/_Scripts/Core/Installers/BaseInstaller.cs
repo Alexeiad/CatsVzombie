@@ -9,7 +9,7 @@ public class BaseInstaller : MonoInstaller
     [SerializeField] private int _startWater = 100;
     [SerializeField] private int _startMaterials = 100;
 
-    private BaseList _bases = new BaseList();
+    private BuildingsList _bases = new BuildingsList();
 
     public override void InstallBindings()
     {
@@ -18,7 +18,7 @@ public class BaseInstaller : MonoInstaller
             .FromInstance(resourceManager)
             .AsSingle();
 
-        Container.Bind<BaseList>()
+        Container.Bind<BuildingsList>()
             .FromInstance(_bases)
             .AsSingle();
 
@@ -28,15 +28,15 @@ public class BaseInstaller : MonoInstaller
 }
 
 [Serializable]
-public class BaseElementsSaveData
+public class BuildingsSaveData
 {
     public string ID;
     public Vector3 Position;
 
     // ѕустой конструктор нужен дл€ десериализации JsonUtility
-    public BaseElementsSaveData() { }
+    public BuildingsSaveData() { }
 
-    public BaseElementsSaveData(string id, Vector3 pos)
+    public BuildingsSaveData(string id, Vector3 pos)
     {
         ID = id;
         Position = pos;
@@ -46,8 +46,8 @@ public class BaseElementsSaveData
 
 
 [Serializable]
-public class BaseList : List<BaseElementsSaveData>
+public class BuildingsList : List<BuildingsSaveData>
 {
-    public BaseList() : base() { }
-    public BaseList(IEnumerable<BaseElementsSaveData> items) : base(items) { }
+    public BuildingsList() : base() { }
+    public BuildingsList(IEnumerable<BuildingsSaveData> items) : base(items) { }
 }

@@ -100,5 +100,5 @@ MonoBehaviour:
   baseType: 3
   isAheadOfThePlayer: 0
   safeDistance: 1
-  pushForce: 100
+  pushForce: 20
   teleportDuration: 0.25
