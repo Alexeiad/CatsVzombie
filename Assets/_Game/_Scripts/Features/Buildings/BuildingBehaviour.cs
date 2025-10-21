@@ -7,6 +7,8 @@ using Zenject;
 public class BuildingBehaviour : MonoBehaviour
 {
     public BuildingType baseType;
+    public BuildingLevelType levelType;
+
     public bool isAheadOfThePlayer = true;
 
     public float safeDistance = 1f;

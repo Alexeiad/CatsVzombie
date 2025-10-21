@@ -11,17 +11,27 @@ using Zenject;
 
 public class BuildingsBuilder : MonoBehaviour
 {
-    public Tilemap tilemap;
+    [SerializeField] private Tilemap tilemap;
 
     [SerializeField] private List<EventTrigger> _eventTriggers;
+
     [SerializeField] private GameObject aquarium, barrel, workbench, tire, headquarters, medUnit, barrak;
 
+
     private Dictionary<Vector2Int, GameObject> builtObjects = new Dictionary<Vector2Int, GameObject>();
+    private Dictionary<string, GameObject> _objectMap;
 
     private GameObject _selectedBuilding;
+    private Camera _camera;
 
     private PlayerMovement _playerMovement;
-    private Camera _camera;
+   
+    private BuildingsList _bases;
+   
+    private BuildingType _buildingType;
+    private BuildingLevelType _buildingLevelType;
+
+    private bool _isBuildPanel;
 
     private string
         _AquariumKey = "AquariumKey",
@@ -31,12 +41,6 @@ public class BuildingsBuilder : MonoBehaviour
         _HeadquartersKey = "HeadquartersKey",
         _MedUnitKey = "MedUnitKey",
         _BarrakKey = "BarrakKey";
-
-    private BuildingsList _bases;
-    private BuildingType _baseType;
-    private DiContainer _diContainer;
-    private bool isBuildPanel;
-    private Dictionary<string, GameObject> _objectMap;
 
     [Inject]
     private void Construct(PlayerMovement player)
@@ -72,12 +76,12 @@ public class BuildingsBuilder : MonoBehaviour
                 builtObjects[gridPos] = newBuilding;
             }
         }
-        _eventTriggers.ForEach(t => AddEventTriggerListener(t, EventTriggerType.PointerDown, OnClick));
+        _eventTriggers.ForEach(et => AddEventTriggerListener(et, EventTriggerType.PointerDown, OnClick));
     }
 
     void Update()
     {
-        Select(_baseType);
+        Select(_buildingType);
         Build(_selectedBuilding);
     }
 
@@ -89,7 +93,7 @@ public class BuildingsBuilder : MonoBehaviour
 
     private void BuildingTypeCheck<T>(out T check, List<T> set)
     {
-        check = _baseType switch
+        check = _buildingType switch
         {
             BuildingType.Aquarium => set[0],
             BuildingType.Barrel => set[1],
@@ -98,6 +102,16 @@ public class BuildingsBuilder : MonoBehaviour
             BuildingType.Headquarters => set[4],
             BuildingType.MedUnit => set[5],
             BuildingType.Barrak => set[6],
+            _ => set[0]
+        };
+    }
+    private void BuildingLevelTypeCheck<T>(out T check, List<T> set)
+    {
+        check = _buildingLevelType switch
+        {
+            BuildingLevelType.low => set[0],
+            BuildingLevelType.middle => set[1],
+            BuildingLevelType.high => set[2],
             _ => set[0]
         };
     }
@@ -112,7 +126,7 @@ public class BuildingsBuilder : MonoBehaviour
 
             Vector3 buildPosition = tilemap.GetCellCenterWorld(tilePosition);
 
-            if (CanBuildHere(gridPosition) && isBuildPanel)
+            if (CanBuildHere(gridPosition) && _isBuildPanel)
             {
                 GameObject newObject = Instantiate(selectedBuildings, buildPosition, Quaternion.identity);
                 builtObjects[gridPosition] = newObject;
@@ -123,6 +137,7 @@ public class BuildingsBuilder : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape))
         {
+            DeselectObject();
         }
     }
 
@@ -133,7 +148,7 @@ public class BuildingsBuilder : MonoBehaviour
         {
             var buttonForConstruction = clickedObject.GetComponent<ButtonForConstruction>();
 
-            _baseType = buttonForConstruction.buildingType;
+            _buildingType = buttonForConstruction.buildingType;
         }
     }
 
@@ -158,12 +173,12 @@ public class BuildingsBuilder : MonoBehaviour
 
     public void BuildedOn()
     {
-        isBuildPanel = true;
+        _isBuildPanel = true;
     }
 
     public void BuildedOff()
     {
-        isBuildPanel = false;
+        _isBuildPanel = false;
     }
 
     bool CanBuildHere(Vector2Int gridPosition)
