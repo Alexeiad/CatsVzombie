@@ -16,7 +16,8 @@ public class BuildingsBuilder : MonoBehaviour
     [SerializeField] private List<EventTrigger> _eventTriggers;
 
     [SerializeField] private GameObject aquarium, barrel, workbench, tire, headquarters, medUnit, barrak;
-
+    [SerializeField] private GameObject aquariumTwo, barrelTwo, workbenchTwo, tireTwo, headquartersTwo, medUnitTwo, barrakTwo;
+    [SerializeField] private GameObject aquariumThree, barrelThree, workbenchThree, tireThree, headquartersThree, medUnitThree, barrakThree;
 
     private Dictionary<Vector2Int, GameObject> builtObjects = new Dictionary<Vector2Int, GameObject>();
     private Dictionary<string, GameObject> _objectMap;
@@ -27,6 +28,8 @@ public class BuildingsBuilder : MonoBehaviour
     private PlayerMovement _playerMovement;
    
     private BuildingsList _bases;
+
+    private DiContainer _diContainer;
    
     private BuildingType _buildingType;
     private BuildingLevelType _buildingLevelType;
@@ -41,6 +44,11 @@ public class BuildingsBuilder : MonoBehaviour
         _HeadquartersKey = "HeadquartersKey",
         _MedUnitKey = "MedUnitKey",
         _BarrakKey = "BarrakKey";
+    private string
+
+        _Middle = "Middle",
+        _High= "High";
+        
 
     [Inject]
     private void Construct(PlayerMovement player)
@@ -61,14 +69,32 @@ public class BuildingsBuilder : MonoBehaviour
             { _TireKey, tire },
             { _HeadquartersKey, headquarters },
             { _MedUnitKey, medUnit },
-            { _BarrakKey, barrak }
+            { _BarrakKey, barrak },
+
+            { _AquariumKey+_Middle, aquariumTwo },
+            { _BarrelKey+_Middle, barrelTwo },
+            { _WorkbenchKey+_Middle, workbenchTwo },
+            { _TireKey+_Middle, tireTwo },
+            { _HeadquartersKey+_Middle, headquartersTwo },
+            { _MedUnitKey + _Middle, medUnitTwo },
+            { _BarrakKey + _Middle, barrakTwo },
+
+            { _AquariumKey+_High, aquariumThree },
+            { _BarrelKey+_High, barrelThree },
+            { _WorkbenchKey+_High, workbenchThree },
+            { _TireKey+_High, tireThree },
+            { _HeadquartersKey+_High, headquartersThree },
+            { _MedUnitKey + _High, medUnitThree },
+            { _BarrakKey + _High, barrakThree }
         };
 
         foreach (BuildingsSaveData baseData in _bases)
         {
             if (_objectMap.TryGetValue(baseData.ID, out var building))
             {
-                var newBuilding = Instantiate(building, baseData.Position, Quaternion.identity);
+                var newBuilding = Instantiate(building, baseData.Position, Quaternion.identity,null);
+
+                newBuilding.GetComponent<BuildingBehaviour>().Construct(_playerMovement);
 
                 Vector3Int tilePos = tilemap.WorldToCell(baseData.Position);
                 Vector2Int gridPos = new Vector2Int(tilePos.x, tilePos.y);
@@ -84,36 +110,40 @@ public class BuildingsBuilder : MonoBehaviour
         Select(_buildingType);
         Build(_selectedBuilding);
     }
-
+    
     private void Select(BuildingType baseType)
     {
         BuildingTypeCheck(out _selectedBuilding, new List<GameObject>
-        { aquarium, barrel, workbench, tire, headquarters, medUnit, barrak });
+    { aquarium, barrel, workbench, tire, headquarters, medUnit, barrak,
+      aquariumTwo, barrelTwo, workbenchTwo, tireTwo, headquartersTwo, medUnitTwo, barrakTwo,
+      aquariumThree, barrelThree, workbenchThree, tireThree, headquartersThree, medUnitThree, barrakThree});
     }
 
     private void BuildingTypeCheck<T>(out T check, List<T> set)
     {
         check = _buildingType switch
         {
-            BuildingType.Aquarium => set[0],
-            BuildingType.Barrel => set[1],
-            BuildingType.Workbench => set[2],
-            BuildingType.Tire => set[3],
-            BuildingType.Headquarters => set[4],
-            BuildingType.MedUnit => set[5],
-            BuildingType.Barrak => set[6],
+            BuildingType.Aquarium => BuildingLevelTypeCheck(out T levelCheck, set, 0),
+            BuildingType.Barrel => BuildingLevelTypeCheck(out T levelCheck, set, 1),
+            BuildingType.Workbench => BuildingLevelTypeCheck(out T levelCheck, set, 2),
+            BuildingType.Tire => BuildingLevelTypeCheck(out T levelCheck, set, 3),
+            BuildingType.Headquarters => BuildingLevelTypeCheck(out T levelCheck, set, 4),
+            BuildingType.MedUnit => BuildingLevelTypeCheck(out T levelCheck, set, 5),
+            BuildingType.Barrak => BuildingLevelTypeCheck(out T levelCheck, set, 6),
             _ => set[0]
         };
     }
-    private void BuildingLevelTypeCheck<T>(out T check, List<T> set)
+
+    private T BuildingLevelTypeCheck<T>(out T check, List<T> set, int baseIndex)
     {
         check = _buildingLevelType switch
         {
-            BuildingLevelType.low => set[0],
-            BuildingLevelType.middle => set[1],
-            BuildingLevelType.high => set[2],
-            _ => set[0]
+            BuildingLevelType.low => set[baseIndex],
+            BuildingLevelType.middle => set[baseIndex + 7],
+            BuildingLevelType.high => set[baseIndex + 14],
+            _ => set[baseIndex]
         };
+        return check;
     }
 
     private void Build(GameObject selectedBuildings)
@@ -129,6 +159,8 @@ public class BuildingsBuilder : MonoBehaviour
             if (CanBuildHere(gridPosition) && _isBuildPanel)
             {
                 GameObject newObject = Instantiate(selectedBuildings, buildPosition, Quaternion.identity);
+                newObject.GetComponent<BuildingBehaviour>().Construct(_playerMovement);
+
                 builtObjects[gridPosition] = newObject;
 
                 SaveBuildingData(gridPosition, newObject.transform.position);
@@ -163,7 +195,9 @@ public class BuildingsBuilder : MonoBehaviour
     private void SaveBuildingData(Vector2Int gridPosition, Vector3 worldPosition)
     {
         BuildingTypeCheck(out string buildingKey, new List<string>
-        { _AquariumKey,_BarrelKey, _WorkbenchKey,_TireKey, _HeadquartersKey, _MedUnitKey, _BarrakKey });
+        { _AquariumKey,_BarrelKey, _WorkbenchKey,_TireKey, _HeadquartersKey, _MedUnitKey, _BarrakKey, 
+        _AquariumKey+_Middle,_BarrelKey + _Middle, _WorkbenchKey + _Middle,_TireKey + _Middle, _HeadquartersKey + _Middle, _MedUnitKey + _Middle, _BarrakKey + _Middle,
+        _AquariumKey + _High,_BarrelKey + _High, _WorkbenchKey + _High,_TireKey + _High, _HeadquartersKey + _High, _MedUnitKey + _High, _BarrakKey + _High});
 
         if (!string.IsNullOrEmpty(buildingKey))
         {

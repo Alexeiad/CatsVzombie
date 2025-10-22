@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Linq;
+using System.Security.Cryptography;
 using UnityEngine;
 using Zenject;
 
@@ -19,26 +20,35 @@ public class BuildingBehaviour : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private SpriteRenderer _playerSpriteRenderer;
     private UltraSensitiveDirectionController _playerController;
+
     private PlayerMovement _playerMovement;
+    private DiContainer _diContainer;
 
     private bool _isPlayerInDangerZone;
     private bool _isPushing;
     private int _defaultSortingOrder;
     private Coroutine _enableControllerCoroutine;
 
-    private void Start()
-    {
+    private bool _isStart;
 
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        if (_spriteRenderer != null)
-        {
-            _defaultSortingOrder = _spriteRenderer.sortingOrder;
-        }
+    
+    public void Construct(PlayerMovement playerMovement)
+    {
+        _playerMovement =playerMovement;
+        Initialize();
+    }
+
+    private void Initialize()
+    {
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _isStart=true;
     }
 
     private void Update()
     {
+        if (!_isStart) return;
+
         HandlePlayerDetection();
 
         if(isAheadOfThePlayer)
@@ -81,9 +91,7 @@ public class BuildingBehaviour : MonoBehaviour
 
     private void FindPlayer()
     {
-        _target = PlayerInstaller.entityList
-            .Select(x => x.transform)
-            .FirstOrDefault(x => x.GetComponent<PlayerMovement>() != null);
+        _target = _playerMovement.transform;
 
         if (_target != null)
         {

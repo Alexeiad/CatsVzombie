@@ -11,10 +11,7 @@ public class GameInstaller : MonoInstaller
    
     public override void InstallBindings()
     {
-        Container.Bind<EntityList>()
-
-                        .FromInstance(_entities)
-                            .AsSingle();
+        Container.Bind<EntityList>().AsSingle().NonLazy();
 
 
         
