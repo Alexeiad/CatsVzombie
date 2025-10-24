@@ -6,9 +6,9 @@ using Zenject;
 
 public class BaseSaveManager : MonoBehaviour
 {
-    public static BuildingsList Bases;
+    private BuildingsList _bases;
 
-    private const string FileText = "BASELIST"; // можно оставить или поменять
+    private const string FileText = "BASELIST";
     private const string FileExtension = ".json";
     private Coroutine _saveCoroutine;
 
@@ -17,17 +17,16 @@ public class BaseSaveManager : MonoBehaviour
     [Inject]
     private void Construct(BuildingsList bases)
     {
-        // Если Zenject предоставляет инстанс — используем его, иначе создаём новый
-       Bases = bases;
+       _bases = bases;
     }
 
     private void Awake()
     {
-        // Попробуем загрузить из файла; если файла нет — оставляем _bases (инжектированный или новый)
+
         var loaded = LoadBaseListFromJson(FileText);
         if (loaded != null && loaded.Count > 0)
         {
-            Bases = loaded;
+            _bases = loaded;
         }
         else
         {
@@ -37,53 +36,45 @@ public class BaseSaveManager : MonoBehaviour
 
     private void OnEnable()
     {
-        // Запускаем периодическое сохранение
         _saveCoroutine = StartCoroutine(AutoSaveCoroutine());
     }
 
     private void OnDisable()
     {
-        // Остановить корутину
         if (_saveCoroutine != null)
         {
             StopCoroutine(_saveCoroutine);
             _saveCoroutine = null;
         }
         
-        // Очистить (удалить) старый файл перед сохранением
         TryDeleteSaveFile();
-
-        // Сохраняем текущее состояние (файл будет создан заново)
-        SaveBaseListToJson(Bases, FileText);
+        SaveBaseListToJson(_bases, FileText);
 
     }
 
     private void OnDestroy()
     {
-        // Остановить корутину
+
         if (_saveCoroutine != null)
         {
             StopCoroutine(_saveCoroutine);
             _saveCoroutine = null;
         }
 
-        // Очистить старый файл и сохранить
         TryDeleteSaveFile();
-        SaveBaseListToJson(Bases, FileText);
+        SaveBaseListToJson(_bases, FileText);
     }
 
     private IEnumerator AutoSaveCoroutine()
     {
         while (true)
         {
-            Debug.Log("C=" + (Bases != null ? Bases.Count.ToString() : "null"));
-            SaveBaseListToJson(Bases, FileText);
+            Debug.Log("C=" + (_bases != null ? _bases.Count.ToString() : "null"));
+            SaveBaseListToJson(_bases, FileText);
             yield return new WaitForSeconds(1f);
             
         }
     }
-
-    // Вспомогательный метод для удаления файла с защитой
     private void TryDeleteSaveFile()
     {
         try
@@ -103,15 +94,11 @@ public class BaseSaveManager : MonoBehaviour
         }
     }
 
-    // Публичный метод для явного сохранения
     public void SaveNow()
     {
-        // перед явной записью тоже удалим старый файл
         TryDeleteSaveFile();
-        SaveBaseListToJson(Bases, FileText);
+        SaveBaseListToJson(_bases, FileText);
     }
-
-    // Сохранение с обёрткой для JsonUtility
     public void SaveBaseListToJson(BuildingsList baseList, string filename)
     {
         try
@@ -130,8 +117,6 @@ public class BaseSaveManager : MonoBehaviour
             Debug.LogError("Error saving base list: " + ex);
         }
     }
-
-    // Загрузка и разворачивание обратно в BaseList
     public BuildingsList LoadBaseListFromJson(string filename)
     {
         string filePath = Path.Combine(Application.persistentDataPath, filename + FileExtension);
@@ -158,34 +143,32 @@ public class BaseSaveManager : MonoBehaviour
         else
         {
             Debug.LogWarning("File not found: " + filePath);
-            return new BuildingsList(); // Возвращаем новый пустой список
+            return new BuildingsList();
         }
     }
 
-    // Обёртка, сериализуемая JsonUtility
     [Serializable]
     private class BaseListWrapper
     {
         public BuildingsSaveData[] items;
     }
 
-    // Дополнительные методы для работы с _bases
-    public BuildingsList GetBases() => Bases;
-    public void SetBases(BuildingsList list) => Bases = list ?? new BuildingsList();
+    public BuildingsList GetBases() => _bases;
+    public void SetBases(BuildingsList list) => _bases = list ?? new BuildingsList();
 
     public void AddBase(BuildingsSaveData element)
     {
-        if (Bases == null) Bases = new BuildingsList();
-        Bases.Add(element);
+        if (_bases == null) _bases = new BuildingsList();
+        _bases.Add(element);
     }
 
     public bool RemoveBaseById(string id)
     {
-        if (Bases == null) return false;
-        var idx = Bases.FindIndex(b => b.ID == id);
+        if (_bases == null) return false;
+        var idx = _bases.FindIndex(b => b.ID == id);
         if (idx >= 0)
         {
-            Bases.RemoveAt(idx);
+            _bases.RemoveAt(idx);
             return true;
         }
         return false;

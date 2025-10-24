@@ -27,7 +27,8 @@ public class BuildingsBuilder : MonoBehaviour
 
     private PlayerMovement _playerMovement;
    
-    private BuildingsList _bases;
+    [Inject] private BuildingsList _bases;
+    [Inject] private BaseSaveManager _baseSaveManager;
 
     private DiContainer _diContainer;
    
@@ -55,11 +56,12 @@ public class BuildingsBuilder : MonoBehaviour
     {
         _playerMovement = player;
         _camera = _playerMovement.GetComponentInChildren<Camera>();
+        
     }
 
     private void Start()
     {
-        _bases = BaseSaveManager.Bases;
+        _bases = _baseSaveManager.GetBases();
 
         _objectMap = new Dictionary<string, GameObject>
         {
@@ -113,37 +115,15 @@ public class BuildingsBuilder : MonoBehaviour
     
     private void Select(BuildingType baseType)
     {
-        BuildingTypeCheck(out _selectedBuilding, new List<GameObject>
-    { aquarium, barrel, workbench, tire, headquarters, medUnit, barrak,
-      aquariumTwo, barrelTwo, workbenchTwo, tireTwo, headquartersTwo, medUnitTwo, barrakTwo,
-      aquariumThree, barrelThree, workbenchThree, tireThree, headquartersThree, medUnitThree, barrakThree});
-    }
-
-    private void BuildingTypeCheck<T>(out T check, List<T> set)
-    {
-        check = _buildingType switch
+        var buildingList = new List<GameObject>
         {
-            BuildingType.Aquarium => BuildingLevelTypeCheck(out T levelCheck, set, 0),
-            BuildingType.Barrel => BuildingLevelTypeCheck(out T levelCheck, set, 1),
-            BuildingType.Workbench => BuildingLevelTypeCheck(out T levelCheck, set, 2),
-            BuildingType.Tire => BuildingLevelTypeCheck(out T levelCheck, set, 3),
-            BuildingType.Headquarters => BuildingLevelTypeCheck(out T levelCheck, set, 4),
-            BuildingType.MedUnit => BuildingLevelTypeCheck(out T levelCheck, set, 5),
-            BuildingType.Barrak => BuildingLevelTypeCheck(out T levelCheck, set, 6),
-            _ => set[0]
+            aquarium, barrel, workbench, tire, headquarters, medUnit, barrak,
+            aquariumTwo, barrelTwo, workbenchTwo, tireTwo, headquartersTwo, medUnitTwo, barrakTwo,
+            aquariumThree, barrelThree, workbenchThree, tireThree, headquartersThree, medUnitThree, barrakThree
         };
-    }
 
-    private T BuildingLevelTypeCheck<T>(out T check, List<T> set, int baseIndex)
-    {
-        check = _buildingLevelType switch
-        {
-            BuildingLevelType.low => set[baseIndex],
-            BuildingLevelType.middle => set[baseIndex + 7],
-            BuildingLevelType.high => set[baseIndex + 14],
-            _ => set[baseIndex]
-        };
-        return check;
+        var indexer = new EnumDoubleIndexer<BuildingType, BuildingLevelType, GameObject>(buildingList);
+        _selectedBuilding = indexer.GetValue(_buildingType, _buildingLevelType);
     }
 
     private void Build(GameObject selectedBuildings)
@@ -194,10 +174,14 @@ public class BuildingsBuilder : MonoBehaviour
 
     private void SaveBuildingData(Vector2Int gridPosition, Vector3 worldPosition)
     {
-        BuildingTypeCheck(out string buildingKey, new List<string>
+        var buildingList = new List<string>
         { _AquariumKey,_BarrelKey, _WorkbenchKey,_TireKey, _HeadquartersKey, _MedUnitKey, _BarrakKey, 
         _AquariumKey+_Middle,_BarrelKey + _Middle, _WorkbenchKey + _Middle,_TireKey + _Middle, _HeadquartersKey + _Middle, _MedUnitKey + _Middle, _BarrakKey + _Middle,
-        _AquariumKey + _High,_BarrelKey + _High, _WorkbenchKey + _High,_TireKey + _High, _HeadquartersKey + _High, _MedUnitKey + _High, _BarrakKey + _High});
+        _AquariumKey + _High,_BarrelKey + _High, _WorkbenchKey + _High,_TireKey + _High, _HeadquartersKey + _High, _MedUnitKey + _High, _BarrakKey + _High};
+
+        var indexer = new EnumDoubleIndexer<BuildingType, BuildingLevelType, string>(buildingList);
+
+        var buildingKey = indexer.GetValue(_buildingType, _buildingLevelType);
 
         if (!string.IsNullOrEmpty(buildingKey))
         {

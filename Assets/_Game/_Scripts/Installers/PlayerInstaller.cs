@@ -25,9 +25,6 @@ public class PlayerInstaller : MonoInstaller
             .AsSingle();
 
 
-
-
-
         if (!IsMobilePlatform())
             _joystick.gameObject.SetActive(false);//если это пк
 
