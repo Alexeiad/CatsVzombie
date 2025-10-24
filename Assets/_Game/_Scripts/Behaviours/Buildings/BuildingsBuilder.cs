@@ -122,7 +122,7 @@ public class BuildingsBuilder : MonoBehaviour
             aquariumThree, barrelThree, workbenchThree, tireThree, headquartersThree, medUnitThree, barrakThree
         };
 
-        var indexer = new EnumDoubleIndexer<BuildingType, BuildingLevelType, GameObject>(buildingList);
+        var indexer = new BuildingComparator<BuildingType, BuildingLevelType, GameObject>(buildingList);
         _selectedBuilding = indexer.GetValue(_buildingType, _buildingLevelType);
     }
 
@@ -143,14 +143,10 @@ public class BuildingsBuilder : MonoBehaviour
 
                 builtObjects[gridPosition] = newObject;
 
-                SaveBuildingData(gridPosition, newObject.transform.position);
+                SaveBuildingData(newObject.transform.position);
             }
         }
 
-        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape))
-        {
-            DeselectObject();
-        }
     }
 
     private void OnClick(BaseEventData data)
@@ -172,14 +168,14 @@ public class BuildingsBuilder : MonoBehaviour
         trigger.triggers.Add(entry);
     }
 
-    private void SaveBuildingData(Vector2Int gridPosition, Vector3 worldPosition)
+    private void SaveBuildingData(Vector3 worldPosition)
     {
         var buildingList = new List<string>
         { _AquariumKey,_BarrelKey, _WorkbenchKey,_TireKey, _HeadquartersKey, _MedUnitKey, _BarrakKey, 
         _AquariumKey+_Middle,_BarrelKey + _Middle, _WorkbenchKey + _Middle,_TireKey + _Middle, _HeadquartersKey + _Middle, _MedUnitKey + _Middle, _BarrakKey + _Middle,
         _AquariumKey + _High,_BarrelKey + _High, _WorkbenchKey + _High,_TireKey + _High, _HeadquartersKey + _High, _MedUnitKey + _High, _BarrakKey + _High};
 
-        var indexer = new EnumDoubleIndexer<BuildingType, BuildingLevelType, string>(buildingList);
+        var indexer = new BuildingComparator<BuildingType, BuildingLevelType, string>(buildingList);
 
         var buildingKey = indexer.GetValue(_buildingType, _buildingLevelType);
 

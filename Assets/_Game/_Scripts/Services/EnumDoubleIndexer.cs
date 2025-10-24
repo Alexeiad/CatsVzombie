@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class EnumDoubleIndexer<TEnum1, TEnum2, TValue>
+public class BuildingComparator<TEnum1, TEnum2, TValue>
     where TEnum1 : Enum
     where TEnum2 : Enum
 {
@@ -10,7 +10,7 @@ public class EnumDoubleIndexer<TEnum1, TEnum2, TValue>
     private readonly Dictionary<TEnum2, int> _secondEnumOffsets;
     private readonly List<TValue> _values;
 
-    public EnumDoubleIndexer(List<TValue> values)
+    public BuildingComparator(List<TValue> values)
     {
         _values = values ?? throw new ArgumentNullException(nameof(values));
         _firstEnumOffsets = new Dictionary<TEnum1, int>();
