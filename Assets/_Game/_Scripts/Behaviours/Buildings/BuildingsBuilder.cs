@@ -104,7 +104,7 @@ public class BuildingsBuilder : MonoBehaviour
                 builtObjects[gridPos] = newBuilding;
             }
         }
-        _eventTriggers.ForEach(et => AddEventTriggerListener(et, EventTriggerType.PointerDown, OnClick));
+        _eventTriggers.ForEach(et => AddEventTriggerListener(et, EventTriggerType.PointerDown, Select));
     }
 
     void Update()
@@ -112,7 +112,13 @@ public class BuildingsBuilder : MonoBehaviour
         Select(_buildingType);
         Build(_selectedBuilding);
     }
-    
+    private void AddEventTriggerListener(EventTrigger trigger, EventTriggerType eventType, UnityEngine.Events.UnityAction<BaseEventData> callback)
+    {
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = eventType;
+        entry.callback.AddListener(callback);
+        trigger.triggers.Add(entry);
+    }
     private void Select(BuildingType baseType)
     {
         var buildingList = new List<GameObject>
@@ -148,8 +154,14 @@ public class BuildingsBuilder : MonoBehaviour
         }
 
     }
+    public void Deselect()
+    {
+        _selectedBuilding = null;
+        
+    }
 
-    private void OnClick(BaseEventData data)
+
+    private void Select(BaseEventData data)
     {
         GameObject clickedObject = ((PointerEventData)data).pointerCurrentRaycast.gameObject;
         if (clickedObject != null)
@@ -157,16 +169,11 @@ public class BuildingsBuilder : MonoBehaviour
             var buttonForConstruction = clickedObject.GetComponent<ButtonForConstruction>();
 
             _buildingType = buttonForConstruction.buildingType;
+            _buildingLevelType = buttonForConstruction.buildingLevelType;
         }
     }
 
-    private void AddEventTriggerListener(EventTrigger trigger, EventTriggerType eventType, UnityEngine.Events.UnityAction<BaseEventData> callback)
-    {
-        EventTrigger.Entry entry = new EventTrigger.Entry();
-        entry.eventID = eventType;
-        entry.callback.AddListener(callback);
-        trigger.triggers.Add(entry);
-    }
+    
 
     private void SaveBuildingData(Vector3 worldPosition)
     {
@@ -203,11 +210,7 @@ public class BuildingsBuilder : MonoBehaviour
         return true;
     }
 
-    public void DeselectObject()
-    {
-        _selectedBuilding = null;
-    }
-
+    
     void OnDrawGizmos()
     {
         if (_camera != null && _selectedBuilding != null)
