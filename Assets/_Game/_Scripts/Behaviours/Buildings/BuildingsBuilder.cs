@@ -151,8 +151,18 @@ public class BuildingsBuilder : MonoBehaviour
 
                 SaveBuildingData(newObject.transform.position);
             }
+            else if(_isBuildPanel)
+            {
+                AboutBuilding(gridPosition);
+            }
         }
 
+    }
+
+    public void AboutBuilding(Vector2Int gridPosition)
+    {
+        GameObject aboutBilding =  builtObjects[gridPosition];
+        
     }
     public void Deselect()
     {

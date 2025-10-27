@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseType: 1
-  levelType: 0
+  levelType: 1
   isAheadOfThePlayer: 1
   safeDistance: 1
   pushForce: 20
