@@ -12,6 +12,7 @@ using Zenject;
 public class BuildingsBuilder : MonoBehaviour
 {
     [SerializeField] private Tilemap tilemap;
+    [SerializeField] private SelectWindow _selectWindow;
 
     [SerializeField] private List<EventTrigger> _eventTriggers;
 
@@ -23,6 +24,7 @@ public class BuildingsBuilder : MonoBehaviour
     private Dictionary<string, GameObject> _objectMap;
 
     private GameObject _selectedBuilding;
+    private GameObject _aboutBilding;
     private Camera _camera;
 
     private PlayerMovement _playerMovement;
@@ -149,11 +151,12 @@ public class BuildingsBuilder : MonoBehaviour
 
                 builtObjects[gridPosition] = newObject;
 
-                SaveBuildingData(newObject.transform.position);
+                SaveBuildingData(newObject.transform.position,false);
             }
             else if(_isBuildPanel)
             {
                 AboutBuilding(gridPosition);
+             
             }
         }
 
@@ -161,8 +164,9 @@ public class BuildingsBuilder : MonoBehaviour
 
     public void AboutBuilding(Vector2Int gridPosition)
     {
-        GameObject aboutBilding =  builtObjects[gridPosition];
-        
+        _aboutBilding =  builtObjects[gridPosition];
+
+        _selectWindow.Container(_aboutBilding.GetComponent<BuildingBehaviour>().baseType);
     }
     public void Deselect()
     {
@@ -185,7 +189,7 @@ public class BuildingsBuilder : MonoBehaviour
 
     
 
-    private void SaveBuildingData(Vector3 worldPosition)
+    private void SaveBuildingData(Vector3 worldPosition,bool remove)
     {
         var buildingList = new List<string>
         { _AquariumKey,_BarrelKey, _WorkbenchKey,_TireKey, _HeadquartersKey, _MedUnitKey, _BarrakKey, 
@@ -196,10 +200,20 @@ public class BuildingsBuilder : MonoBehaviour
 
         var buildingKey = indexer.GetValue(_buildingType, _buildingLevelType);
 
-        if (!string.IsNullOrEmpty(buildingKey))
+        if (!string.IsNullOrEmpty(buildingKey)&&!remove)
         {
             _bases.Add(new BuildingsSaveData(buildingKey, worldPosition));
         }
+        if (!string.IsNullOrEmpty(buildingKey) && remove)
+        {
+            _bases.Remove(new BuildingsSaveData(buildingKey, worldPosition));
+        }
+    }
+    public void DeleteBuilding()
+    {
+        SaveBuildingData(_aboutBilding.transform.position, true);
+
+        _aboutBilding.SetActive(false);
     }
 
     public void BuildedOn()

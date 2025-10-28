@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 85265021}
   - component: {fileID: 85265023}
   - component: {fileID: 85265022}
+  - component: {fileID: 85265024}
   m_Layer: 0
   m_Name: SelectWindow
   m_TagString: Untagged
@@ -198,6 +199,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 85265020}
   m_CullTransparentMesh: 1
+--- !u!114 &85265024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85265020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0168e6128e90bc4409a902078792923b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _uiElementsActivate:
+  - {fileID: 85265020}
+  - {fileID: 1001260901}
+  - {fileID: 1738933704}
+  _uiElementsDisactive:
+  - {fileID: 1050011093}
+  - {fileID: 1645873237}
+  _buildingsBuilder: {fileID: 975543558}
+  _arraySelector: {fileID: 1288193821}
 --- !u!1 &124934473 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2706966472399928293, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
@@ -216,6 +238,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectWindow: {fileID: 85265020}
+  _uiElementsActivate:
+  - {fileID: 1050011093}
+  - {fileID: 1645873237}
+  _uiElementsDisactive:
+  - {fileID: 1001260901}
+  - {fileID: 1738933704}
+  _arraySelector: {fileID: 0}
   buildingType: 0
   buildingLevelType: 0
 --- !u!1 &151276399 stripped
@@ -247,6 +276,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectWindow: {fileID: 85265020}
+  _uiElementsActivate: []
+  _uiElementsDisactive: []
+  _arraySelector: {fileID: 0}
   buildingType: 6
   buildingLevelType: 0
 --- !u!1 &155511013
@@ -390,6 +422,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectWindow: {fileID: 85265020}
+  _uiElementsActivate: []
+  _uiElementsDisactive: []
+  _arraySelector: {fileID: 0}
   buildingType: 1
   buildingLevelType: 0
 --- !u!1 &442452742
@@ -1014,8 +1049,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectWindow: {fileID: 85265020}
+  _uiElementsActivate: []
+  _uiElementsDisactive: []
+  _arraySelector: {fileID: 0}
   buildingType: 3
   buildingLevelType: 0
+--- !u!114 &975543558 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1076829022909692528, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+  m_PrefabInstance: {fileID: 1242735424}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aea6db51af4b744697a69d70b02e7f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &990506668
 GameObject:
   m_ObjectHideFlags: 0
@@ -1743,6 +1792,10 @@ PrefabInstance:
       propertyPath: workbenchTwo
       value: 
       objectReference: {fileID: 8346101613348907668, guid: fd702e70cac53464c973c8c52ff67c04, type: 3}
+    - target: {fileID: 1076829022909692528, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: _selectWindow
+      value: 
+      objectReference: {fileID: 85265024}
     - target: {fileID: 1076829022909692528, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: aquariumThree
       value: 
@@ -3112,7 +3165,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1738933707}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 85265024}
+        m_TargetAssemblyTypeName: SelectWindow, Assembly-CSharp
+        m_MethodName: Delete
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1738933707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15165,6 +15230,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectWindow: {fileID: 85265020}
+  _uiElementsActivate: []
+  _uiElementsDisactive: []
+  _arraySelector: {fileID: 1288193821}
   buildingType: 0
   buildingLevelType: 0
 --- !u!1 &1996067445 stripped
@@ -15196,6 +15264,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectWindow: {fileID: 85265020}
+  _uiElementsActivate: []
+  _uiElementsDisactive: []
+  _arraySelector: {fileID: 0}
   buildingType: 5
   buildingLevelType: 0
 --- !u!1 &2054404755 stripped
@@ -15227,6 +15298,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectWindow: {fileID: 85265020}
+  _uiElementsActivate: []
+  _uiElementsDisactive: []
+  _arraySelector: {fileID: 0}
   buildingType: 4
   buildingLevelType: 0
 --- !u!1 &2118227980 stripped
@@ -15258,6 +15332,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectWindow: {fileID: 85265020}
+  _uiElementsActivate: []
+  _uiElementsDisactive: []
+  _arraySelector: {fileID: 0}
   buildingType: 2
   buildingLevelType: 0
 --- !u!1660057539 &9223372036854775807

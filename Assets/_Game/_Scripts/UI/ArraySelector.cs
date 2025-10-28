@@ -12,11 +12,17 @@ public class ArraySelector : MonoBehaviour
     [SerializeField] private List<Sprite> _images;
     [SerializeField] private Image _image;
 
+    private BuildingType _buildingType;
+
     private void Update()
     {
-        int buildingTypeIndex = (int)_buttonForConstruction.buildingType;
+        int buildingTypeIndex = (int)_buildingType;
 
         _image.sprite = _images[buildingTypeIndex];
+    }
+    public void SelectBuildingType(BuildingType buildingType)
+    {
+        _buildingType = buildingType;
     }
     public void SelectNext()
     {
