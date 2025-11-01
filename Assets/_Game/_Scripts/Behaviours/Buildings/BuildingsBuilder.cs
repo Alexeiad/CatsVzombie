@@ -12,9 +12,6 @@ using Zenject;
 public class BuildingsBuilder : MonoBehaviour
 {
     [SerializeField] private Tilemap tilemap;
-    [SerializeField] private SelectWindow _selectWindow;
-
-    [SerializeField] private List<EventTrigger> _eventTriggers;
 
     [SerializeField] private GameObject aquarium, barrel, workbench, tire, headquarters, medUnit, barrak;
     [SerializeField] private GameObject aquariumTwo, barrelTwo, workbenchTwo, tireTwo, headquartersTwo, medUnitTwo, barrakTwo;
@@ -24,7 +21,7 @@ public class BuildingsBuilder : MonoBehaviour
     private Dictionary<string, GameObject> _objectMap;
 
     private GameObject _selectedBuilding;
-    private GameObject _aboutBilding;
+
     private Camera _camera;
 
     private PlayerMovement _playerMovement;
@@ -32,8 +29,7 @@ public class BuildingsBuilder : MonoBehaviour
     [Inject] private BuildingsList _bases;
     [Inject] private BaseSaveManager _baseSaveManager;
 
-    private DiContainer _diContainer;
-   
+
     private BuildingType _buildingType;
     private BuildingLevelType _buildingLevelType;
 
@@ -51,7 +47,36 @@ public class BuildingsBuilder : MonoBehaviour
 
         _Middle = "Middle",
         _High= "High";
-        
+
+
+    public void BuildedOn()
+    {
+        _isBuildPanel = true;
+    }
+
+    public void BuildedOff()
+    {
+        _isBuildPanel = false;
+    }
+
+
+    public void SelectType(BuildingType buildingType, BuildingLevelType buildingLevelType)
+    {
+        _buildingType = buildingType;
+        _buildingLevelType = buildingLevelType;
+    }
+    public void Deselect()
+    {
+        _selectedBuilding = null;
+
+    }
+    public void DeleteBuilding(GameObject building)
+    {
+        SaveBuildingData(building.transform.position, true);
+
+        building.SetActive(false);
+    }
+
 
     [Inject]
     private void Construct(PlayerMovement player)
@@ -106,38 +131,33 @@ public class BuildingsBuilder : MonoBehaviour
                 builtObjects[gridPos] = newBuilding;
             }
         }
-        _eventTriggers.ForEach(et => AddEventTriggerListener(et, EventTriggerType.PointerDown, Select));
+        
     }
 
     void Update()
     {
-        Select(_buildingType);
-        Build(_selectedBuilding);
+        Select();
+        Build();
     }
-    private void AddEventTriggerListener(EventTrigger trigger, EventTriggerType eventType, UnityEngine.Events.UnityAction<BaseEventData> callback)
+
+    private void Select()
     {
-        EventTrigger.Entry entry = new EventTrigger.Entry();
-        entry.eventID = eventType;
-        entry.callback.AddListener(callback);
-        trigger.triggers.Add(entry);
-    }
-    private void Select(BuildingType baseType)
-    {
-        var buildingList = new List<GameObject>
+        var buildings = new List<GameObject>
         {
             aquarium, barrel, workbench, tire, headquarters, medUnit, barrak,
             aquariumTwo, barrelTwo, workbenchTwo, tireTwo, headquartersTwo, medUnitTwo, barrakTwo,
             aquariumThree, barrelThree, workbenchThree, tireThree, headquartersThree, medUnitThree, barrakThree
         };
 
-        var indexer = new BuildingComparator<BuildingType, BuildingLevelType, GameObject>(buildingList);
+        var indexer = new BuildingComparator<BuildingType, BuildingLevelType, GameObject>(buildings);
         _selectedBuilding = indexer.GetValue(_buildingType, _buildingLevelType);
     }
 
-    private void Build(GameObject selectedBuildings)
+    private void Build()
     {
-        if (selectedBuildings != null)
+        if (_selectedBuilding != null)
         {
+            
             Vector3 mouseWorldPos = _camera.ScreenToWorldPoint(Input.mousePosition);
             Vector3Int tilePosition = tilemap.WorldToCell(mouseWorldPos);
             Vector2Int gridPosition = new Vector2Int(tilePosition.x, tilePosition.y);
@@ -146,48 +166,21 @@ public class BuildingsBuilder : MonoBehaviour
 
             if (CanBuildHere(gridPosition) && _isBuildPanel)
             {
-                GameObject newObject = Instantiate(selectedBuildings, buildPosition, Quaternion.identity);
+                //Debug.LogError(_buildingType);
+                GameObject newObject = Instantiate(_selectedBuilding, buildPosition, Quaternion.identity);
                 newObject.GetComponent<BuildingBehaviour>().Construct(_playerMovement);
 
                 builtObjects[gridPosition] = newObject;
 
                 SaveBuildingData(newObject.transform.position,false);
             }
-            else if(_isBuildPanel)
-            {
-                AboutBuilding(gridPosition);
-             
-            }
+            
         }
 
     }
 
-    public void AboutBuilding(Vector2Int gridPosition)
-    {
-        _aboutBilding =  builtObjects[gridPosition];
+   
 
-        _selectWindow.Container(_aboutBilding.GetComponent<BuildingBehaviour>().baseType);
-    }
-    public void Deselect()
-    {
-        _selectedBuilding = null;
-        
-    }
-
-
-    private void Select(BaseEventData data)
-    {
-        GameObject clickedObject = ((PointerEventData)data).pointerCurrentRaycast.gameObject;
-        if (clickedObject != null)
-        {
-            var buttonForConstruction = clickedObject.GetComponent<ButtonForConstruction>();
-
-            _buildingType = buttonForConstruction.buildingType;
-            _buildingLevelType = buttonForConstruction.buildingLevelType;
-        }
-    }
-
-    
 
     private void SaveBuildingData(Vector3 worldPosition,bool remove)
     {
@@ -209,23 +202,9 @@ public class BuildingsBuilder : MonoBehaviour
             _bases.Remove(new BuildingsSaveData(buildingKey, worldPosition));
         }
     }
-    public void DeleteBuilding()
-    {
-        SaveBuildingData(_aboutBilding.transform.position, true);
+    
 
-        _aboutBilding.SetActive(false);
-    }
-
-    public void BuildedOn()
-    {
-        _isBuildPanel = true;
-    }
-
-    public void BuildedOff()
-    {
-        _isBuildPanel = false;
-    }
-
+   
     bool CanBuildHere(Vector2Int gridPosition)
     {
         if (builtObjects.ContainsKey(gridPosition))
