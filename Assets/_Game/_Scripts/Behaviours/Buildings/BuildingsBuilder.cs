@@ -1,17 +1,17 @@
-using DG.Tweening;
+
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
-using UnityEditor.Rendering;
+
 using UnityEngine;
-using UnityEngine.EventSystems;
+
 using UnityEngine.Tilemaps;
-using UnityEngine.UI;
+
 using Zenject;
 
 public class BuildingsBuilder : MonoBehaviour
 {
     [SerializeField] private Tilemap tilemap;
+
+    [SerializeField] private WindowBehaviour _windowBehaviour;
 
     [SerializeField] private GameObject aquarium, barrel, workbench, tire, headquarters, medUnit, barrak;
     [SerializeField] private GameObject aquariumTwo, barrelTwo, workbenchTwo, tireTwo, headquartersTwo, medUnitTwo, barrakTwo;
@@ -25,7 +25,10 @@ public class BuildingsBuilder : MonoBehaviour
     private Camera _camera;
 
     private PlayerMovement _playerMovement;
-   
+
+    private Vector2Int _gridPosition;
+    private Vector3 _buildPosition;
+
     [Inject] private BuildingsList _bases;
     [Inject] private BaseSaveManager _baseSaveManager;
 
@@ -49,15 +52,6 @@ public class BuildingsBuilder : MonoBehaviour
         _High= "High";
 
 
-    public void BuildedOn()
-    {
-        _isBuildPanel = true;
-    }
-
-    public void BuildedOff()
-    {
-        _isBuildPanel = false;
-    }
 
 
     public void SelectType(BuildingType buildingType, BuildingLevelType buildingLevelType)
@@ -76,7 +70,34 @@ public class BuildingsBuilder : MonoBehaviour
 
         building.SetActive(false);
     }
+    public void GetBuilding()
+    {
+       
+        Select();
 
+        if (_selectedBuilding == null)
+        {
+            return;
+        }
+
+        Build();
+
+        if (CanBuildHere(_gridPosition))
+        {
+            GameObject newObject = Instantiate(_selectedBuilding, _buildPosition, Quaternion.identity);
+            newObject.GetComponent<BuildingBehaviour>().Construct(_playerMovement);
+
+            builtObjects[_gridPosition] = newObject;
+            SaveBuildingData(newObject.transform.position, false);
+        }
+        else
+        {
+            var buildingBehaviour = _selectedBuilding.GetComponent<BuildingBehaviour>();
+            var type = buildingBehaviour.baseType;
+            var levelType = buildingBehaviour.levelType;
+            _windowBehaviour.ShowImage(type, levelType, CallbackType.Base);
+        }
+    }
 
     [Inject]
     private void Construct(PlayerMovement player)
@@ -134,12 +155,6 @@ public class BuildingsBuilder : MonoBehaviour
         
     }
 
-    void Update()
-    {
-        Select();
-        Build();
-    }
-
     private void Select()
     {
         var buildings = new List<GameObject>
@@ -155,31 +170,16 @@ public class BuildingsBuilder : MonoBehaviour
 
     private void Build()
     {
-        if (_selectedBuilding != null)
-        {
-            
-            Vector3 mouseWorldPos = _camera.ScreenToWorldPoint(Input.mousePosition);
-            Vector3Int tilePosition = tilemap.WorldToCell(mouseWorldPos);
-            Vector2Int gridPosition = new Vector2Int(tilePosition.x, tilePosition.y);
+        Vector3 mouseWorldPos = _camera.ScreenToWorldPoint(Input.mousePosition);
+        Vector3Int tilePosition = tilemap.WorldToCell(mouseWorldPos);
 
-            Vector3 buildPosition = tilemap.GetCellCenterWorld(tilePosition);
+        _gridPosition = new Vector2Int(tilePosition.x, tilePosition.y);
+        _buildPosition = tilemap.GetCellCenterWorld(tilePosition);
 
-            if (CanBuildHere(gridPosition) && _isBuildPanel)
-            {
-                //Debug.LogError(_buildingType);
-                GameObject newObject = Instantiate(_selectedBuilding, buildPosition, Quaternion.identity);
-                newObject.GetComponent<BuildingBehaviour>().Construct(_playerMovement);
-
-                builtObjects[gridPosition] = newObject;
-
-                SaveBuildingData(newObject.transform.position,false);
-            }
-            
-        }
 
     }
 
-   
+
 
 
     private void SaveBuildingData(Vector3 worldPosition,bool remove)
