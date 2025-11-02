@@ -92,9 +92,10 @@ public class BuildingsBuilder : MonoBehaviour
         }
         else
         {
-            var buildingBehaviour = _selectedBuilding.GetComponent<BuildingBehaviour>();
-            var type = buildingBehaviour.baseType;
-            var levelType = buildingBehaviour.levelType;
+            var building= builtObjects[_gridPosition];
+            var type = building.GetComponent<BuildingBehaviour>().baseType;
+            var levelType = building.GetComponent<BuildingBehaviour>().levelType;
+
             _windowBehaviour.ShowImage(type, levelType, CallbackType.Base);
         }
     }
