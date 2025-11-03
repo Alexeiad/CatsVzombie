@@ -18,6 +18,7 @@ public class WindowBehaviour : MonoBehaviour
     public void ShowImage(BuildingType buildingType,BuildingLevelType buildingLevelType,CallbackType callback)
     {
         this.buildingType = buildingType;
+        this.buildingLevelType = buildingLevelType;
 
         _image.sprite = _sprites[(int)buildingType];
         _image.transform.localScale = Vector3.one;
@@ -30,10 +31,19 @@ public class WindowBehaviour : MonoBehaviour
         if (callback == CallbackType.Base)
         {
             _elementWindow.SetActive(true);
+            Apply();
         }
+       
+    }
+    public void Apply()
+    {
         _buildingBuilder.SelectType(buildingType, buildingLevelType);
     }
-
+ 
+    public void Remove()
+    {
+        _buildingBuilder.DeleteBuilding(buildingType);
+    }
     public void ArrayRight()
     {
         MoveToNextType(1);
@@ -57,7 +67,6 @@ public class WindowBehaviour : MonoBehaviour
         //_image.sprite = _sprites[newIndex];
         _image.transform.localScale = new Vector2(1+newIndex * 0.2f,1);
 
-        _buildingBuilder.SelectType(buildingType, newType);
 
         buildingLevelType = newType;
     }

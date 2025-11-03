@@ -10,6 +10,7 @@ using Zenject;
 public class BuildingsBuilder : MonoBehaviour
 {
     [SerializeField] private Tilemap tilemap;
+ 
 
     [SerializeField] private WindowBehaviour _windowBehaviour;
 
@@ -23,6 +24,7 @@ public class BuildingsBuilder : MonoBehaviour
     private GameObject _selectedBuilding;
 
     private Camera _camera;
+    private Vector3 _mouseWorldPos;
 
     private PlayerMovement _playerMovement;
 
@@ -64,12 +66,17 @@ public class BuildingsBuilder : MonoBehaviour
         _selectedBuilding = null;
 
     }
-    public void DeleteBuilding(GameObject building)
+    public void DeleteBuilding(BuildingType buildingType)
     {
-        SaveBuildingData(building.transform.position, true);
+        var building = builtObjects[_gridPosition];
 
-        building.SetActive(false);
+        builtObjects.Remove(_gridPosition);
+
+        SaveBuildingData((Vector2)_gridPosition, true);
+
+        Destroy(building);
     }
+
     public void GetBuilding()
     {
        
@@ -171,12 +178,12 @@ public class BuildingsBuilder : MonoBehaviour
 
     private void Build()
     {
-        Vector3 mouseWorldPos = _camera.ScreenToWorldPoint(Input.mousePosition);
-        Vector3Int tilePosition = tilemap.WorldToCell(mouseWorldPos);
+        _mouseWorldPos = _camera.ScreenToWorldPoint(Input.mousePosition);
+
+        Vector3Int tilePosition = tilemap.WorldToCell(_mouseWorldPos);
 
         _gridPosition = new Vector2Int(tilePosition.x, tilePosition.y);
         _buildPosition = tilemap.GetCellCenterWorld(tilePosition);
-
 
     }
 
@@ -201,6 +208,7 @@ public class BuildingsBuilder : MonoBehaviour
         if (!string.IsNullOrEmpty(buildingKey) && remove)
         {
             _bases.Remove(new BuildingsSaveData(buildingKey, worldPosition));
+            _baseSaveManager.RemoveBaseById(buildingKey);
         }
     }
     
