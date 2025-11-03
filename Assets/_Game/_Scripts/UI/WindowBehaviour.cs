@@ -1,7 +1,8 @@
 using System;
-using System.Collections;
+
 using System.Collections.Generic;
-using UnityEditor.Rendering.LookDev;
+using TMPro;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,8 @@ public class WindowBehaviour : MonoBehaviour
     [SerializeField] private List<Sprite> _sprites;
     [SerializeField] private Image _image;
     [SerializeField] private GameObject _window, _elementWindow;
+    [SerializeField] private InfoDataSO _infoDataSO;
+    [SerializeField] private TextMeshProUGUI _textMeshProUGUI;
 
     public void ShowImage(BuildingType buildingType,BuildingLevelType buildingLevelType,CallbackType callback)
     {
@@ -21,6 +24,8 @@ public class WindowBehaviour : MonoBehaviour
         this.buildingLevelType = buildingLevelType;
 
         _image.sprite = _sprites[(int)buildingType];
+        _textMeshProUGUI.text = _infoDataSO.buidingInfo[(int)buildingType];
+        
         _image.transform.localScale = Vector3.one;
         _window.SetActive(true);
 
