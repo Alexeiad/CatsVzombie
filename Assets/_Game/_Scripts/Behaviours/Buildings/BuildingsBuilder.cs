@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -54,7 +55,26 @@ public class BuildingsBuilder : MonoBehaviour
         _High= "High";
 
 
+    public void BuildForLevelUp()
+    {
+        if((int)_buildingLevelType < Enum.GetValues(typeof(BuildingLevelType)).Length-1)
+            _buildingLevelType++;
 
+        Select();
+
+        _mouseWorldPos = _buildPosition;
+
+        Vector3Int tilePosition = tilemap.WorldToCell(_mouseWorldPos);
+
+        _gridPosition = new Vector2Int(tilePosition.x, tilePosition.y);
+        _buildPosition = tilemap.GetCellCenterWorld(tilePosition);
+
+        GameObject newObject = Instantiate(_selectedBuilding, _buildPosition, Quaternion.identity);
+        newObject.GetComponent<BuildingBehaviour>().Construct(_playerMovement);
+
+        builtObjects[_gridPosition] = newObject;
+        SaveBuildingData(newObject.transform.position, false);
+    }
 
     public void SelectType(BuildingType buildingType, BuildingLevelType buildingLevelType)
     {

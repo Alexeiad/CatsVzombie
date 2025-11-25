@@ -49,6 +49,10 @@ public class WindowBehaviour : MonoBehaviour
     {
         _buildingBuilder.DeleteBuilding(buildingType);
     }
+    public void LevelUp()
+    {
+        _buildingBuilder.BuildForLevelUp();
+    }
     public void ArrayRight()
     {
         MoveToNextType(1);
