@@ -47,7 +47,7 @@ public class WindowBehaviour : MonoBehaviour
  
     public void Remove()
     {
-        _buildingBuilder.DeleteBuilding(buildingType);
+        _buildingBuilder.DeleteBuilding();
     }
     public void LevelUp()
     {

@@ -31,12 +31,12 @@ public class BaseInstaller : MonoInstaller
 public class BuildingsSaveData
 {
     public string ID;
-    public Vector3 Position;
+    public Vector2 Position;
 
     // ѕустой конструктор нужен дл€ десериализации JsonUtility
     public BuildingsSaveData() { }
 
-    public BuildingsSaveData(string id, Vector3 pos)
+    public  BuildingsSaveData(string id, Vector2 pos)
     {
         ID = id;
         Position = pos;
