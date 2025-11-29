@@ -266,7 +266,13 @@ public class BuildingsBuilder : MonoBehaviour
 
     private bool CanBuildHere(Vector2Int gridPosition)
     {
-        return !builtObjects.ContainsKey(gridPosition);
+        // Проверяем, что позиция не занята другим зданием
+        if (builtObjects.ContainsKey(gridPosition))
+            return false;
+
+        // Проверяем, что в этой клетке tilemap есть тайл (текстура)
+        Vector3Int tilePosition = new Vector3Int(gridPosition.x, gridPosition.y, 0);
+        return tilemap.HasTile(tilePosition);
     }
 
     void OnDrawGizmos()
