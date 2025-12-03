@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 using Zenject;
 
 public class BuildingsBuilder : MonoBehaviour
 {
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private WindowBehaviour _windowBehaviour;
+    [SerializeField] private TilemapGridHighlighter _tileHighlighter;
 
     [SerializeField] private GameObject aquarium, barrel, workbench, tire, headquarters, medUnit, barrak;
     [SerializeField] private GameObject aquariumTwo, barrelTwo, workbenchTwo, tireTwo, headquartersTwo, medUnitTwo, barrakTwo;
@@ -44,6 +46,10 @@ public class BuildingsBuilder : MonoBehaviour
         _Middle = "Middle",
         _High = "High";
 
+    public bool IsPositionOccupied(Vector2Int gridPosition)
+    {
+        return builtObjects.ContainsKey(gridPosition);
+    }
     public void BuildForLevelUp()
     {
         if ((int)_buildingLevelType < Enum.GetValues(typeof(BuildingLevelType)).Length - 1)
@@ -94,6 +100,7 @@ public class BuildingsBuilder : MonoBehaviour
             builtObjects.Remove(gridPosition);
             SaveBuildingData(_buildPosition, true);
             Destroy(building);
+            //_tileHighlighter.SetTileAtPosition(gridPosition,false);
         }
     }
 
@@ -115,6 +122,7 @@ public class BuildingsBuilder : MonoBehaviour
 
             builtObjects[_gridPosition] = newObject;
             SaveBuildingData(newObject.transform.position, false);
+            //_tileHighlighter.SetTileAtPosition(_gridPosition, true);
         }
         else
         {
@@ -131,6 +139,9 @@ public class BuildingsBuilder : MonoBehaviour
             }
         }
     }
+    
+   
+    
 
     [Inject]
     private void Construct(PlayerMovement player)
