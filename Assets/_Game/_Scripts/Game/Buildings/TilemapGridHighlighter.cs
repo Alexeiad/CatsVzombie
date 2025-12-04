@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -12,9 +13,13 @@ public class TilemapGridHighlighter : MonoBehaviour
     [SerializeField] private TileBase buildableTile;
     [SerializeField] private TileBase occupiedTile;
 
-    [SerializeField] private BuildingsBuilder buildingsBuilder;
+    [Header("Building Detection")]
+    [SerializeField] private LayerMask buildingLayerMask = -1; // По умолчанию все слои
+    [SerializeField] private float checkRadius = 0.3f; // Радиус для проверки зданий
 
     private HashSet<Vector3Int> tilePositions = new HashSet<Vector3Int>();
+    private Dictionary<Vector3Int, Collider2D[]> occupiedTilesCache = new Dictionary<Vector3Int, Collider2D[]>();
+
     private float updateTimer = 0f;
     private const float UPDATE_INTERVAL = 0.1f;
 
@@ -48,6 +53,7 @@ public class TilemapGridHighlighter : MonoBehaviour
         {
             renderer.sortingOrder = baseRenderer.sortingOrder + 1;
             renderer.sortingLayerName = baseRenderer.sortingLayerName;
+            renderer.material = baseRenderer.material;
         }
 
         return newTilemap;
@@ -84,33 +90,121 @@ public class TilemapGridHighlighter : MonoBehaviour
 
     private void RefreshAllTiles()
     {
+        // Очищаем кэш
+        occupiedTilesCache.Clear();
+
+        // Сначала устанавливаем buildableTile на все позиции
         foreach (Vector3Int cellPos in tilePositions)
         {
-            Vector2Int gridPos = new Vector2Int(cellPos.x, cellPos.y);
-            bool isOccupied = IsPositionOccupied(gridPos);
-            highlightTilemap.SetTile(cellPos, isOccupied ? occupiedTile : buildableTile);
+            highlightTilemap.SetTile(cellPos, buildableTile);
+        }
+
+        // Ищем все здания на сцене
+        FindAndMarkOccupiedTiles();
+    }
+
+    private void FindAndMarkOccupiedTiles()
+    {
+        // Вариант 1: Ищем все объекты с SpriteRenderer
+        BuildingBehaviour[] allBuildings = FindObjectsOfType<BuildingBehaviour>();
+
+        foreach (BuildingBehaviour building in allBuildings)
+        {
+            if (building == null || !building.enabled || building.gameObject == null)
+                continue;
+
+            // Пропускаем сам tilemap и highlightTilemap
+            if (building.GetComponent<TilemapRenderer>() != null)
+                continue;
+
+            // Проверяем, находится ли здание над тайлом
+            MarkTileUnderBuilding(building.transform.position, Vector3Int.one);
+        }
+
+        // Вариант 2: Ищем все объекты с определенным тегом или компонентом
+        // GameObject[] taggedBuildings = GameObject.FindGameObjectsWithTag("Building");
+        // foreach (GameObject building in taggedBuildings)
+        // {
+        //     if (building.activeInHierarchy)
+        //     {
+        //         MarkTileUnderBuilding(building.transform.position, GetObjectSize(building));
+        //     }
+        // }
+    }
+
+    private void MarkTileUnderBuilding(Vector3 worldPosition, Vector3 buildingSize)
+    {
+        // Преобразуем мировую позицию в позицию тайла
+        Vector3Int cellPosition = highlightTilemap.WorldToCell(worldPosition);
+
+        // Проверяем, есть ли тайл в этой позиции
+        if (tilePositions.Contains(cellPosition))
+        {
+            // Ставим occupiedTile под зданием
+            highlightTilemap.SetTile(cellPosition, occupiedTile);
+
+            // Если здание большое, отмечаем соседние тайлы
+            if (buildingSize.x > 1f || buildingSize.y > 1f)
+            {
+                int cellsX = Mathf.CeilToInt(buildingSize.x);
+                int cellsY = Mathf.CeilToInt(buildingSize.y);
+
+                for (int x = 0; x < cellsX; x++)
+                {
+                    for (int y = 0; y < cellsY; y++)
+                    {
+                        Vector3Int offsetCell = cellPosition + new Vector3Int(x, y, 0);
+                        if (tilePositions.Contains(offsetCell))
+                        {
+                            highlightTilemap.SetTile(offsetCell, occupiedTile);
+                        }
+                    }
+                }
+            }
         }
     }
 
-    private bool IsPositionOccupied(Vector2Int gridPosition)
+    private Vector3 GetObjectSize(GameObject obj)
     {
-        if (buildingsBuilder == null) return false;
-
-        System.Reflection.FieldInfo field = typeof(BuildingsBuilder).GetField("builtObjects",
-            System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-
-        if (field != null)
+        Renderer renderer = obj.GetComponent<Renderer>();
+        if (renderer != null)
         {
-            var builtObjects = field.GetValue(buildingsBuilder) as Dictionary<Vector2Int, GameObject>;
-            return builtObjects != null && builtObjects.ContainsKey(gridPosition);
+            return renderer.bounds.size;
         }
 
-        return false;
+        Collider2D collider2D = obj.GetComponent<Collider2D>();
+        if (collider2D != null)
+        {
+            return collider2D.bounds.size;
+        }
+
+        // Если нет коллайдера или рендерера, используем размер по умолчанию
+        return Vector3.one;
+    }
+
+    // Метод для проверки конкретной позиции
+    public bool IsTileOccupied(Vector3Int cellPosition)
+    {
+        // Проверяем коллайдеры в центре тайла
+        Vector3 worldPos = highlightTilemap.GetCellCenterWorld(cellPosition);
+
+        // Ищем SpriteRenderer в этой позиции
+        SpriteRenderer[] renderers = Physics2D.OverlapCircleAll(worldPos, checkRadius)
+            .Select(collider => collider.GetComponent<SpriteRenderer>())
+            .Where(renderer => renderer != null && renderer.enabled)
+            .ToArray();
+
+        return renderers.Length > 0;
+    }
+
+    // Метод для принудительного обновления
+    public void ForceRefresh()
+    {
+        RefreshAllTiles();
     }
 
     private void OnDisable()
     {
-        // Очищаем тайлы при отключении компонента
         if (highlightTilemap != null)
         {
             highlightTilemap.ClearAllTiles();
@@ -119,10 +213,25 @@ public class TilemapGridHighlighter : MonoBehaviour
 
     private void OnEnable()
     {
-        // Восстанавливаем подсветку при включении компонента
-        if (highlightTilemap != null && buildingsBuilder != null)
+        if (highlightTilemap != null && tilePositions.Count > 0)
         {
             RefreshAllTiles();
+        }
+    }
+
+    // Визуализация в редакторе (для отладки)
+    private void OnDrawGizmosSelected()
+    {
+        if (!Application.isPlaying || highlightTilemap == null) return;
+
+        Gizmos.color = Color.red;
+        foreach (Vector3Int cellPos in tilePositions)
+        {
+            if (IsTileOccupied(cellPos))
+            {
+                Vector3 worldPos = highlightTilemap.GetCellCenterWorld(cellPos);
+                Gizmos.DrawWireCube(worldPos, Vector3.one * 0.8f);
+            }
         }
     }
 }

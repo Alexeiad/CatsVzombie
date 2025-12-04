@@ -31,7 +31,13 @@ public class BuildingBehaviour : MonoBehaviour
 
     private bool _isStart;
 
-    
+
+    public Vector2Int GridPosition = new Vector2Int();
+
+    public Vector2Int Size = new Vector2Int();
+
+  
+
     public void Construct(PlayerMovement playerMovement)
     {
         _playerMovement =playerMovement;
