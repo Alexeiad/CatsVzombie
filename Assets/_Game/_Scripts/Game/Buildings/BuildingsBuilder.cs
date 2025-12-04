@@ -13,7 +13,7 @@ public class BuildingsBuilder : MonoBehaviour
 
     [SerializeField] private GameObject aquarium, barrel, workbench, tire, headquarters, medUnit, barrak;
     [SerializeField] private GameObject aquariumTwo, barrelTwo, workbenchTwo, tireTwo, headquartersTwo, medUnitTwo, barrakTwo;
-    [SerializeField] private GameObject aquariumThree, barrelThree, workbenchThree, tireThree, headquartersThree, medUnitThree, barrakThree;
+
 
     private Dictionary<Vector2Int, GameObject> builtObjects = new Dictionary<Vector2Int, GameObject>();
     private Dictionary<string, GameObject> _objectMap;
@@ -43,8 +43,7 @@ public class BuildingsBuilder : MonoBehaviour
         _MedUnitKey = "MedUnitKey",
         _BarrakKey = "BarrakKey";
     private string
-        _Middle = "Middle",
-        _High = "High";
+        _Middle = "Middle";
 
     public bool IsPositionOccupied(Vector2Int gridPosition)
     {
@@ -100,7 +99,7 @@ public class BuildingsBuilder : MonoBehaviour
             builtObjects.Remove(gridPosition);
             SaveBuildingData(_buildPosition, true);
             Destroy(building);
-            //_tileHighlighter.SetTileAtPosition(gridPosition,false);
+
         }
     }
 
@@ -122,7 +121,6 @@ public class BuildingsBuilder : MonoBehaviour
 
             builtObjects[_gridPosition] = newObject;
             SaveBuildingData(newObject.transform.position, false);
-            //_tileHighlighter.SetTileAtPosition(_gridPosition, true);
         }
         else
         {
@@ -139,9 +137,9 @@ public class BuildingsBuilder : MonoBehaviour
             }
         }
     }
-    
-   
-    
+
+
+
 
     [Inject]
     private void Construct(PlayerMovement player)
@@ -172,13 +170,7 @@ public class BuildingsBuilder : MonoBehaviour
             { _MedUnitKey + _Middle, medUnitTwo },
             { _BarrakKey + _Middle, barrakTwo },
 
-            { _AquariumKey+_High, aquariumThree },
-            { _BarrelKey+_High, barrelThree },
-            { _WorkbenchKey+_High, workbenchThree },
-            { _TireKey+_High, tireThree },
-            { _HeadquartersKey+_High, headquartersThree },
-            { _MedUnitKey + _High, medUnitThree },
-            { _BarrakKey + _High, barrakThree }
+
         };
 
         LoadSavedBuildings();
@@ -227,7 +219,7 @@ public class BuildingsBuilder : MonoBehaviour
         {
             aquarium, barrel, workbench, tire, headquarters, medUnit, barrak,
             aquariumTwo, barrelTwo, workbenchTwo, tireTwo, headquartersTwo, medUnitTwo, barrakTwo,
-            aquariumThree, barrelThree, workbenchThree, tireThree, headquartersThree, medUnitThree, barrakThree
+
         };
 
         var indexer = new BuildingComparator<BuildingType, BuildingLevelType, GameObject>(buildings);
@@ -250,7 +242,7 @@ public class BuildingsBuilder : MonoBehaviour
         {
             _AquariumKey, _BarrelKey, _WorkbenchKey, _TireKey, _HeadquartersKey, _MedUnitKey, _BarrakKey,
             _AquariumKey+_Middle, _BarrelKey + _Middle, _WorkbenchKey + _Middle, _TireKey + _Middle, _HeadquartersKey + _Middle, _MedUnitKey + _Middle, _BarrakKey + _Middle,
-            _AquariumKey + _High, _BarrelKey + _High, _WorkbenchKey + _High, _TireKey + _High, _HeadquartersKey + _High, _MedUnitKey + _High, _BarrakKey + _High
+
         };
 
         var indexer = new BuildingComparator<BuildingType, BuildingLevelType, string>(buildingList);
@@ -286,28 +278,4 @@ public class BuildingsBuilder : MonoBehaviour
         return tilemap.HasTile(tilePosition);
     }
 
-    void OnDrawGizmos()
-    {
-        if (_camera != null && _selectedBuilding != null)
-        {
-            Vector3 mouseWorldPos = _camera.ScreenToWorldPoint(Input.mousePosition);
-            mouseWorldPos.z = 0; // Обнуляем Z-координату
-            Vector3Int tilePosition = tilemap.WorldToCell(mouseWorldPos);
-            Vector2Int gridPosition = new Vector2Int(tilePosition.x, tilePosition.y);
-            Vector3 buildPosition = tilemap.GetCellCenterWorld(tilePosition);
-
-            Gizmos.color = CanBuildHere(gridPosition) ? Color.green : Color.red;
-            Gizmos.DrawWireCube(buildPosition, Vector3.one * 0.8f);
-        }
-    }
-
-    // Метод для отладки - показывает все занятые позиции
-    private void DebugBuiltObjects()
-    {
-        Debug.Log($"Total built objects: {builtObjects.Count}");
-        foreach (var kvp in builtObjects)
-        {
-            Debug.Log($"Position: {kvp.Key}, Object: {kvp.Value.name}");
-        }
-    }
 }
