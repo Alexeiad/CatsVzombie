@@ -91,7 +91,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startFood: 10
   _startWater: 10
-  _startMaterials: 0
+  _startMaterials: 1000
 --- !u!114 &-3762084733375387741
 MonoBehaviour:
   m_ObjectHideFlags: 0

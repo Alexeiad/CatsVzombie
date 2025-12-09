@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: BuildingDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::BuildingDatabase
+  buildingEntries:
+  - buildingType: 0
+    tiers:
+      tier1: {fileID: 4258981923913178660, guid: 987197c8497aa1741ab8785ffbf9eb10, type: 3}
+      tier2: {fileID: 4258981923913178660, guid: 987197c8497aa1741ab8785ffbf9eb10, type: 3}
+    saveKey: aquarium
+  - buildingType: 1
+    tiers:
+      tier1: {fileID: 8346101613348907668, guid: 2a0909563da800d43a738fec4f87c8f4, type: 3}
+      tier2: {fileID: 8346101613348907668, guid: 7104c6e066cef394cb29583a78eb31cb, type: 3}
+    saveKey: barrel
+  - buildingType: 2
+    tiers:
+      tier1: {fileID: 8346101613348907668, guid: fd702e70cac53464c973c8c52ff67c04, type: 3}
+      tier2: {fileID: 8346101613348907668, guid: fd702e70cac53464c973c8c52ff67c04, type: 3}
+    saveKey: workbench
+  - buildingType: 3
+    tiers:
+      tier1: {fileID: 8346101613348907668, guid: 271729bdd7ae67447985aa37cb194a7d, type: 3}
+      tier2: {fileID: 8346101613348907668, guid: 271729bdd7ae67447985aa37cb194a7d, type: 3}
+    saveKey: tire
+  - buildingType: 4
+    tiers:
+      tier1: {fileID: 8346101613348907668, guid: f6656cecff9ae1447b5bf06e951786ee, type: 3}
+      tier2: {fileID: 8346101613348907668, guid: f6656cecff9ae1447b5bf06e951786ee, type: 3}
+    saveKey: headquarters
+  - buildingType: 5
+    tiers:
+      tier1: {fileID: 8346101613348907668, guid: 8f397fb4f30d6494da23e6eedfb102ba, type: 3}
+      tier2: {fileID: 8346101613348907668, guid: 8f397fb4f30d6494da23e6eedfb102ba, type: 3}
+    saveKey: medUnit
+  - buildingType: 6
+    tiers:
+      tier1: {fileID: 8346101613348907668, guid: 581e9fc5043dfbb45bcc01bd86be385f, type: 3}
+      tier2: {fileID: 8346101613348907668, guid: 581e9fc5043dfbb45bcc01bd86be385f, type: 3}
+    saveKey: barrak

@@ -17,6 +17,7 @@ public class WindowBehaviour : MonoBehaviour
     [SerializeField] private GameObject _window, _elementWindow;
     [SerializeField] private InfoDataSO _infoDataSO;
     [SerializeField] private TextMeshProUGUI _textMeshProUGUI;
+    [SerializeField] private ResourceValidator _resourceValidator;
 
     public void ShowImage(BuildingType buildingType,BuildingLevelType buildingLevelType,CallbackType callback)
     {
@@ -38,7 +39,8 @@ public class WindowBehaviour : MonoBehaviour
             _elementWindow.SetActive(true);
             Apply();
         }
-       
+        _resourceValidator.CostInfo(buildingType, buildingLevelType);
+
     }
     public void Apply()
     {
@@ -78,6 +80,7 @@ public class WindowBehaviour : MonoBehaviour
 
 
         buildingLevelType = newType;
+        _resourceValidator.CostInfo(buildingType, buildingLevelType);
     }
 
 }

@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &85265021
 RectTransform:
   m_ObjectHideFlags: 0
@@ -423,7 +423,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -32.5, y: -3.3}
+  m_AnchoredPosition: {x: -163.39, y: -3.3}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &442452744
@@ -480,7 +480,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -557,7 +557,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -18.46, y: -3.3}
+  m_AnchoredPosition: {x: -147.7, y: -3.3}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &457716224
@@ -614,7 +614,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1854,9 +1854,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1242735429}
     - target: {fileID: 1076829022909692528, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: buildingDatabase
+      value: 
+      objectReference: {fileID: 11400000, guid: 810df22bfd69c314ea552ca1a46517ca, type: 2}
+    - target: {fileID: 1076829022909692528, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: headquartersThree
       value: 
       objectReference: {fileID: 8346101613348907668, guid: f6656cecff9ae1447b5bf06e951786ee, type: 3}
+    - target: {fileID: 1076829022909692528, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: _resourceValidator
+      value: 
+      objectReference: {fileID: 1242735434}
     - target: {fileID: 1076829022909692528, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: _eventTriggers.Array.size
       value: 0
@@ -2554,6 +2562,9 @@ PrefabInstance:
       addedObject: {fileID: 85265021}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4889747923704949320, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      insertIndex: 4
+      addedObject: {fileID: 1242735434}
+    - targetCorrespondingSourceObject: {fileID: 4889747923704949320, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1242735429}
     - targetCorrespondingSourceObject: {fileID: 8944190520936717485, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
@@ -2639,6 +2650,21 @@ MonoBehaviour:
   _elementWindow: {fileID: 1743346360}
   _infoDataSO: {fileID: 11400000, guid: 06be85298986ae24581cd71887e50bdc, type: 2}
   _textMeshProUGUI: {fileID: 1222909162}
+  _resourceValidator: {fileID: 1242735434}
+--- !u!114 &1242735434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242735427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 980646047ce127d458cfce5ede0a6a8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _costOfBuildingSO: {fileID: 11400000, guid: 47355fe7174b6a34f8dc715e3acd533e, type: 2}
+  _textCost: {fileID: 442452744}
 --- !u!1 &1252258007
 GameObject:
   m_ObjectHideFlags: 0

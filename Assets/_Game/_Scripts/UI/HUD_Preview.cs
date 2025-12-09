@@ -12,18 +12,7 @@ public class HUD_Preview : MonoBehaviour
     private void Update()
     {
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            _resources.AddFood(10);
-            _resources.SaveToJson();
-
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            _resources.AddFood(-10);
-            _resources.SaveToJson();
-
-        }
+        
         // Обновление UI с конкретными значениями
         _food.text = _resources.Food.ToString();
         _water.text = _resources.Water.ToString();
