@@ -20,9 +20,15 @@ public class ResourceValidator:MonoBehaviour
             if (costBuilding.buildingType == building &&
                 costBuilding.buildingLevelType == buildingLevelType)
             {
-                _resourceManager.AddMaterials(-costBuilding.cost);
-                _resourceManager.SaveToJson();
-               return _resourceManager.Materials>= costBuilding.cost;
+                if(_resourceManager.Materials - costBuilding.cost >= 0)
+                {
+                    _resourceManager.AddMaterials(-costBuilding.cost);
+                    _resourceManager.SaveToJson();
+                    return true;
+                }
+                else
+                    return false;
+               
             }
         }
 

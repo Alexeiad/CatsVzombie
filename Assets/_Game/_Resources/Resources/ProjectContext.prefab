@@ -91,7 +91,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startFood: 10
   _startWater: 10
-  _startMaterials: 1000
+  _startMaterials: 10
+  _collectorDataSO: {fileID: 11400000, guid: 39253cb9884eb6245a18544d27adabb6, type: 2}
 --- !u!114 &-3762084733375387741
 MonoBehaviour:
   m_ObjectHideFlags: 0

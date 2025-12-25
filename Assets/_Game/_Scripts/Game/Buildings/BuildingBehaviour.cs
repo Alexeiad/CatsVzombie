@@ -1,12 +1,19 @@
 using DG.Tweening;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
+using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
 public class BuildingBehaviour : MonoBehaviour
 {
+    
+    public Vector2Int GridPosition = new Vector2Int();
+
+    public Vector2Int Size = new Vector2Int();
+
     public BuildingType baseType;
     public BuildingLevelType levelType;
 
@@ -30,22 +37,21 @@ public class BuildingBehaviour : MonoBehaviour
     private Coroutine _enableControllerCoroutine;
 
     private bool _isStart;
+    
 
+    [Inject] private CollectorDataSO _collectorDataSO;
 
-    public Vector2Int GridPosition = new Vector2Int();
-
-    public Vector2Int Size = new Vector2Int();
-
-  
 
     public void Construct(PlayerMovement playerMovement)
     {
-        _playerMovement =playerMovement;
+        _playerMovement = playerMovement;
+        
         Initialize();
     }
     
     private void Initialize()
     {
+        
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _isStart=true;

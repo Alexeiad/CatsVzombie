@@ -11,6 +11,8 @@ public class BaseInstaller : MonoInstaller
 
     private BuildingsList _bases = new BuildingsList();
 
+    private List<BuildingBehaviour> _buildingsBehaviours = new List<BuildingBehaviour>();
+
     public override void InstallBindings()
     {
         ResourceManager resourceManager = new ResourceManager(_startFood, _startWater, _startMaterials);
@@ -18,8 +20,13 @@ public class BaseInstaller : MonoInstaller
             .FromInstance(resourceManager)
             .AsSingle();
 
+
         Container.Bind<BuildingsList>()
             .FromInstance(_bases)
+            .AsSingle();
+
+        Container.Bind<List<BuildingBehaviour>>()
+            .FromInstance(_buildingsBehaviours)
             .AsSingle();
 
         // Optional: Load saved data immediately

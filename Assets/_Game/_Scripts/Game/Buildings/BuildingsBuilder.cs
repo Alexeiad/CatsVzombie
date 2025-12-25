@@ -17,6 +17,7 @@ public class BuildingsBuilder : MonoBehaviour
 
     [Inject] private BuildingsList _bases;
     [Inject] private BaseSaveManager _baseSaveManager;
+    [Inject] private List<BuildingBehaviour> _buildingBehaviours;
 
     private PlayerMovement _playerMovement;
     private GameObject _selectedBuilding;
@@ -40,7 +41,7 @@ public class BuildingsBuilder : MonoBehaviour
         _bases = _baseSaveManager.GetBases();
         LoadSavedBuildings();
     }
-
+    
     #region Public Methods
 
     public void SelectType(BuildingType buildingType, BuildingLevelType buildingLevelType)
@@ -68,18 +69,7 @@ public class BuildingsBuilder : MonoBehaviour
 
         if (CanBuildHere(_gridPosition))
         {
-            /*
-            if (_resourceValidator != null)
-            {
-                if (!_resourceValidator.IsEnoughResourses(_buildingType, _buildingLevelType))
-                {
-                    // Можно добавить уведомление для игрока
-                    Debug.Log("Недостаточно ресурсов для постройки!");
-                    
-                    return;
-                }
-            }*/
-
+         
             BuildSelectedBuilding();
         }
         else
@@ -99,17 +89,6 @@ public class BuildingsBuilder : MonoBehaviour
         else
             return; // Уже максимальный уровень
 
-        /*
-        if (_resourceValidator != null)
-        {
-            if (!_resourceValidator.IsEnoughResourses(_buildingType, targetLevel))
-            {
-                // Можно добавить уведомление для игрока
-                Debug.Log("Недостаточно ресурсов для улучшения!");
-                
-                return;
-            }
-        }*/
 
         // Устанавливаем новый уровень
         _buildingLevelType = targetLevel;
@@ -173,6 +152,7 @@ public class BuildingsBuilder : MonoBehaviour
             }
 
             builtObjects.Remove(gridPosition);
+            _buildingBehaviours.Remove(buildingBehaviour);
             SaveBuildingData(_buildPosition, true);
             Destroy(building);
         }
@@ -223,6 +203,7 @@ public class BuildingsBuilder : MonoBehaviour
 
         GameObject newObject = Instantiate(_selectedBuilding, _buildPosition, Quaternion.identity);
         newObject.GetComponent<BuildingBehaviour>().Construct(_playerMovement);
+        _buildingBehaviours.Add(newObject.GetComponent<BuildingBehaviour>());
         builtObjects[_gridPosition] = newObject;
         SaveBuildingData(newObject.transform.position, false);
     }
@@ -294,6 +275,7 @@ public class BuildingsBuilder : MonoBehaviour
                 if (buildingBehaviour != null)
                 {
                     buildingBehaviour.Construct(_playerMovement);
+                    _buildingBehaviours.Add(buildingBehaviour);
                 }
 
                 builtObjects[gridPos] = newBuilding;

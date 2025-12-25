@@ -2563,6 +2563,9 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4889747923704949320, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       insertIndex: 4
+      addedObject: {fileID: 1242735439}
+    - targetCorrespondingSourceObject: {fileID: 4889747923704949320, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      insertIndex: 5
       addedObject: {fileID: 1242735434}
     - targetCorrespondingSourceObject: {fileID: 4889747923704949320, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       insertIndex: -1
@@ -2665,6 +2668,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _costOfBuildingSO: {fileID: 11400000, guid: 47355fe7174b6a34f8dc715e3acd533e, type: 2}
   _textCost: {fileID: 442452744}
+--- !u!114 &1242735439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242735427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8335d315bed63f645a394d05893de6ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collectorDataSO: {fileID: 11400000, guid: 39253cb9884eb6245a18544d27adabb6, type: 2}
+  _collectionInterval: 1
 --- !u!1 &1252258007
 GameObject:
   m_ObjectHideFlags: 0
