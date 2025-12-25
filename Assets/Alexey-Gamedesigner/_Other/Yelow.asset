@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Yelow
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 21300000, guid: 478f09d7acfa96141b3e7f6e4849c25c, type: 3}
-  m_Color: {r: 1, g: 0.93279696, b: 0.18396229, a: 0.5019608}
+  m_Color: {r: 1, g: 0.9501442, b: 0.39, a: 0.5019608}
   m_Transform:
     e00: 1
     e01: 0
