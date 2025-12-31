@@ -16,7 +16,7 @@ MonoBehaviour:
   - buildingType: 0
     tiers:
       tier1: {fileID: 4258981923913178660, guid: 987197c8497aa1741ab8785ffbf9eb10, type: 3}
-      tier2: {fileID: 4258981923913178660, guid: 987197c8497aa1741ab8785ffbf9eb10, type: 3}
+      tier2: {fileID: 4258981923913178660, guid: efdc307c27f93fa43b18c7a67af64a1b, type: 3}
     saveKey: aquarium
   - buildingType: 1
     tiers:
@@ -26,7 +26,7 @@ MonoBehaviour:
   - buildingType: 2
     tiers:
       tier1: {fileID: 8346101613348907668, guid: fd702e70cac53464c973c8c52ff67c04, type: 3}
-      tier2: {fileID: 8346101613348907668, guid: fd702e70cac53464c973c8c52ff67c04, type: 3}
+      tier2: {fileID: 8346101613348907668, guid: f10fc2a407b81d342a106e0075a5bd4a, type: 3}
     saveKey: workbench
   - buildingType: 3
     tiers:

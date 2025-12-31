@@ -44,7 +44,8 @@ public class ResourceManager
 
     public void ClearData()
     {
-        _resourceData = new ResourceData(0,0,0);
+        _resourceData = new ResourceData(10,10,10);
+        SaveToJson();
     }
 
 

@@ -7,11 +7,15 @@ using Zenject;
 public class ClearSaveData : MonoBehaviour
 {
     [Inject] private ResourceManager _resourceManager;
-    [Inject] private BuildingsList _buildingsList;
+    [Inject] private BuildingsList _bases;
+    [Inject] private BaseSaveManager _baseSaveManager;
     public void ClearFolder()
     {
         _resourceManager.ClearData();
-        _buildingsList.Clear();
+
+        _bases = _baseSaveManager.GetBases();
+        _bases.Clear();
+      
     }
     
 }

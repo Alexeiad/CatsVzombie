@@ -6,7 +6,7 @@ using Zenject;
 
 public class BaseSaveManager : MonoBehaviour
 {
-    private BuildingsList _bases;
+    
 
     private const string FileText = "BASELIST";
     private const string FileExtension = ".json";
@@ -14,11 +14,8 @@ public class BaseSaveManager : MonoBehaviour
 
     private string FullPath => Path.Combine(Application.persistentDataPath, FileText + FileExtension);
 
-    [Inject]
-    private void Construct(BuildingsList bases)
-    {
-        _bases = bases;
-    }
+    [Inject] private BuildingsList _bases;
+    
 
     private void Awake()
     {
