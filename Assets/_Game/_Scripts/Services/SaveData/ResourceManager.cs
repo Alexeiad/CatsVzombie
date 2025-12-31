@@ -42,6 +42,13 @@ public class ResourceManager
     public void AddDiamonds(int amount) => _resourceData.diamonds += amount;
     public void SetCatsCount(int count) => _resourceData.catsCount = count;
 
+    public void ClearData()
+    {
+        _resourceData = new ResourceData(0,0,0);
+    }
+
+
+
     // Сохранение и загрузка
     public void SaveToJson(string filename = "resources.json")
     {
