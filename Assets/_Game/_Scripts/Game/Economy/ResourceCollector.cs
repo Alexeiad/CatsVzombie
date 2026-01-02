@@ -7,7 +7,13 @@ using System;
 public class ResourceCollector : MonoBehaviour
 {
     [SerializeField] private CollectorDataSO _collectorDataSO;
-    [SerializeField] private float _collectionInterval = 1f;
+    [SerializeField] private float _collectionInterval = 60f; // по умолчанию 1 минута
+
+    [Header("Настройки интервала")]
+    [SerializeField] private bool _useCustomInterval = false;
+    [SerializeField] private int _hours = 0;
+    [SerializeField] private int _minutes = 0;
+    [SerializeField] private int _seconds = 1;
 
     [Inject] private ResourceManager _resourceManager;
     [Inject] private List<BuildingBehaviour> _buildingsBehaviours;
@@ -15,17 +21,37 @@ public class ResourceCollector : MonoBehaviour
     private float _timer;
     private DateTime _lastSaveTime;
     private bool _isFirstLaunch = true;
+    private float _actualInterval;
 
     private void Start()
     {
+        InitializeInterval();
         LoadOfflineProgress();
         _lastSaveTime = DateTime.UtcNow;
     }
 
+    private void InitializeInterval()
+    {
+        if (_useCustomInterval)
+        {
+            // Рассчитываем общее время в секундах
+            _actualInterval = _hours * 3600 + _minutes * 60 + _seconds;
+        }
+        else
+        {
+            _actualInterval = _collectionInterval;
+        }
+
+        Debug.Log($"Интервал сбора установлен: {_actualInterval} секунд " +
+                  $"({_actualInterval / 3600:0.##} часов, {_actualInterval / 60:0.##} минут)");
+    }
+
     private void Update()
     {
+        if (_actualInterval <= 0) return;
+
         _timer += Time.deltaTime;
-        if (_timer >= _collectionInterval)
+        if (_timer >= _actualInterval)
         {
             _timer = 0f;
             CollectResources();
@@ -36,12 +62,10 @@ public class ResourceCollector : MonoBehaviour
     {
         if (pauseStatus)
         {
-            // При сворачивании приложения
-            SaveOfflineTime();
+            SaveGameState();
         }
         else
         {
-            // При разворачивании приложения
             LoadOfflineProgress();
             _lastSaveTime = DateTime.UtcNow;
         }
@@ -51,12 +75,10 @@ public class ResourceCollector : MonoBehaviour
     {
         if (!hasFocus)
         {
-            // При потере фокуса (сворачивании)
-            SaveOfflineTime();
+            SaveGameState();
         }
         else
         {
-            // При получении фокуса (разворачивании)
             LoadOfflineProgress();
             _lastSaveTime = DateTime.UtcNow;
         }
@@ -64,7 +86,37 @@ public class ResourceCollector : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        SaveOfflineTime();
+        SaveGameState();
+    }
+
+    private void SaveGameState()
+    {
+        // Сохраняем текущее время и прогресс таймера
+        long currentTicks = DateTime.UtcNow.Ticks;
+        PlayerPrefs.SetString("LastSaveTime", currentTicks.ToString());
+
+        // Сохраняем текущее значение таймера
+        PlayerPrefs.SetFloat("CurrentTimer", _timer);
+
+        // Сохраняем прогресс зданий
+        SaveBuildingsProgress();
+
+        PlayerPrefs.Save();
+
+        // Также сохраняем время локально
+        _lastSaveTime = DateTime.UtcNow;
+    }
+
+    private void SaveBuildingsProgress()
+    {
+        foreach (var building in _buildingsBehaviours)
+        {
+            if (building != null)
+            {
+                string key = $"Building_{building.GetInstanceID()}_LastUpdate";
+                PlayerPrefs.SetString(key, DateTime.UtcNow.Ticks.ToString());
+            }
+        }
     }
 
     private void CollectResources(int multiplier = 1)
@@ -93,7 +145,6 @@ public class ResourceCollector : MonoBehaviour
             }
         }
 
-        // Добавляем ресурсы один раз для оптимизации
         if (totalWater > 0) _resourceManager.AddWater(totalWater);
         if (totalFood > 0) _resourceManager.AddFood(totalFood);
         if (totalMaterials > 0) _resourceManager.AddMaterials(totalMaterials);
@@ -102,33 +153,9 @@ public class ResourceCollector : MonoBehaviour
         _resourceManager.SaveToJson();
     }
 
-    private void SaveOfflineTime()
-    {
-        long seconds = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-        PlayerPrefs.SetString("LastSave", seconds.ToString());
-
-        // Сохраняем текущий прогресс зданий
-        SaveBuildingsProgress();
-
-        PlayerPrefs.Save();
-    }
-
-    private void SaveBuildingsProgress()
-    {
-        // Сохраняем время последнего апдейта каждого здания
-        foreach (var building in _buildingsBehaviours)
-        {
-            if (building != null)
-            {
-                string key = $"Building_{building.GetInstanceID()}_LastUpdate";
-                PlayerPrefs.SetString(key, DateTime.UtcNow.Ticks.ToString());
-            }
-        }
-    }
-
     private void LoadOfflineProgress()
     {
-        if (!PlayerPrefs.HasKey("LastSave"))
+        if (!PlayerPrefs.HasKey("LastSaveTime"))
         {
             _isFirstLaunch = true;
             return;
@@ -136,44 +163,80 @@ public class ResourceCollector : MonoBehaviour
 
         try
         {
-            long savedSeconds = long.Parse(PlayerPrefs.GetString("LastSave"));
-            long currentSeconds = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-            long secondsPassed = currentSeconds - savedSeconds;
+            // Получаем время последнего сохранения
+            long savedTicks = long.Parse(PlayerPrefs.GetString("LastSaveTime"));
+            DateTime savedTime = new DateTime(savedTicks);
+            DateTime currentTime = DateTime.UtcNow;
 
-            // Ограничиваем максимальное время оффлайн (например, 24 часа)
-            long maxOfflineSeconds = 24 * 60 * 60;
-            secondsPassed = Math.Min(secondsPassed, maxOfflineSeconds);
+            // Получаем сохраненное значение таймера
+            float savedTimer = PlayerPrefs.GetFloat("CurrentTimer", 0f);
 
-            if (secondsPassed > 0)
+            // Вычисляем прошедшее время в секундах
+            TimeSpan timePassed = currentTime - savedTime;
+            double totalSecondsPassed = timePassed.TotalSeconds + savedTimer;
+
+            // Ограничиваем максимальное время оффлайн (например, 7 дней)
+            double maxOfflineSeconds = 7 * 24 * 60 * 60; // 7 дней
+            totalSecondsPassed = Math.Min(totalSecondsPassed, maxOfflineSeconds);
+
+            if (totalSecondsPassed > 0 && _actualInterval > 0)
             {
-                int cycles = Mathf.FloorToInt(secondsPassed / _collectionInterval);
+                // Рассчитываем сколько полных циклов прошло
+                int fullCycles = Mathf.FloorToInt((float)totalSecondsPassed / _actualInterval);
 
-                // Если прошло много времени, ограничиваем количество циклов
-                int maxCycles = 3600; // Максимум 1 час оффлайн прогресса за раз
-                cycles = Mathf.Min(cycles, maxCycles);
+                // Рассчитываем остаток времени для текущего цикла
+                float remainingTime = (float)totalSecondsPassed % _actualInterval;
 
-                if (cycles > 0)
+                // Ограничиваем максимальное количество циклов для обработки
+                int maxCycles = 1000; // Максимум 1000 циклов за раз
+                fullCycles = Mathf.Min(fullCycles, maxCycles);
+
+                if (fullCycles > 0)
                 {
-                    // Для первого запуска показываем уведомление
                     if (_isFirstLaunch)
                     {
-                        Debug.Log($"Оффлайн прогресс: {secondsPassed} секунд, {cycles} циклов");
-                        // Здесь можно показать UI-уведомление о полученных ресурсах
+                        Debug.Log($"Оффлайн прогресс: {timePassed.TotalHours:0.##} часов прошло, " +
+                                 $"{fullCycles} полных циклов, остаток: {remainingTime:0.##} секунд");
+
+                        // Здесь можно показать UI-уведомление
+                        ShowOfflineRewardNotification(timePassed, fullCycles);
                     }
 
-                    CollectResources(cycles);
+                    CollectResources(fullCycles);
                 }
+
+                // Устанавливаем таймер с учетом остатка времени
+                _timer = remainingTime;
+
+                Debug.Log($"Таймер установлен на {_timer:0.##} секунд (из {_actualInterval:0.##})");
             }
         }
         catch (Exception e)
         {
             Debug.LogError($"Ошибка загрузки оффлайн прогресса: {e.Message}");
+            _timer = 0f;
         }
 
         _isFirstLaunch = false;
     }
 
-    // Дополнительный метод для принудительного расчета оффлайн прогресса
+    private void ShowOfflineRewardNotification(TimeSpan timePassed, int cycles)
+    {
+        // Визуальное уведомление для игрока
+        // Здесь можно реализовать UI-уведомление о полученных ресурсах
+        Debug.Log($"Вы отсутствовали {FormatTimeSpan(timePassed)} и получили ресурсы за {cycles} циклов!");
+    }
+
+    private string FormatTimeSpan(TimeSpan timeSpan)
+    {
+        if (timeSpan.TotalDays >= 1)
+            return $"{timeSpan.Days} дн. {timeSpan.Hours} ч.";
+        if (timeSpan.TotalHours >= 1)
+            return $"{timeSpan.Hours} ч. {timeSpan.Minutes} мин.";
+        return $"{timeSpan.Minutes} мин. {timeSpan.Seconds} сек.";
+    }
+
+    // Метод для принудительного расчета оффлайн прогресса
     public void ForceOfflineProgressCalculation()
     {
         LoadOfflineProgress();
@@ -184,5 +247,31 @@ public class ResourceCollector : MonoBehaviour
     public TimeSpan GetTimeSinceLastSave()
     {
         return DateTime.UtcNow - _lastSaveTime;
+    }
+
+    // Метод для получения текущего прогресса таймера (от 0 до 1)
+    public float GetTimerProgress()
+    {
+        if (_actualInterval <= 0) return 0f;
+        return _timer / _actualInterval;
+    }
+
+    // Метод для получения оставшегося времени до следующего сбора
+    public float GetTimeRemaining()
+    {
+        return Mathf.Max(0, _actualInterval - _timer);
+    }
+
+    // Метод для получения форматированного оставшегося времени
+    public string GetFormattedTimeRemaining()
+    {
+        float remaining = GetTimeRemaining();
+
+        if (remaining >= 3600) // больше часа
+            return $"{(int)(remaining / 3600)} ч. {(int)((remaining % 3600) / 60)} мин.";
+        else if (remaining >= 60) // больше минуты
+            return $"{(int)(remaining / 60)} мин. {(int)(remaining % 60)} сек.";
+        else
+            return $"{(int)remaining} сек.";
     }
 }

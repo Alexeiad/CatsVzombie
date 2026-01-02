@@ -743,6 +743,26 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6507096009598992790, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: _hours
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507096009598992790, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: _minutes
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507096009598992790, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: _seconds
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507096009598992790, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: _useCustomInterval
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507096009598992790, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: _collectionInterval
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7079390060886965832, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
