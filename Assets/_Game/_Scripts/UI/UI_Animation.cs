@@ -1,8 +1,9 @@
 ﻿using DG.Tweening;
+using FMODUnity;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using FMODUnity;
+using UnityEngine.UI;
 
 public class SimpleUIAnimator : MonoBehaviour
 {
@@ -10,10 +11,16 @@ public class SimpleUIAnimator : MonoBehaviour
     [SerializeField] private float clickScale = 0.9f;
     [SerializeField] private float animationDuration = 0.2f;
 
-    private Dictionary<GameObject, Vector3> _originalScales = new Dictionary<GameObject, Vector3>();
+    [SerializeField] private Canvas _canvas;
 
+    private Dictionary<GameObject, Vector3> _originalScales = new Dictionary<GameObject, Vector3>();
+    
+
+    
+    
     private void Awake()
     {
+        
         // Устанавливаем частоту обновления для всех твинов
         DOTween.SetTweensCapacity(500, 50); // Опционально: увеличиваем capacity
         DOTween.defaultUpdateType = UpdateType.Normal;
@@ -21,6 +28,7 @@ public class SimpleUIAnimator : MonoBehaviour
         // Основная настройка FPS
         DOTween.timeScale = 1f; // Убеждаемся, что timeScale = 1
         Application.targetFrameRate = 120;
+      
 
         foreach (var trigger in _triggers)
         {
@@ -33,6 +41,7 @@ public class SimpleUIAnimator : MonoBehaviour
             AddEventTriggerListener(trigger, EventTriggerType.PointerClick, OnClick);
         }
     }
+    
 
     private void OnClick(BaseEventData data)
     {

@@ -1,17 +1,31 @@
 
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class KeyboardInput : IPlayerInput
 {
+    private InputAction _movementAction;
+
+    public KeyboardInput()
+    {
+        // Создаем Input Action для движения
+        _movementAction = new InputAction("Movement", InputActionType.Value);
+
+        // Настраиваем композитное связывание (WASD + стрелки)
+        _movementAction.AddCompositeBinding("2DVector")
+            .With("Up", "<Keyboard>/w")
+            .With("Up", "<Keyboard>/upArrow")
+            .With("Down", "<Keyboard>/s")
+            .With("Down", "<Keyboard>/downArrow")
+            .With("Left", "<Keyboard>/a")
+            .With("Left", "<Keyboard>/leftArrow")
+            .With("Right", "<Keyboard>/d")
+            .With("Right", "<Keyboard>/rightArrow");
+        _movementAction.Enable();
+    }
     public Vector2 GetMovement()
     {
-        float x = 0f, y = 0f;
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) y += 1;
-        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) y -= 1;
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) x += 1;
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) x -= 1;
-
-        Vector2 dir = new Vector2(x, y);
+        Vector2 dir = _movementAction.ReadValue<Vector2>();
         return dir.magnitude > 1 ? dir.normalized : dir;
     }
 }
