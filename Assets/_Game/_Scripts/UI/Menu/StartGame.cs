@@ -8,4 +8,8 @@ public class StartGame : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+    public void StartSceneTwo()
+    {
+        SceneManager.LoadScene(2);
+    }
 }

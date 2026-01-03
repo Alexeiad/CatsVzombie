@@ -14,6 +14,7 @@ public class BuildingsBuilder : MonoBehaviour
     [SerializeField] private WindowBehaviour _windowBehaviour;
     [SerializeField] private ResourceValidator _resourceValidator;
     [SerializeField] private TilemapGridHighlighter _tileHighlighter;
+    [SerializeField] private bool _hasNotBaseLevel;
 
     [Header("Building Configuration")]
     [SerializeField] private BuildingDataBase buildingDatabase;
@@ -31,6 +32,7 @@ public class BuildingsBuilder : MonoBehaviour
     private BuildingLevelType _buildingLevelType;
     private Vector2Int _gridPosition;
     private Vector3 _buildPosition;
+
 
     [Inject]
     private void Construct(PlayerMovement player)
@@ -269,12 +271,17 @@ public class BuildingsBuilder : MonoBehaviour
             }
 
             Vector3Int tilePos = tilemap.WorldToCell(baseData.Position);
+
             Vector2Int gridPos = new Vector2Int(tilePos.x, tilePos.y);
 
             if (!builtObjects.ContainsKey(gridPos))
             {
                 var newBuilding = Instantiate(buildingPrefab, baseData.Position, Quaternion.identity, null);
                 var buildingBehaviour = newBuilding.GetComponent<BuildingBehaviour>();
+                if (_hasNotBaseLevel)
+                {
+                    newBuilding.transform.position=new Vector3(0,float.MaxValue,0);
+                }
 
                 if (buildingBehaviour != null)
                 {
