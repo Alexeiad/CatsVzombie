@@ -54,9 +54,9 @@ public class Bullet : MonoBehaviour
             {
                 playerMovement.TakeDamage(playerDamage);
             }
-            else if (_finishPoint.TryGetComponent<EnemyAI>(out var enemyAI))
+            else if (_finishPoint.TryGetComponent<Enemy>(out var enemyAI))
             {
-                enemyAI.TakeDamage(enemyDamage);
+               // enemyAI.TakeDamage(enemyDamage);
 
             }
 

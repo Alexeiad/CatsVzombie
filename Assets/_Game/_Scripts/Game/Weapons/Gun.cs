@@ -12,7 +12,7 @@ public class Gun : MonoBehaviour
 
     [Inject] private List<Transform> _entities;
 
-    private EntityType _entityType = EntityType.Player;
+    private EntityType _entityType = EntityType.Cat;
 
 
     public void Container(EntityType entityType)
@@ -35,7 +35,7 @@ public class Gun : MonoBehaviour
 
     private void PrepareShoot()
     {
-        if (_entityType.Equals(EntityType.Player))
+        if (_entityType.Equals(EntityType.Cat))
         {
             Transform closestEntity = FindClosestEntity();
 

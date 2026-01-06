@@ -1,6 +1,10 @@
 ﻿public enum EntityType
 {
-    Player,
-    Kent,
-    Zombie
+    Cat,
+    Ally,
+    Zombie,
+    ZombieCreeping,
+    ZombieKamikaze,
+    ZombieJock,
+    ZombieCop,
 }

@@ -18,7 +18,7 @@ public class StatsPreview : MonoBehaviour
 
     private PlayerMovement _playerMovement;
 
-    private List<EnemyAI> _enemys;
+    private List<Enemy> _enemys;
 
     private float _playerHealth;
 
@@ -30,7 +30,7 @@ public class StatsPreview : MonoBehaviour
     private void Start()
     {
          _enemys = _entities
-        .Select(entity => entity.GetComponent<EnemyAI>())
+        .Select(entity => entity.GetComponent<Enemy>())
         .Where(enemyAI => enemyAI != null)
         .ToList();
         _enemyStats.sliderHealth.gameObject.SetActive(false);
@@ -56,16 +56,16 @@ public class StatsPreview : MonoBehaviour
             return;
         }
 
-        EnemyAI closestEnemy = validEnemies
-            .Select(enemy => enemy.GetComponent<EnemyAI>())
-            .OfType<EnemyAI>()
+        Enemy closestEnemy = validEnemies
+            .Select(enemy => enemy.GetComponent<Enemy>())
+            .OfType<Enemy>()
             .Where(enemyAI => Vector3.Distance(enemyAI.transform.position, _playerMovement.transform.position) <= 10f)
             .OrderBy(enemyAI => Vector3.Distance(enemyAI.transform.position, _playerMovement.transform.position))
             .FirstOrDefault();
         if (closestEnemy != null && closestEnemy.gameObject != null)
         {
             _enemyStats.sliderHealth.gameObject.SetActive(true);
-            _enemyStats.sliderHealth.value =closestEnemy.currentHealth.Value * 0.01f;
+            //_enemyStats.sliderHealth.value =closestEnemy.currentHealth.Value * 0.01f;
         }
         else
         {
