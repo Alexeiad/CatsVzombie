@@ -65,12 +65,11 @@ public class Enemy : MonoBehaviour, IEntity
 
     void Start()
     {
-        InstantiateConstructor(_playerMovement);
         currentState = State.Idle;
     }
 
     void Update()
-    {/*
+    {
         switch (currentState)
         {
             case State.Idle:
@@ -89,7 +88,7 @@ public class Enemy : MonoBehaviour, IEntity
                 HandleFlee();
                 break;
         }
-        */
+        
     }
 
     private void HandleIdle()

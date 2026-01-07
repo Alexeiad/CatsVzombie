@@ -280,7 +280,7 @@ public class BuildingsBuilder : MonoBehaviour
                 var buildingBehaviour = newBuilding.GetComponent<BuildingBehaviour>();
                 if (_hasNotBaseLevel)
                 {
-                    newBuilding.transform.position=new Vector3(0,float.MaxValue,0);
+                    newBuilding.transform.position=new Vector3(0,10000,0);
                 }
 
                 if (buildingBehaviour != null)

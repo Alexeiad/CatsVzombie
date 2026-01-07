@@ -10,7 +10,7 @@ public class Gun : MonoBehaviour
 
     [SerializeField] private Bullet _bulletPrefab;
 
-    [Inject] private List<Transform> _entities;
+    [Inject] private EntityList _entities;
 
     private EntityType _entityType = EntityType.Cat;
 

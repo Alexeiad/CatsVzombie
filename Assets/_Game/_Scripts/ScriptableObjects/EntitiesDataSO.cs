@@ -11,6 +11,7 @@ public class EntitiesDataSO : ScriptableObject
     {
         
         [field: SerializeField] public string CharacterName { get; set; }
+        [field: SerializeField] public GameObject EntityPrefab { get; set; }
         [field: SerializeField] public EntityType EntityType { get; set; }
         [field: SerializeField] public Vector2 MovementSpeed { get; set; } 
         [field: SerializeField] public Vector2 AttackSpeed { get; set; }
