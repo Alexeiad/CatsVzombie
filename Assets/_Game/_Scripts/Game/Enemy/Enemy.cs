@@ -1,3 +1,5 @@
+// Enemy.cs
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -7,10 +9,10 @@ using Zenject.SpaceFighter;
 
 public class Enemy : MonoBehaviour, IEntity
 {
-
     [SerializeField] private EntityType _entityType;
     [SerializeField] private EntitiesDataSO _entitiesDataSO;
 
+    // Свойства из интерфейса IEntity
     public string CharacterName { get; set; }
     public EntityType EntityType { get; set; }
     public Vector2 MovementSpeed { get; set; }
@@ -24,6 +26,8 @@ public class Enemy : MonoBehaviour, IEntity
     public float ShootRange { get; set; } = 5f;
     public float Armor { get; set; }
 
+    public EnemyStateMachine StateMachine { get; private set; }
+
     private PlayerMovement _playerMovement;
 
 
@@ -35,124 +39,83 @@ public class Enemy : MonoBehaviour, IEntity
         {
             if (_entityType == entity.EntityType)
             {
-                CharacterName=entity.CharacterName;
-                MovementSpeed=entity.MovementSpeed;
-                AttackSpeed=entity.AttackSpeed;
-                ShootSpeed=entity.ShootSpeed;
-                ShootDamage=entity.ShootDamage;
-                MeleeDamage=entity.MeleeDamage;
-                Health=entity.Health;
-                DetectionRadius=entity.DetectionRadius;
-                AttackRange=entity.AttackRange;
-                ShootRange=entity.ShootRange;
-                Armor=entity.Armor;
+                CharacterName = entity.CharacterName;
+                MovementSpeed = entity.MovementSpeed;
+                AttackSpeed = entity.AttackSpeed;
+                ShootSpeed = entity.ShootSpeed;
+                ShootDamage = entity.ShootDamage;
+                MeleeDamage = entity.MeleeDamage;
+                Health = entity.Health;
+                DetectionRadius = entity.DetectionRadius;
+                AttackRange = entity.AttackRange;
+                ShootRange = entity.ShootRange;
+                Armor = entity.Armor;
             }
         }
 
-    }
 
-    private enum State
-    {
-        Idle,
-        Patrol,
-        Chase,
-        Attack,
-        Flee
-    }
-
-    private State currentState;
-    
-
-    void Start()
-    {
-        currentState = State.Idle;
+        StateMachine = new EnemyStateMachine(this, new EnemyIdleState());
     }
 
     void Update()
     {
-        switch (currentState)
-        {
-            case State.Idle:
-                HandleIdle();
-                break;
-            case State.Patrol:
-                HandlePatrol();
-                break;
-            case State.Chase:
-                HandleChase();
-                break;
-            case State.Attack:
-                HandleAttack();
-                break;
-            case State.Flee:
-                HandleFlee();
-                break;
-        }
-        
+        StateMachine?.Update();
     }
 
-    private void HandleIdle()
-    {
-        // запуск маршрута
-
-        if (PlayerInDetectionRadius())
-        {
-            currentState = State.Chase;
-        }
-    }
-
-    private void HandlePatrol()
-    {
-        // идти в направлении игрока
-        if (PlayerInDetectionRadius())
-        {
-            currentState = State.Chase;
-        }
-    }
-
-    private void HandleChase()
-    {
-        // Бежать чтобы ударить или стрельнуть
-
-        if (PlayerInAttackRange())
-        {
-            currentState = State.Attack;
-        }
-        else if (!PlayerInDetectionRadius())
-        {
-            currentState = State.Patrol;
-        }
-    }
-
-    private void HandleAttack()
-    {
-        // Атака ударом или выстрелом
-
-        if (Health < 30)
-        {
-            currentState = State.Flee;
-        }
-        else if (!PlayerInAttackRange())
-        {
-            currentState = State.Chase;
-        }
-    }
-
-    private void HandleFlee()//убежать от игрока
-    {
-        // Logic for flee state
-        // Implement fleeing behavior
-    }
-
-    private bool PlayerInDetectionRadius()
+    
+    public bool PlayerInDetectionRadius()
     {
 
         return Vector3.Distance(transform.position, _playerMovement.transform.position) < DetectionRadius;
     }
 
-    private bool PlayerInAttackRange()
+    public bool PlayerInAttackRange()
     {
 
         return Vector3.Distance(transform.position, _playerMovement.transform.position) < AttackRange;
+    }
+
+    public bool PlayerInShootRange()
+    {
+
+        float distance = Vector3.Distance(transform.position, _playerMovement.transform.position);
+        return distance > AttackRange && distance < ShootRange;
+    }
+
+    public bool PlayerInMeleeRange()
+    {
+
+        return Vector3.Distance(transform.position, _playerMovement.transform.position) < AttackRange;
+    }
+
+ 
+    public void MoveTowardsPlayer()
+    {
+        transform.DOMove(_playerMovement.transform.position,2f);
+    }
+
+    public void FleeFromPlayer()
+    {
+
+    }
+
+    public void MeleeAttack()
+    {
+        
+    }
+
+    public void Shoot()
+    {
+        
+    }
+
+    public void TakeDamage(int damage)
+    {
+        
+    }
+
+    private void Die()
+    {
+        // Логика смерти врага
     }
 }

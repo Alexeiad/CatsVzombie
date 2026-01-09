@@ -26,8 +26,37 @@ MonoBehaviour:
     <AttackRange>k__BackingField: 2
     <ShootRange>k__BackingField: 5
     <Armor>k__BackingField: 0
-  - <CharacterName>k__BackingField: "\u0417\u043E\u043C\u0431\u0438 \u043E\u0431\u044B\u0447\u043D\u044B\u0439 "
+  - <CharacterName>k__BackingField: "\u0417\u043E\u043C\u0431\u0438 \u043E\u0431\u044B\u0447\u043D\u044B\u0439
+      \u0432\u0430\u04401"
     <EntityPrefab>k__BackingField: {fileID: 1997929004700043616, guid: cd179722c1683114bb769bfd3a4a1d8a, type: 3}
+    <EntityType>k__BackingField: 2
+    <MovementSpeed>k__BackingField: {x: 0.4, y: 0.7}
+    <AttackSpeed>k__BackingField: {x: 1, y: 1}
+    <ShootSpeed>k__BackingField: {x: 0, y: 0}
+    <ShootDamage>k__BackingField: 0
+    <MeleeDamage>k__BackingField: 20
+    <Health>k__BackingField: 40
+    <DetectionRadius>k__BackingField: 6
+    <AttackRange>k__BackingField: 2
+    <ShootRange>k__BackingField: 5
+    <Armor>k__BackingField: 0
+  - <CharacterName>k__BackingField: "\u0417\u043E\u043C\u0431\u0438 \u043E\u0431\u044B\u0447\u043D\u044B\u0439
+      \u0432\u0430\u04402"
+    <EntityPrefab>k__BackingField: {fileID: 1997929004700043616, guid: 557d49bd27220e8499b1f0bedf517a19, type: 3}
+    <EntityType>k__BackingField: 2
+    <MovementSpeed>k__BackingField: {x: 0.4, y: 0.7}
+    <AttackSpeed>k__BackingField: {x: 1, y: 1}
+    <ShootSpeed>k__BackingField: {x: 0, y: 0}
+    <ShootDamage>k__BackingField: 0
+    <MeleeDamage>k__BackingField: 20
+    <Health>k__BackingField: 40
+    <DetectionRadius>k__BackingField: 6
+    <AttackRange>k__BackingField: 2
+    <ShootRange>k__BackingField: 5
+    <Armor>k__BackingField: 0
+  - <CharacterName>k__BackingField: "\u0417\u043E\u043C\u0431\u0438 \u043E\u0431\u044B\u0447\u043D\u044B\u0439 
+      \u0432\u0430\u04403"
+    <EntityPrefab>k__BackingField: {fileID: 1997929004700043616, guid: 45c04aad2cd495e4bb1620493426a3af, type: 3}
     <EntityType>k__BackingField: 2
     <MovementSpeed>k__BackingField: {x: 0.4, y: 0.7}
     <AttackSpeed>k__BackingField: {x: 1, y: 1}
