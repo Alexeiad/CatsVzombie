@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class EnemyAttackState : IEnemyState
 {
-    private float attackTimer;
+    private PlayerMovement _playerMovement;
 
-    public void Enter(Enemy enemy)
+    public void Enter(Enemy enemy,PlayerMovement playerMovement)
     {
-        
+        _playerMovement = playerMovement;
     }
 
     public void Update(Enemy enemy)

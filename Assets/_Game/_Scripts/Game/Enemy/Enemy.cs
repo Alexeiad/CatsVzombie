@@ -54,14 +54,16 @@ public class Enemy : MonoBehaviour, IEntity
         }
 
 
-        StateMachine = new EnemyStateMachine(this, new EnemyIdleState());
+        StateMachine = new EnemyStateMachine(this, new EnemyWalkingState(),playerMovement);
+        
     }
 
-    void Update()
+    private void Update()
     {
         StateMachine?.Update();
+        
     }
-
+    
     
     public bool PlayerInDetectionRadius()
     {
@@ -89,33 +91,6 @@ public class Enemy : MonoBehaviour, IEntity
     }
 
  
-    public void MoveTowardsPlayer()
-    {
-        transform.DOMove(_playerMovement.transform.position,2f);
-    }
-
-    public void FleeFromPlayer()
-    {
-
-    }
-
-    public void MeleeAttack()
-    {
-        
-    }
-
-    public void Shoot()
-    {
-        
-    }
-
-    public void TakeDamage(int damage)
-    {
-        
-    }
-
-    private void Die()
-    {
-        // Логика смерти врага
-    }
+  
+ 
 }

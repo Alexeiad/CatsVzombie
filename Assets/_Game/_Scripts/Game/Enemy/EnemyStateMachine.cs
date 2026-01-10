@@ -8,17 +8,17 @@ public class EnemyStateMachine
 
     public IEnemyState CurrentState => _currentState;
 
-    public EnemyStateMachine(Enemy enemy, IEnemyState initialState)
+    public EnemyStateMachine(Enemy enemy, IEnemyState initialState,PlayerMovement playerMovement)
     {
         _enemy = enemy;
-        ChangeState(initialState);
+        ChangeState(initialState, playerMovement);
     }
 
-    public void ChangeState(IEnemyState newState)
+    public void ChangeState(IEnemyState newState,PlayerMovement playerMovement)
     {
         _currentState?.Exit(_enemy);
         _currentState = newState;
-        _currentState?.Enter(_enemy);
+        _currentState?.Enter(_enemy,playerMovement);
     }
 
     public void Update()
