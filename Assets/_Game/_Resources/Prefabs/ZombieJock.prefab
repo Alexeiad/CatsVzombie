@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 3344391601302507824}
   - component: {fileID: 7102300943171205039}
   - component: {fileID: 7385110953258304678}
+  - component: {fileID: 3117304156557416767}
+  - component: {fileID: -5250302368750237255}
   m_Layer: 0
   m_Name: ZombieJock
   m_TagString: Untagged
@@ -99,3 +101,90 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entityType: 5
   _entitiesDataSO: {fileID: 11400000, guid: fd5915f3c3625734997ef4887405096c, type: 2}
+--- !u!114 &3117304156557416767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997929004700043616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab5c7d4c32e743048dfca98e2d5914f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Spline:
+    m_EditModeType: 1
+    m_Knots: []
+    m_MetaData: []
+    m_Closed: 0
+    m_IntData:
+      m_Data: []
+    m_FloatData:
+      m_Data: []
+    m_Float4Data:
+      m_Data: []
+    m_ObjectData:
+      m_Data: []
+  m_Splines:
+  - m_EditModeType: 1
+    m_Knots: []
+    m_MetaData: []
+    m_Closed: 0
+    m_IntData:
+      m_Data: []
+    m_FloatData:
+      m_Data: []
+    m_Float4Data:
+      m_Data: []
+    m_ObjectData:
+      m_Data: []
+  m_Knots:
+    m_KnotsLink: []
+--- !u!114 &-5250302368750237255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997929004700043616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 695cf490b0704a746b7c58565cff019c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 2
+  pointReachThreshold: 0.1
+  minPointDistance: 2
+  maxPointDistance: 3
+  obstacles:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  obstacleAvoidanceRadius: 0.2
+  avoidanceStrength: 1
+  maxAvoidanceIterations: 10
+  obstacleClearance: 1.5
+  maxAngleThreshold: 45
+  curveSmoothness: 1
+  tangentLengthMultiplier: 0.1
+  pathFindingRays: 8
+  maxPathDeviation: 15
+  directionChangeProbability: 0.3
+  boundsMin: {x: -50, y: -50}
+  boundsMax: {x: 50, y: 50}
+  maxPoints: 10
+  explorationBias: 0.5
+  showDebugInfo: 1
+  safePathColor: {r: 0, g: 1, b: 0, a: 1}
+  obstaclePathColor: {r: 1, g: 0, b: 0, a: 1}
+  directionColor: {r: 0, g: 1, b: 1, a: 1}

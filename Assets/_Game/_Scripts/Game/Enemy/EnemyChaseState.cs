@@ -13,7 +13,7 @@ public class EnemyChaseState : IEnemyState
     public void Update(Enemy enemy)
     {
 
-        enemy.transform.DOMove(_playerMovement.transform.position, 2f);
+        //enemy.transform.DOMove(_playerMovement.transform.position, 2f);
 
 
     }
