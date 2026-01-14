@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 3344391601302507824}
   - component: {fileID: 7102300943171205039}
   - component: {fileID: 7385110953258304678}
-  - component: {fileID: 8920161737809990194}
+  - component: {fileID: 8864052830412886667}
+  - component: {fileID: 894805680006014137}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Untagged
@@ -75,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 0.11697959, g: 0.5188679, b: 0, a: 1}
+  m_Sprite: {fileID: 1941125446, guid: f445349b33287f24b8f0689c1a829560, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -100,7 +101,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _entityType: 2
   _entitiesDataSO: {fileID: 11400000, guid: fd5915f3c3625734997ef4887405096c, type: 2}
---- !u!114 &8920161737809990194
+--- !u!114 &8864052830412886667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997929004700043616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60ee31eb46a52b0408dfce73134e22fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pursuitDistance: 30
+  speed: 4
+  avoidanceStrength: 15
+  avoidanceDistance: 3
+  obstacles:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  currentState: 0
+  attackDistance: 1.5
+  retreatDistance: 4
+  minPauseTime: 1
+  maxPauseTime: 3
+  patrolVariation: 1.5
+  tangentialSpeed: 2
+  changeDirectionMin: 2
+  changeDirectionMax: 5
+  safeDistance: 3
+  fleeSpeedMultiplier: 1.5
+--- !u!114 &894805680006014137
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,18 +159,6 @@ MonoBehaviour:
       m_Data: []
     m_ObjectData:
       m_Data: []
-  m_Splines:
-  - m_EditModeType: 1
-    m_Knots: []
-    m_MetaData: []
-    m_Closed: 0
-    m_IntData:
-      m_Data: []
-    m_FloatData:
-      m_Data: []
-    m_Float4Data:
-      m_Data: []
-    m_ObjectData:
-      m_Data: []
+  m_Splines: []
   m_Knots:
     m_KnotsLink: []

@@ -1,11 +1,7 @@
 // Enemy.cs
-using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+
 using UnityEngine;
-using Zenject;
-using Zenject.SpaceFighter;
+
 
 public class Enemy : MonoBehaviour, IEntity
 {
@@ -28,12 +24,12 @@ public class Enemy : MonoBehaviour, IEntity
 
     public EnemyStateMachine StateMachine { get; private set; }
 
-    private PlayerMovement _playerMovement;
+    public PlayerMovement PlayerMovement { get; private set; }
 
 
     public void InstantiateConstructor(PlayerMovement playerMovement)
     {
-        _playerMovement = playerMovement;
+        PlayerMovement = playerMovement;
 
         foreach (var entity in _entitiesDataSO.EnemyRows)
         {
@@ -68,26 +64,26 @@ public class Enemy : MonoBehaviour, IEntity
     public bool PlayerInDetectionRadius()
     {
 
-        return Vector3.Distance(transform.position, _playerMovement.transform.position) < DetectionRadius;
+        return Vector3.Distance(transform.position, PlayerMovement.transform.position) < DetectionRadius;
     }
 
     public bool PlayerInAttackRange()
     {
 
-        return Vector3.Distance(transform.position, _playerMovement.transform.position) < AttackRange;
+        return Vector3.Distance(transform.position, PlayerMovement.transform.position) < AttackRange;
     }
 
     public bool PlayerInShootRange()
     {
 
-        float distance = Vector3.Distance(transform.position, _playerMovement.transform.position);
+        float distance = Vector3.Distance(transform.position, PlayerMovement.transform.position);
         return distance > AttackRange && distance < ShootRange;
     }
 
     public bool PlayerInMeleeRange()
     {
 
-        return Vector3.Distance(transform.position, _playerMovement.transform.position) < AttackRange;
+        return Vector3.Distance(transform.position, PlayerMovement.transform.position) < AttackRange;
     }
 
  
