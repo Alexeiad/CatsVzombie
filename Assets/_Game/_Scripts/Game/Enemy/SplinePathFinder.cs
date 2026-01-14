@@ -7,6 +7,13 @@ using System.Linq;
 [RequireComponent(typeof(SplineContainer))]
 public class SplinePathfinder : MonoBehaviour
 {
+    public bool IsMoving => isMoving;
+    public bool IsPathGenerated => isPathGenerated;
+    public float CurrentProgress => currentSplinePosition;
+    public float SplineLength => splineLength;
+
+
+
     [Header("Основные настройки")]
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float pointReachThreshold = 0.1f;
@@ -906,10 +913,7 @@ public class SplinePathfinder : MonoBehaviour
         obstacles.Clear();
     }
 
-    public bool IsMoving => isMoving;
-    public bool IsPathGenerated => isPathGenerated;
-    public float CurrentProgress => currentSplinePosition;
-    public float SplineLength => splineLength;
+    
 
     private void OnDrawGizmosSelected()
     {
