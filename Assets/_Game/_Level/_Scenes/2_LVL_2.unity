@@ -13479,11 +13479,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9077074271627790481, guid: 97a3fe6d12c30a94db9eff15c2d5339a, type: 3}
       propertyPath: _enableRandomMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9077074271627790481, guid: 97a3fe6d12c30a94db9eff15c2d5339a, type: 3}
       propertyPath: _spawnHorizontal.y
       value: 215
+      objectReference: {fileID: 0}
+    - target: {fileID: 9077074271627790481, guid: 97a3fe6d12c30a94db9eff15c2d5339a, type: 3}
+      propertyPath: _enableSpawnPointsMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9077074271627790481, guid: 97a3fe6d12c30a94db9eff15c2d5339a, type: 3}
       propertyPath: _spawnPoints.Array.data[0]
