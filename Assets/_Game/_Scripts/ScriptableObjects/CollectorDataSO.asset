@@ -17,35 +17,35 @@ MonoBehaviour:
     buildingLevelType: 0
     materialsToGive: 0
     waterToGive: 0
-    foodToGive: 10
+    foodToGive: 2
     diamondToGive: 0
   - buildingType: 0
     buildingLevelType: 1
     materialsToGive: 0
     waterToGive: 0
-    foodToGive: 20
+    foodToGive: 4
     diamondToGive: 0
   - buildingType: 1
     buildingLevelType: 0
     materialsToGive: 0
-    waterToGive: 10
+    waterToGive: 2
     foodToGive: 0
     diamondToGive: 0
   - buildingType: 1
     buildingLevelType: 1
     materialsToGive: 0
-    waterToGive: 20
+    waterToGive: 4
     foodToGive: 0
     diamondToGive: 0
   - buildingType: 2
     buildingLevelType: 0
-    materialsToGive: 10
+    materialsToGive: 1
     waterToGive: 0
     foodToGive: 0
     diamondToGive: 0
   - buildingType: 2
     buildingLevelType: 1
-    materialsToGive: 20
+    materialsToGive: 2
     waterToGive: 0
     foodToGive: 0
     diamondToGive: 0
