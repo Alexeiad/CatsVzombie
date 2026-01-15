@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7102300943171205039}
   - component: {fileID: 7385110953258304678}
   - component: {fileID: 7894260318138710997}
+  - component: {fileID: 8376854097551028901}
   m_Layer: 0
   m_Name: Zombie 1
   m_TagString: Untagged
@@ -28,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 1997929004700043616}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.64, y: 8.91, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 0.11697959, g: 0.5188679, b: 0, a: 1}
+  m_Sprite: {fileID: 1405842878, guid: d9cdefa1d0ffc0344b1c3e4329431f0d, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -140,3 +141,30 @@ MonoBehaviour:
       m_Data: []
   m_Knots:
     m_KnotsLink: []
+--- !u!114 &8376854097551028901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997929004700043616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60ee31eb46a52b0408dfce73134e22fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pursuitDistance: 30
+  speed: 1
+  avoidanceStrength: 15
+  avoidanceDistance: 3
+  currentState: 0
+  attackDistance: 0.2
+  retreatDistance: 4
+  minPauseTime: 0.1
+  maxPauseTime: 3
+  patrolVariation: 1.5
+  tangentialSpeed: 2
+  changeDirectionMin: 2
+  changeDirectionMax: 5
+  safeDistance: 3
+  fleeSpeedMultiplier: 1.5

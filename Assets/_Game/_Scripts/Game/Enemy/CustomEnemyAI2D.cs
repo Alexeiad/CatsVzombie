@@ -20,7 +20,6 @@ public class CustomEnemyAI2D : MonoBehaviour
         RangedPatrol,
         Flee
     }
-
     private enum MeleeSubState
     {
         Approaching,    // Подходит к цели
@@ -34,9 +33,6 @@ public class CustomEnemyAI2D : MonoBehaviour
     public float speed = 4f;
     public float avoidanceStrength = 15f;
     public float avoidanceDistance = 3f;
-
-    [Header("Препятствия для обхода")]
-    public List<Transform> obstacles = new List<Transform>();
 
     [Header("Режим поведения")]
     public AIState currentState = AIState.MeleeAttack;
@@ -65,16 +61,19 @@ public class CustomEnemyAI2D : MonoBehaviour
     private int tangentialDirection = 1;        // Общий для обоих режимов патруля
     private float waitTimer;                    // Время патруля в Melee перед новой атакой
     private Enemy _enemy;
-    private Transform target;
-    [Inject] private PlayerMovement _playerMovement;
+    private Transform _target;
+    private List<Transform> _obstacles;
+
+    //[Inject] private PlayerMovement _playerMovement;
 
     private void Start()
     {
         _enemy = GetComponent<Enemy>();
 
-       // target = _enemy?.PlayerMovement.transform;
-        
-        target = _playerMovement.transform;
+        _target = _enemy.PlayerMovement.transform;
+        _obstacles = _enemy.ObstacleList;
+
+        //target = _playerMovement.transform;
         
         patrolTimer = Random.Range(changeDirectionMin, changeDirectionMax);
         tangentialDirection = Random.value > 0.5f ? 1 : -1;
@@ -83,9 +82,9 @@ public class CustomEnemyAI2D : MonoBehaviour
 
     private void Update()
     {
-        if (target == null) return;
+        if (_target == null) return;
 
-        Vector2 toTarget = target.position - transform.position;
+        Vector2 toTarget = _target.position - transform.position;
         float distToTarget = toTarget.magnitude;
 
         if (distToTarget >= pursuitDistance)
@@ -210,7 +209,7 @@ public class CustomEnemyAI2D : MonoBehaviour
     {
         Vector2 avoidance = Vector2.zero;
 
-        foreach (Transform obstacle in obstacles)
+        foreach (Transform obstacle in _obstacles)
         {
             if (obstacle == null) continue;
 

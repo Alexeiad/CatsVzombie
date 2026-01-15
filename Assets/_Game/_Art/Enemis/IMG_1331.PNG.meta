@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 1000
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -108,7 +108,133 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: IMG_1331_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1166.6666
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6febdabaebfe09748ad1e134c12393c7
+      internalID: 1806265172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_1331_1
+      rect:
+        serializedVersion: 2
+        x: 1166
+        y: 0
+        width: 1166.6666
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bba281c41cee9454e80e0e7e1132ac8e
+      internalID: -1659692391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_1331_2
+      rect:
+        serializedVersion: 2
+        x: 2332
+        y: 0
+        width: 1166.6666
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e80e28e670536f4da9cad47a5a6b22b
+      internalID: -1220358195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_1331_3
+      rect:
+        serializedVersion: 2
+        x: 3498
+        y: 0
+        width: 1166.6666
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 458cd9334e599264fbb4cb7d1b409022
+      internalID: -764325342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_1331_4
+      rect:
+        serializedVersion: 2
+        x: 4664
+        y: 0
+        width: 1166.6666
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d2af6a726f8fd9459a70ebcd8e034f6
+      internalID: -1620746503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_1331_5
+      rect:
+        serializedVersion: 2
+        x: 5830
+        y: 0
+        width: 1166.6666
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ae693acb32ddd845b19c99628005d04
+      internalID: -260987353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +245,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      IMG_1331_0: 1806265172
+      IMG_1331_1: -1659692391
+      IMG_1331_2: -1220358195
+      IMG_1331_3: -764325342
+      IMG_1331_4: -1620746503
+      IMG_1331_5: -260987353
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

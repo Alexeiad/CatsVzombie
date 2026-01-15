@@ -1,5 +1,6 @@
 // Enemy.cs
 
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -25,11 +26,13 @@ public class Enemy : MonoBehaviour, IEntity
     public EnemyStateMachine StateMachine { get; private set; }
 
     public PlayerMovement PlayerMovement { get; private set; }
+    public List<Transform> ObstacleList { get; private set; }
 
 
-    public void InstantiateConstructor(PlayerMovement playerMovement)
+    public void InstantiateConstructor(PlayerMovement playerMovement,List<Transform> obstacleList)
     {
         PlayerMovement = playerMovement;
+        ObstacleList = obstacleList;
 
         foreach (var entity in _entitiesDataSO.EnemyRows)
         {

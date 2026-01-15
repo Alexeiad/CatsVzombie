@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +11,6 @@ public class PlayerInstaller : MonoInstaller
     [SerializeField] private GameObject _playerPrefab;
 
     [SerializeField] private DynamicJoystick _joystick;
-
 
     [Inject] private EntityList _entities;
 
@@ -38,7 +38,7 @@ public class PlayerInstaller : MonoInstaller
 
         _entities.Add(player.transform);
 
-
+        
 
     }
 
@@ -49,3 +49,4 @@ public class PlayerInstaller : MonoInstaller
 
     }
 }
+

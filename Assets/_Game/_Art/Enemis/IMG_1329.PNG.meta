@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 600
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -108,7 +108,154 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: IMG_1329_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1285.7142
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11bcbe14d87ddf54c83d67403c6c970b
+      internalID: 891350191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_1329_1
+      rect:
+        serializedVersion: 2
+        x: 1285
+        y: 0
+        width: 1285.7142
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb63894f4127e4f4098ab4184bc8ed5c
+      internalID: 1186203847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_1329_2
+      rect:
+        serializedVersion: 2
+        x: 2570
+        y: 0
+        width: 1285.7142
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af084b336c5ba1c4c98b9fe6370b8eae
+      internalID: 1580621675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_1329_3
+      rect:
+        serializedVersion: 2
+        x: 3855
+        y: 0
+        width: 1285.7142
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a6254b7a61efbf4882389f5a43bf53f
+      internalID: -474844409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_1329_4
+      rect:
+        serializedVersion: 2
+        x: 5140
+        y: 0
+        width: 1285.7142
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8db77ef77078fea4e9c142f17a039640
+      internalID: 87850030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_1329_5
+      rect:
+        serializedVersion: 2
+        x: 6425
+        y: 0
+        width: 1285.7142
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29f2742f8ccd3f34aa0a54bf85b23ce5
+      internalID: -1870425080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_1329_6
+      rect:
+        serializedVersion: 2
+        x: 7710
+        y: 0
+        width: 1285.7142
+        height: 2000
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd45f408015adc641b2ff9d5dee9b700
+      internalID: 329789747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +266,14 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      IMG_1329_0: 891350191
+      IMG_1329_1: 1186203847
+      IMG_1329_2: 1580621675
+      IMG_1329_3: -474844409
+      IMG_1329_4: 87850030
+      IMG_1329_5: -1870425080
+      IMG_1329_6: 329789747
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
