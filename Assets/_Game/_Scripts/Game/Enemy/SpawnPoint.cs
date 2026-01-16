@@ -19,6 +19,7 @@ public class SpawnPoint : MonoBehaviour
 
     private EntitiesDataSO _entitiesDataSO;
     private PlayerMovement _playerMovement;
+    private Transform _playerTransform; // Кешируем для производительности
     private List<Transform> _obstacleList;
     private List<GameObject> _spawnedEntities = new List<GameObject>(); // Track alive entities
 
@@ -26,6 +27,7 @@ public class SpawnPoint : MonoBehaviour
     {
         _entitiesDataSO = entitiesDataSO;
         _playerMovement = playerMovement;
+        _playerTransform = playerMovement?.transform; // Кешируем трансформ игрока
         _obstacleList = obstacleList;
 
         // Normalize chances if not set
@@ -64,34 +66,65 @@ public class SpawnPoint : MonoBehaviour
             // Clean up destroyed entities
             _spawnedEntities.RemoveAll(e => e == null);
 
-            // Only spawn if under max
-            if (_spawnedEntities.Count < _maxAlive)
+            // Только если есть место под новых врагов и игрок вне радиуса
+            if (_spawnedEntities.Count < _maxAlive && _playerTransform != null)
             {
-                int groupSize = Random.Range(_minGroupSize, _maxGroupSize + 1);
-                int toSpawn = Mathf.Min(groupSize, _maxAlive - _spawnedEntities.Count);
+                float distanceToPlayer = Vector3.Distance(transform.position, _playerTransform.position);
 
-                for (int i = 0; i < toSpawn; i++)
+                // Спавним ТОЛЬКО если игрок дальше радиуса спавна
+                if (distanceToPlayer > _spawnRadius)
                 {
-                    // Pick type based on chances
-                    EntityType selectedType = PickEntityType();
+                    int groupSize = Random.Range(_minGroupSize, _maxGroupSize + 1);
+                    int toSpawn = Mathf.Min(groupSize, _maxAlive - _spawnedEntities.Count);
 
-                    var entityData = _entitiesDataSO.EnemyRows.FirstOrDefault(e => e.EntityType == selectedType);
-                    if (entityData != null)
+                    for (int i = 0; i < toSpawn; i++)
                     {
-                        // Spawn position: random within radius
-                        Vector2 offset = Random.insideUnitCircle * _spawnRadius;
-                        Vector3 spawnPosition = transform.position + new Vector3(offset.x, offset.y, 0f);
+                        EntityType selectedType = PickEntityType();
 
-                        var newEntity = Instantiate(entityData.EntityPrefab, spawnPosition, Quaternion.identity);
-                        newEntity.GetComponent<Enemy>().InstantiateConstructor(_playerMovement, _obstacleList);
-                        _spawnedEntities.Add(newEntity);
+                        var entityData = _entitiesDataSO.EnemyRows.FirstOrDefault(e => e.EntityType == selectedType);
+                        if (entityData == null) continue;
+
+                        // Пытаемся найти подходящую позицию (не слишком близко к игроку)
+                        Vector3 spawnPosition = GetValidSpawnPosition(distanceToPlayer);
+
+                        if (spawnPosition != Vector3.zero) // Если нашли позицию
+                        {
+                            var newEntity = Instantiate(entityData.EntityPrefab, spawnPosition, Quaternion.identity);
+                            var enemy = newEntity.GetComponent<Enemy>();
+                            if (enemy != null)
+                            {
+                                enemy.InstantiateConstructor(_playerMovement, _obstacleList);
+                            }
+                            _spawnedEntities.Add(newEntity);
+                        }
                     }
                 }
             }
 
-            // Wait random interval
+            // Ждём случайный интервал
             yield return new WaitForSeconds(Random.Range(_minInterval, _maxInterval));
         }
+    }
+
+    private Vector3 GetValidSpawnPosition(float distanceToPlayer)
+    {
+        const int maxAttempts = 10;
+        const float minDistanceToPlayer = 1.5f; // Минимальное расстояние до игрока, чтобы не спавнить прямо на нём
+
+        for (int i = 0; i < maxAttempts; i++)
+        {
+            Vector2 offset = Random.insideUnitCircle * _spawnRadius;
+            Vector3 candidate = transform.position + new Vector3(offset.x, offset.y, 0f);
+
+            float distToPlayer = Vector3.Distance(candidate, _playerTransform.position);
+            if (distToPlayer >= minDistanceToPlayer)
+            {
+                return candidate;
+            }
+        }
+
+        // Если не нашли подходящую позицию — возвращаем zero (не спавним этого врага)
+        return Vector3.zero;
     }
 
     private EntityType PickEntityType()
