@@ -99,8 +99,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7797ebb8d17f11c41ae86bda031449b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entityType: 2
-  _entitiesDataSO: {fileID: 11400000, guid: fd5915f3c3625734997ef4887405096c, type: 2}
+  entityType: 2
+  entitiesDataSO: {fileID: 11400000, guid: fd5915f3c3625734997ef4887405096c, type: 2}
+  isCreepingZombie: 0
+  sortingUnitsPerMeter: 100
+  enemySeparationDistance: 0.2
+  enemySeparationStrength: 0.01
 --- !u!114 &7894260318138710997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,18 +157,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60ee31eb46a52b0408dfce73134e22fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pursuitDistance: 30
-  speed: 1
-  avoidanceStrength: 15
-  avoidanceDistance: 3
   currentState: 0
-  attackDistance: 0.2
-  retreatDistance: 4
-  minPauseTime: 0.1
-  maxPauseTime: 3
-  patrolVariation: 1.5
-  tangentialSpeed: 2
-  changeDirectionMin: 2
-  changeDirectionMax: 5
-  safeDistance: 3
-  fleeSpeedMultiplier: 1.5
+  patrolOscillationAmplitude: 0.15
+  patrolOscillationFrequency: 0.8
+  enemySeparationDistance: 1
+  enemySeparationStrength: 100
