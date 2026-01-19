@@ -102,7 +102,7 @@ MonoBehaviour:
   entityType: 3
   entitiesDataSO: {fileID: 11400000, guid: fd5915f3c3625734997ef4887405096c, type: 2}
   isCreepingZombie: 1
-  sortingUnitsPerMeter: 100
+  sortingUnitsPerMeter: 1
   enemySeparationDistance: 0.2
   enemySeparationStrength: 0.01
 --- !u!114 &7787898618245144262
