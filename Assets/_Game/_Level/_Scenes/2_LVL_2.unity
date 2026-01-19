@@ -150,6 +150,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnOnce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: _entityChances.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -159,23 +163,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: _entityChances.Array.data[0].Chance
-      value: 0.91
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: _entityChances.Array.data[1].Chance
-      value: 0.43
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: _entityChances.Array.data[2].Chance
-      value: 0.69
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: _entityChances.Array.data[3].Chance
-      value: 0.64
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: _entityChances.Array.data[4].Chance
-      value: 0.33
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: _entityChances.Array.data[5].Chance
@@ -1382,7 +1386,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1000
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -1480,7 +1484,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -1000
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -1655,7 +1659,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -1000
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.027999997, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -13564,15 +13568,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9077074271627790481, guid: 97a3fe6d12c30a94db9eff15c2d5339a, type: 3}
       propertyPath: _waveInterval
-      value: 100
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9077074271627790481, guid: 97a3fe6d12c30a94db9eff15c2d5339a, type: 3}
       propertyPath: _spawnInterval
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9077074271627790481, guid: 97a3fe6d12c30a94db9eff15c2d5339a, type: 3}
+      propertyPath: _waveOnceCount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9077074271627790481, guid: 97a3fe6d12c30a94db9eff15c2d5339a, type: 3}
       propertyPath: _enableWaveMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9077074271627790481, guid: 97a3fe6d12c30a94db9eff15c2d5339a, type: 3}
       propertyPath: _waveEnemyCount
@@ -13587,8 +13595,20 @@ PrefabInstance:
       value: 215
       objectReference: {fileID: 0}
     - target: {fileID: 9077074271627790481, guid: 97a3fe6d12c30a94db9eff15c2d5339a, type: 3}
-      propertyPath: _enableSpawnPointsMode
+      propertyPath: _waveModeSpawnOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9077074271627790481, guid: 97a3fe6d12c30a94db9eff15c2d5339a, type: 3}
+      propertyPath: _randomModeSpawnOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9077074271627790481, guid: 97a3fe6d12c30a94db9eff15c2d5339a, type: 3}
+      propertyPath: _spawnPointsSpawnOnce
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9077074271627790481, guid: 97a3fe6d12c30a94db9eff15c2d5339a, type: 3}
+      propertyPath: _enableSpawnPointsMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9077074271627790481, guid: 97a3fe6d12c30a94db9eff15c2d5339a, type: 3}
       propertyPath: _spawnPoints.Array.size

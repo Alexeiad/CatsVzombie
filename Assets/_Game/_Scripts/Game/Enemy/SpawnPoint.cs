@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
-public class SpawnPoint : MonoBehaviour
+public class SpawnPoint : MonoBehaviour, ISpawner
 {
     [Header("Spawn Settings")]
     [SerializeField] private float _spawnRadius = 5f; // Radius around the point to spawn within
@@ -14,6 +14,9 @@ public class SpawnPoint : MonoBehaviour
     [SerializeField] private int _maxGroupSize = 3; // Max enemies per spawn
     [SerializeField] private int _maxAlive = 5; // Max alive from this point
 
+    [Header("Spawn Mode")]
+    [SerializeField] private bool _spawnOnce = false; // Если true - спавнит разово _maxAlive врагов
+
     [Header("Entity Percentages")]
     [SerializeField] private List<EntitySpawnChance> _entityChances = new List<EntitySpawnChance>(); // Percentages for each type
 
@@ -22,6 +25,8 @@ public class SpawnPoint : MonoBehaviour
     private Transform _playerTransform; // Кешируем для производительности
     private List<Transform> _obstacleList;
     private List<GameObject> _spawnedEntities = new List<GameObject>(); // Track alive entities
+    private bool _hasSpawnedOnce = false; // Флаг для отслеживания разового спауна
+    public List<Enemy> Enemies { get; set; } = new List<Enemy>();
 
     public void Initialize(EntitiesDataSO entitiesDataSO, PlayerMovement playerMovement, List<Transform> obstacleList)
     {
@@ -66,6 +71,12 @@ public class SpawnPoint : MonoBehaviour
             // Clean up destroyed entities
             _spawnedEntities.RemoveAll(e => e == null);
 
+            // Если режим разового спауна и уже заспавнили - выходим из корутины
+            if (_spawnOnce && _hasSpawnedOnce)
+            {
+                yield break; // Прерываем корутину
+            }
+
             // Только если есть место под новых врагов и игрок вне радиуса
             if (_spawnedEntities.Count < _maxAlive && _playerTransform != null)
             {
@@ -74,15 +85,37 @@ public class SpawnPoint : MonoBehaviour
                 // Спавним ТОЛЬКО если игрок дальше радиуса спавна
                 if (distanceToPlayer > _spawnRadius)
                 {
-                    int groupSize = Random.Range(_minGroupSize, _maxGroupSize + 1);
-                    int toSpawn = Mathf.Min(groupSize, _maxAlive - _spawnedEntities.Count);
+                    // Для разового спауна спавним сразу всех врагов
+                    int toSpawn;
+                    if (_spawnOnce && !_hasSpawnedOnce)
+                    {
+                        // Спавним сразу всех врагов до максимума
+                        toSpawn = _maxAlive - _spawnedEntities.Count;
+                        _hasSpawnedOnce = true; // Помечаем, что разовый спаун выполнен
+                    }
+                    else
+                    {
+                        // Обычный режим - спавним группой
+                        int groupSize = Random.Range(_minGroupSize, _maxGroupSize + 1);
+                        toSpawn = Mathf.Min(groupSize, _maxAlive - _spawnedEntities.Count);
+                    }
 
                     for (int i = 0; i < toSpawn; i++)
                     {
                         EntityType selectedType = PickEntityType();
 
-                        var entityData = _entitiesDataSO.EnemyRows.FirstOrDefault(e => e.EntityType == selectedType);
-                        if (entityData == null) continue;
+                        // Собираем все префабы данного типа
+                        var matchingRows = _entitiesDataSO.EnemyRows
+                            .Where(e => e.EntityType == selectedType)
+                            .ToList();
+
+                        if (matchingRows.Count == 0)
+                        {
+                            continue; // Нет префабов этого типа — пропускаем
+                        }
+
+                        // Выбираем случайный префаб среди подходящих
+                        var entityData = matchingRows[Random.Range(0, matchingRows.Count)];
 
                         // Пытаемся найти подходящую позицию (не слишком близко к игроку)
                         Vector3 spawnPosition = GetValidSpawnPosition(distanceToPlayer);
@@ -93,7 +126,8 @@ public class SpawnPoint : MonoBehaviour
                             var enemy = newEntity.GetComponent<Enemy>();
                             if (enemy != null)
                             {
-                                enemy.InstantiateConstructor(_playerMovement, _obstacleList);
+                                Enemies.Add(enemy);
+                                enemy.InstantiateConstructor(_playerMovement, _obstacleList,this);
                             }
                             _spawnedEntities.Add(newEntity);
                         }
@@ -101,7 +135,13 @@ public class SpawnPoint : MonoBehaviour
                 }
             }
 
-            // Ждём случайный интервал
+            // Если режим разового спауна и уже заспавнили - выходим после спауна
+            if (_spawnOnce && _hasSpawnedOnce)
+            {
+                yield break; // Прерываем корутину
+            }
+
+            // Ждём случайный интервал (для разового спауна это не имеет значения, т.к. выйдем сразу)
             yield return new WaitForSeconds(Random.Range(_minInterval, _maxInterval));
         }
     }
@@ -142,13 +182,21 @@ public class SpawnPoint : MonoBehaviour
         // Fallback to first non-Cat
         return _entityChances.FirstOrDefault(c => c.Type != EntityType.Cat)?.Type ?? EntityType.Zombie;
     }
+
+    // Метод для принудительного сброса флага разового спауна (если нужно перезапустить)
+    public void ResetSpawnFlag()
+    {
+        _hasSpawnedOnce = false;
+    }
 }
+
 [System.Serializable]
 public class EntitySpawnChance
 {
     public EntityType Type;
     [Range(0f, 1f)] public float Chance;
 }
+
 [System.Serializable]
 public class EnemyRow
 {
