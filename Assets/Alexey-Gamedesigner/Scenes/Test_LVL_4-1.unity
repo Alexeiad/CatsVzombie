@@ -399,6 +399,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnPoint (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxAlive
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnOnce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnRadius
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxGroupSize
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 70
@@ -520,6 +536,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnPoint (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxAlive
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnRadius
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 120.27
@@ -586,13 +610,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnPoint (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxAlive
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnRadius
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 234.6
+      value: 238.3
       objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 138.3
+      value: 137.4
       objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -651,6 +687,22 @@ PrefabInstance:
     - target: {fileID: 6341556208870452401, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_Name
       value: SpawnPoint (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxAlive
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnRadius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxGroupSize
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.x
@@ -718,13 +770,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnPoint (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxAlive
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnRadius
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 164.75
+      value: 177.2
       objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 103.95
+      value: 104.4
       objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -842,13 +906,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnPoint (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxAlive
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnRadius
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 180.05
+      value: 195.7
       objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 113.87
+      value: 121.2
       objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -992,6 +1068,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnPoint (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxAlive
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnRadius
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 174.84
@@ -1058,6 +1146,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnPoint (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnOnce
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22.95
@@ -1123,6 +1215,18 @@ PrefabInstance:
     - target: {fileID: 6341556208870452401, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_Name
       value: SpawnPoint (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxAlive
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxGroupSize
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1341,6 +1445,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnPoint (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxAlive
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnOnce
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 33.45
@@ -1406,6 +1518,14 @@ PrefabInstance:
     - target: {fileID: 6341556208870452401, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_Name
       value: SpawnPoint (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxAlive
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnOnce
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1484,6 +1604,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnPoint
       objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxAlive
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnOnce
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.48
@@ -1560,6 +1688,18 @@ PrefabInstance:
     - target: {fileID: 6341556208870452401, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_Name
       value: SpawnPoint (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxAlive
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnRadius
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1700,6 +1840,14 @@ PrefabInstance:
     - target: {fileID: 6341556208870452401, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_Name
       value: SpawnPoint (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxAlive
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnOnce
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2557,13 +2705,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnPoint (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxAlive
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxGroupSize
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 311.9
+      value: 318.8
       objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 154.4
+      value: 159.7
       objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2623,13 +2783,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnPoint (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxAlive
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnRadius
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxGroupSize
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 288.3
+      value: 303.5
       objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 168.7
+      value: 178.9
       objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2688,6 +2864,22 @@ PrefabInstance:
     - target: {fileID: 6341556208870452401, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_Name
       value: SpawnPoint (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxAlive
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnRadius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxGroupSize
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2883,13 +3075,33 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnPoint (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxAlive
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnRadius
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxGroupSize
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _minGroupSize
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 269.6
+      value: 276.9
       objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 135.5
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2971,6 +3183,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnPoint (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxAlive
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxGroupSize
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 100.18
@@ -3037,13 +3261,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnPoint (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxAlive
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxGroupSize
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 55.37
+      value: 64.38
       objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 43.33
+      value: 38.22
       objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -287893,6 +288129,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnPoint (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnRadius
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.08
@@ -287969,6 +288213,26 @@ PrefabInstance:
     - target: {fileID: 6341556208870452401, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_Name
       value: SpawnPoint (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxAlive
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxInterval
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxGroupSize
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _minGroupSize
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.x
@@ -288229,13 +288493,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnPoint (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxAlive
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnRadius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 190.65
       objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 91.51
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -288295,13 +288571,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnPoint (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxAlive
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _spawnOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500684395815136535, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
+      propertyPath: _maxGroupSize
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 144.4
+      value: 150.9
       objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 89.58
+      value: 88.7
       objectReference: {fileID: 0}
     - target: {fileID: 7373734005192871845, guid: ed70555dfce332a4e9bad6352a9bd8ac, type: 3}
       propertyPath: m_LocalPosition.z
