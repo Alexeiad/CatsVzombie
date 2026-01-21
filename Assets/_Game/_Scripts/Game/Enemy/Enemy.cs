@@ -43,11 +43,11 @@ public class Enemy : MonoBehaviour, IEntity
 
     private List<Enemy> _enemies;
 
-    public void InstantiateConstructor(PlayerMovement playerMovement, List<Transform> obstacleList, ISpawner iSpawner)
+    public void InstantiateConstructor(PlayerMovement playerMovement, List<Transform> obstacleList, ZombieSpawner zombieSpawner)
     {
         _playerMovement = playerMovement;
         ObstacleList = obstacleList;
-        _enemies = iSpawner.Enemies;
+        _enemies = zombieSpawner.enemies;
         GetComponent<CustomEnemyAI2D>().Initialize(playerMovement,_enemies);
 
         foreach (var entity in entitiesDataSO.EnemyRows)

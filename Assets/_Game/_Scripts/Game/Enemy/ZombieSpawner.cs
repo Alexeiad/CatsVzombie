@@ -4,8 +4,10 @@ using System.Linq;
 using UnityEngine;
 using Zenject;
 
-public class ZombieSpawner : MonoBehaviour, ISpawner
+public class ZombieSpawner : MonoBehaviour
 {
+    public List<Enemy> enemies  = new List<Enemy>();
+
     [SerializeField] private EntitiesDataSO _entitiesDataSO;
     [SerializeField] private float _spawnInterval = 1f;
     [SerializeField] private Vector2 _spawnHorizontal;
@@ -40,7 +42,7 @@ public class ZombieSpawner : MonoBehaviour, ISpawner
 
     private List<Coroutine> _activeCoroutines = new List<Coroutine>();
     private Dictionary<string, bool> _hasSpawnedOnce = new Dictionary<string, bool>();// Трекер для разовых спаунов
-    public List<Enemy> Enemies { get; set; } = new List<Enemy>();
+   
 
     private void Start()
     {
@@ -64,7 +66,7 @@ public class ZombieSpawner : MonoBehaviour, ISpawner
 
             foreach (var spawnPoint in _spawnPoints)
             {
-                spawnPoint.Initialize(_entitiesDataSO, _playerMovement, _obstacleList);
+                spawnPoint.Initialize(_entitiesDataSO, _playerMovement, _obstacleList,this);
                 _activeCoroutines.Add(StartCoroutine(spawnPoint.SpawnRoutine()));
             }
         }
@@ -219,7 +221,7 @@ public class ZombieSpawner : MonoBehaviour, ISpawner
                     } while (!validPosition && attempts < maxAttempts);
 
                     var newEntity = Instantiate(entity.EntityPrefab, spawnPosition, Quaternion.identity);
-                    Enemies.Add(newEntity.GetComponent<Enemy>());
+                    enemies.Add(newEntity.GetComponent<Enemy>());
                     newEntity.GetComponent<Enemy>().InstantiateConstructor(_playerMovement, _obstacleList,this);
 
                     if (_randomModeSpawnOnce)
@@ -327,7 +329,7 @@ public class ZombieSpawner : MonoBehaviour, ISpawner
                         } while (!validPosition && attempts < maxAttempts);
 
                         var newEntity = Instantiate(entityData.EntityPrefab, spawnPosition, Quaternion.identity);
-                        Enemies.Add(newEntity.GetComponent<Enemy>());
+                        enemies.Add(newEntity.GetComponent<Enemy>());
                         newEntity.GetComponent<Enemy>().InstantiateConstructor(_playerMovement, _obstacleList,this);
                         spawnedCount++;
                     }

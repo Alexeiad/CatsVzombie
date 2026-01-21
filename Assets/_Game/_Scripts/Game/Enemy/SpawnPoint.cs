@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
-public class SpawnPoint : MonoBehaviour, ISpawner
+public class SpawnPoint : MonoBehaviour
 {
     [Header("Spawn Settings")]
     [SerializeField] private float _spawnRadius = 5f; // Radius around the point to spawn within
@@ -13,6 +13,7 @@ public class SpawnPoint : MonoBehaviour, ISpawner
     [SerializeField] private int _minGroupSize = 1; // Min enemies per spawn
     [SerializeField] private int _maxGroupSize = 3; // Max enemies per spawn
     [SerializeField] private int _maxAlive = 5; // Max alive from this point
+    
 
     [Header("Spawn Mode")]
     [SerializeField] private bool _spawnOnce = false; // Если true - спавнит разово _maxAlive врагов
@@ -26,12 +27,13 @@ public class SpawnPoint : MonoBehaviour, ISpawner
     private List<Transform> _obstacleList;
     private List<GameObject> _spawnedEntities = new List<GameObject>(); // Track alive entities
     private bool _hasSpawnedOnce = false; // Флаг для отслеживания разового спауна
-    public List<Enemy> Enemies { get; set; } = new List<Enemy>();
+    private ZombieSpawner _zombieSpawner;
 
-    public void Initialize(EntitiesDataSO entitiesDataSO, PlayerMovement playerMovement, List<Transform> obstacleList)
+    public void Initialize(EntitiesDataSO entitiesDataSO, PlayerMovement playerMovement, List<Transform> obstacleList,ZombieSpawner zombieSpawner)
     {
         _entitiesDataSO = entitiesDataSO;
         _playerMovement = playerMovement;
+        _zombieSpawner = zombieSpawner;
         _playerTransform = playerMovement?.transform; // Кешируем трансформ игрока
         _obstacleList = obstacleList;
 
@@ -126,8 +128,8 @@ public class SpawnPoint : MonoBehaviour, ISpawner
                             var enemy = newEntity.GetComponent<Enemy>();
                             if (enemy != null)
                             {
-                                Enemies.Add(enemy);
-                                enemy.InstantiateConstructor(_playerMovement, _obstacleList,this);
+                               _zombieSpawner.enemies.Add(enemy);
+                                enemy.InstantiateConstructor(_playerMovement, _obstacleList,_zombieSpawner);
                             }
                             _spawnedEntities.Add(newEntity);
                         }
