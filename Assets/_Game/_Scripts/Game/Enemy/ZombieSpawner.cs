@@ -7,12 +7,14 @@ using Zenject;
 public class ZombieSpawner : MonoBehaviour
 {
     public List<Enemy> enemies  = new List<Enemy>();
+    public StatsPreview statsPreview;
 
     [SerializeField] private EntitiesDataSO _entitiesDataSO;
     [SerializeField] private float _spawnInterval = 1f;
     [SerializeField] private Vector2 _spawnHorizontal;
     [SerializeField] private Vector2 _spawnVertical;
     [SerializeField] private List<Transform> _obstacleList;
+    
 
     [Header("Modes")]
     [SerializeField] private bool _enableRandomMode = true; // Mode 1: Current random spawn
@@ -39,6 +41,7 @@ public class ZombieSpawner : MonoBehaviour
     [SerializeField] private int _maxEnemiesOnMap = 30; // Максимальное количество зомби на карте
 
     [Inject] private PlayerMovement _playerMovement;
+    [Inject] private EntityList _entities;
 
     private List<Coroutine> _activeCoroutines = new List<Coroutine>();
     private Dictionary<string, bool> _hasSpawnedOnce = new Dictionary<string, bool>();// Трекер для разовых спаунов
@@ -222,6 +225,8 @@ public class ZombieSpawner : MonoBehaviour
 
                     var newEntity = Instantiate(entity.EntityPrefab, spawnPosition, Quaternion.identity);
                     enemies.Add(newEntity.GetComponent<Enemy>());
+                    statsPreview.enemys.Add(newEntity.GetComponent<Enemy>());
+
                     newEntity.GetComponent<Enemy>().InstantiateConstructor(_playerMovement, _obstacleList,this);
 
                     if (_randomModeSpawnOnce)
@@ -330,6 +335,7 @@ public class ZombieSpawner : MonoBehaviour
 
                         var newEntity = Instantiate(entityData.EntityPrefab, spawnPosition, Quaternion.identity);
                         enemies.Add(newEntity.GetComponent<Enemy>());
+                        statsPreview.enemys.Add(newEntity.GetComponent<Enemy>());
                         newEntity.GetComponent<Enemy>().InstantiateConstructor(_playerMovement, _obstacleList,this);
                         spawnedCount++;
                     }

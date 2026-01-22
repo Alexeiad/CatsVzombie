@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 [System.Serializable]
 public class SpawnPoint : MonoBehaviour
@@ -21,6 +22,8 @@ public class SpawnPoint : MonoBehaviour
     [Header("Entity Percentages")]
     [SerializeField] private List<EntitySpawnChance> _entityChances = new List<EntitySpawnChance>(); // Percentages for each type
 
+    [Inject] private EntityList _entities;
+
     private EntitiesDataSO _entitiesDataSO;
     private PlayerMovement _playerMovement;
     private Transform _playerTransform; // Кешируем для производительности
@@ -28,6 +31,7 @@ public class SpawnPoint : MonoBehaviour
     private List<GameObject> _spawnedEntities = new List<GameObject>(); // Track alive entities
     private bool _hasSpawnedOnce = false; // Флаг для отслеживания разового спауна
     private ZombieSpawner _zombieSpawner;
+    private StatsPreview _statsPreview;
 
     public void Initialize(EntitiesDataSO entitiesDataSO, PlayerMovement playerMovement, List<Transform> obstacleList,ZombieSpawner zombieSpawner)
     {
@@ -36,6 +40,7 @@ public class SpawnPoint : MonoBehaviour
         _zombieSpawner = zombieSpawner;
         _playerTransform = playerMovement?.transform; // Кешируем трансформ игрока
         _obstacleList = obstacleList;
+        _statsPreview=_zombieSpawner.statsPreview;
 
         // Normalize chances if not set
         if (_entityChances.Count == 0)
@@ -128,7 +133,8 @@ public class SpawnPoint : MonoBehaviour
                             var enemy = newEntity.GetComponent<Enemy>();
                             if (enemy != null)
                             {
-                               _zombieSpawner.enemies.Add(enemy);
+                                _zombieSpawner.enemies.Add(enemy);
+                                _statsPreview.enemys.Add(enemy);
                                 enemy.InstantiateConstructor(_playerMovement, _obstacleList,_zombieSpawner);
                             }
                             _spawnedEntities.Add(newEntity);

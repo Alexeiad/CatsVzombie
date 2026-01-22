@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -9,16 +10,19 @@ using Zenject;
 public class StatsPreview : MonoBehaviour
 {
     public static Action OnClick;
+    public List<Enemy> enemys;
 
     [SerializeField] private StatsBar _playerStats;
     [SerializeField] private StatsBar _kentStats;
     [SerializeField] private StatsBar _enemyStats;
+    [SerializeField] private GameObject _enemyStatsBar;
+    [SerializeField] private TextMeshProUGUI _enemyText;
 
     [Inject] private EntityList _entities;
 
     private PlayerMovement _playerMovement;
 
-    private List<Enemy> _enemys;
+    
 
     private float _playerHealth;
 
@@ -29,34 +33,36 @@ public class StatsPreview : MonoBehaviour
     }
     private void Start()
     {
-         _enemys = _entities
+        _enemyStatsBar.SetActive(false);
+        enemys = _entities
         .Select(entity => entity.GetComponent<Enemy>())
         .Where(enemyAI => enemyAI != null)
         .ToList();
-        _enemyStats.sliderHealth.gameObject.SetActive(false);
+
     }
 
     private void Update()
     {
-        _playerStats.sliderHealth.value = _playerMovement.CurrentHealth.Value * 0.01f;
+        _playerStats.sliderHealth.maxValue = _playerMovement.CurrentHealth.Value;
+        _playerStats.sliderHealth.value = _playerMovement.CurrentHealth.Value;
 
-        if (_enemys == null || _enemys.Count == 0)
+        if (enemys == null || enemys.Count == 0)
         {
-            _enemyStats.sliderHealth.gameObject.SetActive(false);
+            _enemyStatsBar.SetActive(false);
             return;
         }
 
-        var validEnemies = _enemys
+        var validEnemies = enemys
             .Where(enemy => enemy != null && enemy.gameObject != null)
             .ToList();
 
         if (validEnemies.Count == 0)
         {
-            _enemyStats.sliderHealth.gameObject.SetActive(false);
+            _enemyStatsBar.SetActive(false);
             return;
         }
 
-        Enemy closestEnemy = validEnemies
+        Enemy closestEnemy = enemys
             .Select(enemy => enemy.GetComponent<Enemy>())
             .OfType<Enemy>()
             .Where(enemyAI => Vector3.Distance(enemyAI.transform.position, _playerMovement.transform.position) <= 10f)
@@ -64,12 +70,14 @@ public class StatsPreview : MonoBehaviour
             .FirstOrDefault();
         if (closestEnemy != null && closestEnemy.gameObject != null)
         {
-            _enemyStats.sliderHealth.gameObject.SetActive(true);
-            //_enemyStats.sliderHealth.value =closestEnemy.currentHealth.Value * 0.01f;
+            _enemyStatsBar.SetActive(true);
+            _enemyStats.sliderHealth.maxValue = closestEnemy.Health;
+            _enemyStats.sliderHealth.value = closestEnemy.Health;
+            _enemyText.text = closestEnemy.CharacterName;
         }
         else
         {
-            _enemyStats.sliderHealth.gameObject.SetActive(false);
+            _enemyStatsBar.SetActive(false);
         }
 
         

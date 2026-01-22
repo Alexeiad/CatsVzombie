@@ -133,6 +133,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c80f6869c651854091a514938f6376b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &195490989 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2492044459243146204, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+  m_PrefabInstance: {fileID: 1242735424}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &262503829
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1243,6 +1248,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 581098447059056539, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 581098447059056539, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 638388124104821945, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1311,6 +1324,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1873779165458352475, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 1873779165458352475, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 1994281874059462405, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1331,6 +1352,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -412.8
       objectReference: {fileID: 0}
+    - target: {fileID: 3655195303502260477, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: _enemyText
+      value: 
+      objectReference: {fileID: 1985735122}
+    - target: {fileID: 3655195303502260477, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: _enemyStatsBar
+      value: 
+      objectReference: {fileID: 195490989}
     - target: {fileID: 3928019438360075821, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -1363,6 +1392,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5550933232856450651, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 5550933232856450651, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 5990869076129483361, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: tilemap
       value: 
@@ -1371,6 +1408,14 @@ PrefabInstance:
       propertyPath: _hasNotBaseLevel
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6013332744265561059, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 6013332744265561059, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 6016938879025184088, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -1418,6 +1463,10 @@ PrefabInstance:
     - target: {fileID: 7125341869295010802, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.000028848648
+      objectReference: {fileID: 0}
+    - target: {fileID: 7239618663731375864, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 7570095883962206764, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1487,6 +1536,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -1191
       objectReference: {fileID: 0}
+    - target: {fileID: 8559043952733535684, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 8559043952733535684, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 8920003887602167273, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -2018,6 +2075,17 @@ MonoBehaviour:
   m_IgnoreFromBuild: 0
   m_ApplyToChildren: 1
   m_AffectedAgents: 00000000
+--- !u!114 &1842826917 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3655195303502260477, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+  m_PrefabInstance: {fileID: 1242735424}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 295b8ff2c28e1a34cbd6651997c6c109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1980377485
 GameObject:
   m_ObjectHideFlags: 0
@@ -13858,6 +13926,17 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1985735122 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 411887233571633121, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+  m_PrefabInstance: {fileID: 1242735424}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2120271895
 GameObject:
   m_ObjectHideFlags: 0
@@ -13994,6 +14073,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ZombieSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 9077074271627790481, guid: 97a3fe6d12c30a94db9eff15c2d5339a, type: 3}
+      propertyPath: statsPreview
+      value: 
+      objectReference: {fileID: 1842826917}
+    - target: {fileID: 9077074271627790481, guid: 97a3fe6d12c30a94db9eff15c2d5339a, type: 3}
+      propertyPath: _statsPreview
+      value: 
+      objectReference: {fileID: 1842826917}
     - target: {fileID: 9077074271627790481, guid: 97a3fe6d12c30a94db9eff15c2d5339a, type: 3}
       propertyPath: _waveDuration
       value: 5
