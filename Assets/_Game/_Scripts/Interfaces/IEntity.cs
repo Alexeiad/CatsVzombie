@@ -2,6 +2,7 @@
 
 public interface IEntity 
 {
+    public int ID { get; set; }
     public string CharacterName { get; set; }
     public EntityType EntityType { get; set; }
     public Vector2 MovementSpeed { get; set; }

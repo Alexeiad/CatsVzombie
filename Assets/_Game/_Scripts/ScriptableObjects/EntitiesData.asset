@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: EntitiesData
   m_EditorClassIdentifier: 
   <EnemyRows>k__BackingField:
-  - <CharacterName>k__BackingField: "\u041A\u043E\u0442 \u0431\u0430\u0437\u043E\u0432\u044B\u0439 "
+  - <ID>k__BackingField: 0
+    <CharacterName>k__BackingField: "\u041A\u043E\u0442 \u0431\u0430\u0437\u043E\u0432\u044B\u0439 "
     <EntityPrefab>k__BackingField: {fileID: 3928872983729171847, guid: 912a8228498283649a2165757d23cb9c, type: 3}
     <EntityType>k__BackingField: 0
     <MovementSpeed>k__BackingField: {x: 1, y: 1}
@@ -40,7 +41,8 @@ MonoBehaviour:
     changeDirectionMax: 4
     safeDistance: 3
     fleeSpeedMultiplier: 1.5
-  - <CharacterName>k__BackingField: "\u0417\u043E\u043C\u0431\u0438 \u043E\u0431\u044B\u0447\u043D\u044B\u0439
+  - <ID>k__BackingField: 1
+    <CharacterName>k__BackingField: "\u0417\u043E\u043C\u0431\u0438 \u043E\u0431\u044B\u0447\u043D\u044B\u0439
       \u0432\u0430\u04401"
     <EntityPrefab>k__BackingField: {fileID: 1997929004700043616, guid: cd179722c1683114bb769bfd3a4a1d8a, type: 3}
     <EntityType>k__BackingField: 2
@@ -68,7 +70,8 @@ MonoBehaviour:
     changeDirectionMax: 4
     safeDistance: 3
     fleeSpeedMultiplier: 1.5
-  - <CharacterName>k__BackingField: "\u0417\u043E\u043C\u0431\u0438 \u043E\u0431\u044B\u0447\u043D\u044B\u0439
+  - <ID>k__BackingField: 2
+    <CharacterName>k__BackingField: "\u0417\u043E\u043C\u0431\u0438 \u043E\u0431\u044B\u0447\u043D\u044B\u0439
       \u0432\u0430\u04402"
     <EntityPrefab>k__BackingField: {fileID: 1997929004700043616, guid: 557d49bd27220e8499b1f0bedf517a19, type: 3}
     <EntityType>k__BackingField: 2
@@ -96,7 +99,8 @@ MonoBehaviour:
     changeDirectionMax: 4
     safeDistance: 3
     fleeSpeedMultiplier: 1.5
-  - <CharacterName>k__BackingField: "\u0417\u043E\u043C\u0431\u0438 \u043E\u0431\u044B\u0447\u043D\u044B\u0439 
+  - <ID>k__BackingField: 3
+    <CharacterName>k__BackingField: "\u0417\u043E\u043C\u0431\u0438 \u043E\u0431\u044B\u0447\u043D\u044B\u0439 
       \u0432\u0430\u04403"
     <EntityPrefab>k__BackingField: {fileID: 1997929004700043616, guid: 45c04aad2cd495e4bb1620493426a3af, type: 3}
     <EntityType>k__BackingField: 2
@@ -124,7 +128,8 @@ MonoBehaviour:
     changeDirectionMax: 4
     safeDistance: 3
     fleeSpeedMultiplier: 1.5
-  - <CharacterName>k__BackingField: "\u0417\u043E\u043C\u0431\u0438 \u043F\u043E\u043B\u0437\u0443\u0449\u0438\u0439 "
+  - <ID>k__BackingField: 4
+    <CharacterName>k__BackingField: "\u0417\u043E\u043C\u0431\u0438 \u043F\u043E\u043B\u0437\u0443\u0449\u0438\u0439 "
     <EntityPrefab>k__BackingField: {fileID: 1997929004700043616, guid: cbb5339fe28ccea4b975c14492fb04b9, type: 3}
     <EntityType>k__BackingField: 3
     <MovementSpeed>k__BackingField: {x: 0.25, y: 0.4}
@@ -151,7 +156,8 @@ MonoBehaviour:
     changeDirectionMax: 4
     safeDistance: 3
     fleeSpeedMultiplier: 1.5
-  - <CharacterName>k__BackingField: "\u0417\u043E\u043C\u0431\u0438-\u043A\u0430\u043C\u0438\u043A\u0430\u0434\u0437\u0435 "
+  - <ID>k__BackingField: 5
+    <CharacterName>k__BackingField: "\u0417\u043E\u043C\u0431\u0438-\u043A\u0430\u043C\u0438\u043A\u0430\u0434\u0437\u0435 "
     <EntityPrefab>k__BackingField: {fileID: 1997929004700043616, guid: 095a22d5c34c43e4a84e526894b9558e, type: 3}
     <EntityType>k__BackingField: 4
     <MovementSpeed>k__BackingField: {x: 0.3, y: 3}
@@ -178,7 +184,8 @@ MonoBehaviour:
     changeDirectionMax: 4
     safeDistance: 3
     fleeSpeedMultiplier: 1.5
-  - <CharacterName>k__BackingField: "\u0417\u043E\u043C\u0431\u0438-\u043A\u0430\u0447\u043E\u043A "
+  - <ID>k__BackingField: 6
+    <CharacterName>k__BackingField: "\u0417\u043E\u043C\u0431\u0438-\u043A\u0430\u0447\u043E\u043A "
     <EntityPrefab>k__BackingField: {fileID: 1997929004700043616, guid: e3b259fe0b9682443bbe669a05bb09d8, type: 3}
     <EntityType>k__BackingField: 5
     <MovementSpeed>k__BackingField: {x: 0.8, y: 1.2}
@@ -205,7 +212,8 @@ MonoBehaviour:
     changeDirectionMax: 4
     safeDistance: 3
     fleeSpeedMultiplier: 1.5
-  - <CharacterName>k__BackingField: "\u0417\u043E\u043C\u0431\u0438-\u043A\u043E\u043F "
+  - <ID>k__BackingField: 7
+    <CharacterName>k__BackingField: "\u0417\u043E\u043C\u0431\u0438-\u043A\u043E\u043F "
     <EntityPrefab>k__BackingField: {fileID: 1997929004700043616, guid: 3bee90394d5ce75499abb24a9348694e, type: 3}
     <EntityType>k__BackingField: 6
     <MovementSpeed>k__BackingField: {x: 0.7, y: 1}

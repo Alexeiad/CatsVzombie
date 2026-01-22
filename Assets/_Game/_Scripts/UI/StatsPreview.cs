@@ -39,11 +39,13 @@ public class StatsPreview : MonoBehaviour
         .Where(enemyAI => enemyAI != null)
         .ToList();
 
+        _playerStats.sliderHealth.maxValue = _playerMovement.CurrentHealth.Value;
+
     }
 
     private void Update()
     {
-        _playerStats.sliderHealth.maxValue = _playerMovement.CurrentHealth.Value;
+        
         _playerStats.sliderHealth.value = _playerMovement.CurrentHealth.Value;
 
         if (enemys == null || enemys.Count == 0)
@@ -62,7 +64,7 @@ public class StatsPreview : MonoBehaviour
             return;
         }
 
-        Enemy closestEnemy = enemys
+        Enemy closestEnemy = enemys.Where(enemy=>enemy!=null)
             .Select(enemy => enemy.GetComponent<Enemy>())
             .OfType<Enemy>()
             .Where(enemyAI => Vector3.Distance(enemyAI.transform.position, _playerMovement.transform.position) <= 10f)
@@ -71,7 +73,7 @@ public class StatsPreview : MonoBehaviour
         if (closestEnemy != null && closestEnemy.gameObject != null)
         {
             _enemyStatsBar.SetActive(true);
-            _enemyStats.sliderHealth.maxValue = closestEnemy.Health;
+            _enemyStats.sliderHealth.maxValue = closestEnemy.MaxHealth;
             _enemyStats.sliderHealth.value = closestEnemy.Health;
             _enemyText.text = closestEnemy.CharacterName;
         }

@@ -16,7 +16,7 @@ public class EntitiesDataSO : ScriptableObject
 [Serializable]
 public class EnemyTableRow : IEntity, IEnemyAIConfig
 {
-
+    [field: SerializeField] public int ID { get; set; }
     [field: SerializeField] public string CharacterName { get; set; }
     [field: SerializeField] public GameObject EntityPrefab { get; set; }
     [field: SerializeField] public EntityType EntityType { get; set; }

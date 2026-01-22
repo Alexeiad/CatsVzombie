@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Zenject;
 using UnityEngine.Timeline;
+using Unity.VisualScripting;
 
 /// <summary>
 /// Кастомный 2D AI без NavMesh и без поворота объекта.
@@ -56,6 +57,8 @@ public class CustomEnemyAI2D : MonoBehaviour, IEnemyAIConfig
     [Header("Сепарация от других врагов (плавно, без тряски и наложения)")]
     [SerializeField] private float enemySeparationDistance = 2.0f;   // Радиус отталкивания (увеличен — начинают расходиться заранее)
     [SerializeField] private float enemySeparationStrength = 5.0f;   // Сила отталкивания (сбалансировано — нет тряски)
+   
+
 
     private float patrolPhase; // Рандомная фаза для каждого врага
 
@@ -71,6 +74,7 @@ public class CustomEnemyAI2D : MonoBehaviour, IEnemyAIConfig
     private Transform _target;
     private List<Transform> _obstacles;
     private List<Enemy> _enemis;
+    private PlayerMovement _playerMovement;
 
     public void Initialize(PlayerMovement playerMovement, List<Enemy> enemis)
     {
@@ -79,7 +83,8 @@ public class CustomEnemyAI2D : MonoBehaviour, IEnemyAIConfig
         _target = playerMovement.transform;
         _obstacles = _enemy.ObstacleList;
         _entityDataSO = _enemy.entitiesDataSO;
-        _entityType = _enemy.entityType;
+        _entityType = _enemy.EntityType;
+        _playerMovement = playerMovement;
 
         patrolTimer = Random.Range(ChangeDirectionMin, ChangeDirectionMax);
         tangentialDirection = Random.value > 0.5f ? 1 : -1;
@@ -111,6 +116,7 @@ public class CustomEnemyAI2D : MonoBehaviour, IEnemyAIConfig
         {
             case AIState.MeleeAttack:
                 desiredVelocity = MeleeAttackDirection(toTarget, distToTarget);
+                
                 break;
 
             case AIState.RangedPatrol:

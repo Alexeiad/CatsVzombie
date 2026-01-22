@@ -1,19 +1,22 @@
-using UnityEngine;
-using Zenject;
-using UniRx;
 using System;
+using System.Linq;
+using UniRx;
+using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-
+using Zenject;
 
 public class PlayerMovement : MonoBehaviour, IDamageable<float>
 {
-    public float Speed;
-    public float MaxHealth = 100;
+    public Enemy currentEnemy { private get; set; }
 
+    
     // Реактивные свойства
     public IReadOnlyReactiveProperty<float> CurrentHealth => _currentHealth;
     public IReadOnlyReactiveProperty<bool> IsDead => _isDead;
     public IReadOnlyReactiveProperty<Vector2> MovementDirection => _movementDirection;
+
+    [SerializeField] private EntitiesDataSO _entitySO;
 
     private ReactiveProperty<float> _currentHealth = new ReactiveProperty<float>();
     private ReactiveProperty<bool> _isDead = new ReactiveProperty<bool>();
@@ -22,6 +25,10 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
     private PlayerInput _playerInput;
     private DynamicJoystick _joystick;
     private CompositeDisposable _disposables = new CompositeDisposable();
+    private Mouse _mouse;
+
+    private float _speed;
+    private float _health;
 
     [Inject]
     public void Construct(DynamicJoystick joystick)
@@ -31,7 +38,17 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
 
     void Awake()
     {
-        _currentHealth.Value = MaxHealth;
+        _currentHealth.Value = _entitySO.EnemyRows
+            .Where(x => x.ID == 0)
+            .Select(x => x.Health)
+            .FirstOrDefault();
+
+        _health = _currentHealth.Value;
+
+        _speed = _entitySO.EnemyRows
+            .Where(x => x.ID == 0)
+            .Select(x => x.Speed)
+            .FirstOrDefault();
 
         // Реактивная подписка на смерть
         _currentHealth
@@ -45,6 +62,8 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
             .Where(isDead => isDead)
             .Subscribe(_ => OnDeath())
             .AddTo(_disposables);
+
+        _mouse = Mouse.current;
     }
 
     void Start()
@@ -53,8 +72,21 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
 
         // Реактивное обновление движения каждый кадр
         Observable.EveryUpdate()
-            .Subscribe(_ => UpdateMovement())
+            .Subscribe(_ =>
+            {
+                Vector2 dir = _playerInput.GetMovement();
+                _movementDirection.Value = dir;
+
+                // Движение игрока
+                if (dir != Vector2.zero && !_isDead.Value)
+                {
+                    Vector3 move = new Vector3(dir.x, dir.y, 0) * _speed * Time.deltaTime;
+                    transform.position += move;
+                }
+            })
             .AddTo(_disposables);
+
+        
 
         // Можно добавить визуальные эффекты при движении
         _movementDirection
@@ -63,32 +95,35 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
             .Subscribe(_ => OnMovement())
             .AddTo(_disposables);
     }
+    private void Update()
+    {
+        AttackZombie();
+    }
+    private void AttackZombie()
+    {
+        if (currentEnemy == null) return;
 
+        Debug.Log("work");
+        int damage = _entitySO.EnemyRows
+                    .Where(x => x.ID == 0)
+                    .Select(x => x.ShootDamage)
+                    .FirstOrDefault();
+        currentEnemy.Health -= damage;
+    }
     private void OnDestroy()
     {
         _disposables.Dispose();
     }
 
-    private void UpdateMovement()
-    {
-        Vector2 dir = _playerInput.GetMovement();
-        _movementDirection.Value = dir;
-
-        if (dir != Vector2.zero)
-        {
-            Vector3 move = new Vector3(dir.x, dir.y, 0) * Speed * Time.deltaTime;
-            transform.position += move;
-        }
-    }
-
     public void TakeDamage(float damage)
     {
+        if (_isDead.Value) return;
+
         // Реактивное применение урона
         Observable.NextFrame()
             .Subscribe(_ =>
             {
                 _currentHealth.Value -= damage;
-
 
                 // Визуальный эффект при получении урона
                 OnDamageTaken(damage);
@@ -99,7 +134,6 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
     private void OnDamageTaken(float damage)
     {
         // Можно добавить визуальные эффекты, звуки и т.д.
-
 
         // Мигание спрайта при получении урона
         StartCoroutine(DamageFlashCoroutine());
@@ -119,11 +153,8 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
 
     private void OnDeath()
     {
-
         // Отключаем управление и коллайдер
         enabled = false;
-        var collider = GetComponent<Collider2D>();
-        if (collider != null) collider.enabled = false;
 
         // Визуальные эффекты смерти
         Observable.Timer(TimeSpan.FromSeconds(2))
@@ -133,7 +164,8 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
 
     private void OnMovement()
     {
-      
+        // Здесь можно добавить эффекты движения (частицы, звуки и т.д.)
+        // Debug.Log("Player is moving");
     }
 
     // Реактивный метод для лечения
@@ -142,7 +174,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
         Observable.NextFrame()
             .Subscribe(_ =>
             {
-                _currentHealth.Value = Mathf.Min(_currentHealth.Value + amount, MaxHealth);
+                _currentHealth.Value = Mathf.Min(_currentHealth.Value + amount, _health);
             })
             .AddTo(_disposables);
     }
@@ -153,7 +185,8 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
         Observable.NextFrame()
             .Subscribe(_ =>
             {
-                _currentHealth.Value = MaxHealth;
+                _currentHealth.Value = _health;
+                _isDead.Value = false;
                 enabled = true;
                 var collider = GetComponent<Collider2D>();
                 if (collider != null) collider.enabled = true;

@@ -440,8 +440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bb147f2a0687a24bbcd65842bff425c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 5
-  MaxHealth: 100
+  _entitySO: {fileID: 11400000, guid: fd5915f3c3625734997ef4887405096c, type: 2}
 --- !u!95 &548096243579654796
 Animator:
   serializedVersion: 5

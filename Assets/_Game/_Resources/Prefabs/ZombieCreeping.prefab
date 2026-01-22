@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7797ebb8d17f11c41ae86bda031449b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityType: 3
+  entityID: 4
   entitiesDataSO: {fileID: 11400000, guid: fd5915f3c3625734997ef4887405096c, type: 2}
   isCreepingZombie: 1
   sortingUnitsPerMeter: 1

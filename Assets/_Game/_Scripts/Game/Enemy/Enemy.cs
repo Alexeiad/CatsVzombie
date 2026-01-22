@@ -4,10 +4,12 @@ using UnityEngine.Rendering; // Для SortingGroup
 
 public class Enemy : MonoBehaviour, IEntity
 {
-    public EntityType entityType;
+    public int entityID;
     public EntitiesDataSO entitiesDataSO;
+    public int MaxHealth { get; private set; }
 
     // Свойства из интерфейса IEntity
+    public int ID {get; set; }
     public string CharacterName { get; set; }
     public EntityType EntityType { get; set; }
     public Vector2 MovementSpeed { get; set; }
@@ -45,6 +47,7 @@ public class Enemy : MonoBehaviour, IEntity
 
     public void InstantiateConstructor(PlayerMovement playerMovement, List<Transform> obstacleList, ZombieSpawner zombieSpawner)
     {
+        
         _playerMovement = playerMovement;
         ObstacleList = obstacleList;
         _enemies = zombieSpawner.enemies;
@@ -52,23 +55,25 @@ public class Enemy : MonoBehaviour, IEntity
 
         foreach (var entity in entitiesDataSO.EnemyRows)
         {
-            if (entityType == entity.EntityType)
+            if (entityID == entity.ID)
             {
                 CharacterName = entity.CharacterName;
+                EntityType = entity.EntityType;
                 MovementSpeed = entity.MovementSpeed;
                 AttackSpeed = entity.AttackSpeed;
                 ShootSpeed = entity.ShootSpeed;
                 ShootDamage = entity.ShootDamage;
                 MeleeDamage = entity.MeleeDamage;
                 Health = entity.Health;
+                MaxHealth = Health;
                 DetectionRadius = entity.DetectionRadius;
                 AttackRange = entity.AttackRange;
                 ShootRange = entity.ShootRange;
                 Armor = entity.Armor;
             }
         }
-
-        StateMachine = new EnemyStateMachine(this, new EnemyWalkingState(), playerMovement);
+       
+        StateMachine = new EnemyStateMachine(this, new EnemyAttackState(), playerMovement);
 
         mySpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         playerSpriteRenderer = playerMovement.GetComponent<SpriteRenderer>();
