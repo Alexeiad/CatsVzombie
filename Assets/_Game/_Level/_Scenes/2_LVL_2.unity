@@ -133,11 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c80f6869c651854091a514938f6376b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &195490989 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2492044459243146204, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
-  m_PrefabInstance: {fileID: 1242735424}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &262503829
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1353,13 +1348,9 @@ PrefabInstance:
       value: -412.8
       objectReference: {fileID: 0}
     - target: {fileID: 3655195303502260477, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
-      propertyPath: _enemyText
+      propertyPath: _enemyHealthCount
       value: 
-      objectReference: {fileID: 1985735122}
-    - target: {fileID: 3655195303502260477, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
-      propertyPath: _enemyStatsBar
-      value: 
-      objectReference: {fileID: 195490989}
+      objectReference: {fileID: 1714505500}
     - target: {fileID: 3928019438360075821, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -1463,10 +1454,6 @@ PrefabInstance:
     - target: {fileID: 7125341869295010802, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.000028848648
-      objectReference: {fileID: 0}
-    - target: {fileID: 7239618663731375864, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 7570095883962206764, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1899,6 +1886,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 505308921}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1714505500 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7873675561980586490, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+  m_PrefabInstance: {fileID: 1242735424}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1796007624
 GameObject:
   m_ObjectHideFlags: 0
@@ -13926,17 +13924,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &1985735122 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 411887233571633121, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
-  m_PrefabInstance: {fileID: 1242735424}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2120271895
 GameObject:
   m_ObjectHideFlags: 0

@@ -47,10 +47,15 @@ public class Enemy : MonoBehaviour, IEntity
 
     public void InstantiateConstructor(PlayerMovement playerMovement, List<Transform> obstacleList, ZombieSpawner zombieSpawner)
     {
-        
-        _playerMovement = playerMovement;
         ObstacleList = obstacleList;
+
+        _playerMovement = playerMovement;
+
+        _playerMovement.currentEnemis.Add(this);
+
         _enemies = zombieSpawner.enemies;
+        
+       
         GetComponent<CustomEnemyAI2D>().Initialize(playerMovement,_enemies);
 
         foreach (var entity in entitiesDataSO.EnemyRows)
@@ -73,8 +78,8 @@ public class Enemy : MonoBehaviour, IEntity
             }
         }
        
-        StateMachine = new EnemyStateMachine(this, new EnemyAttackState(), playerMovement);
-
+        //StateMachine = new EnemyStateMachine(this, new EnemyAttackState(), _playerMovement);
+        
         mySpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         playerSpriteRenderer = playerMovement.GetComponent<SpriteRenderer>();
     }
@@ -83,6 +88,11 @@ public class Enemy : MonoBehaviour, IEntity
     {
         StateMachine?.Update();
         UpdateSortingOrder();
+
+        if (Health <= 0)
+        {
+            Destroy(gameObject);
+        }   
     }
 
     private void LateUpdate()

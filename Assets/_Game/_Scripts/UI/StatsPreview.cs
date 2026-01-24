@@ -17,6 +17,7 @@ public class StatsPreview : MonoBehaviour
     [SerializeField] private StatsBar _enemyStats;
     [SerializeField] private GameObject _enemyStatsBar;
     [SerializeField] private TextMeshProUGUI _enemyText;
+    [SerializeField] private TextMeshProUGUI _enemyHealthCount;
 
     [Inject] private EntityList _entities;
 
@@ -76,6 +77,9 @@ public class StatsPreview : MonoBehaviour
             _enemyStats.sliderHealth.maxValue = closestEnemy.MaxHealth;
             _enemyStats.sliderHealth.value = closestEnemy.Health;
             _enemyText.text = closestEnemy.CharacterName;
+
+            _enemyHealthCount.text=closestEnemy.Health.ToString()+"/"+
+                closestEnemy.MaxHealth.ToString();
         }
         else
         {

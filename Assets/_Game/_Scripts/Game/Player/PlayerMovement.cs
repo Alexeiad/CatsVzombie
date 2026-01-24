@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UniRx;
 using UnityEngine;
@@ -8,7 +9,7 @@ using Zenject;
 
 public class PlayerMovement : MonoBehaviour, IDamageable<float>
 {
-    public Enemy currentEnemy { private get; set; }
+    public List<Enemy> currentEnemis;
 
     
     // Реактивные свойства
@@ -101,14 +102,21 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
     }
     private void AttackZombie()
     {
-        if (currentEnemy == null) return;
+        if(currentEnemis==null) return;
 
-        Debug.Log("work");
-        int damage = _entitySO.EnemyRows
-                    .Where(x => x.ID == 0)
-                    .Select(x => x.ShootDamage)
-                    .FirstOrDefault();
-        currentEnemy.Health -= damage;
+        if (Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            var playerData = _entitySO.EnemyRows.Where(x => x.ID == 0).FirstOrDefault();
+
+            var nearestEnemy = currentEnemis.Where(x=>x!=null)
+                .OrderBy(x => Vector3.Distance(transform.position, x.transform.position))
+                .FirstOrDefault();
+
+            if (nearestEnemy != null)
+            {
+                nearestEnemy.Health -= playerData.ShootDamage;
+            }
+        }
     }
     private void OnDestroy()
     {
