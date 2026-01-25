@@ -3,6 +3,7 @@
 public class UltraSensitiveDirectionController : MonoBehaviour
 {
     public Animator animator;
+    public bool setStopAnimation;
 
     private Vector3 previousPosition;
     private Vector2 currentDirection;
@@ -22,7 +23,9 @@ public class UltraSensitiveDirectionController : MonoBehaviour
         Vector3 movement = transform.position - previousPosition;
         currentDirection = new Vector2(movement.x, movement.y);
 
-        UpdateAnimator();
+        if(!setStopAnimation)
+            UpdateAnimator();
+
         previousPosition = transform.position;
     }
 
@@ -54,7 +57,7 @@ public class UltraSensitiveDirectionController : MonoBehaviour
         else if (angle >= 292.5f && angle < 337.5f) animator.SetBool(DOWN_RIGHT_BOOL, true);
     }
 
-    private void ResetAllDirectionBools()
+    public void ResetAllDirectionBools()
     {
         animator.SetBool(UP_BOOL, false);
         animator.SetBool(DOWN_BOOL, false);
@@ -65,4 +68,5 @@ public class UltraSensitiveDirectionController : MonoBehaviour
         animator.SetBool(DOWN_LEFT_BOOL, false);
         animator.SetBool(DOWN_RIGHT_BOOL, false);
     }
+    
 }

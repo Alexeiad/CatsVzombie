@@ -1,7 +1,10 @@
+using DG.Tweening;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UniRx;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -18,6 +21,17 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
     public IReadOnlyReactiveProperty<Vector2> MovementDirection => _movementDirection;
 
     [SerializeField] private EntitiesDataSO _entitySO;
+    [SerializeField] private UltraSensitiveDirectionController _animationControl;
+    [SerializeField] private Sprite _leftS, _upLeftS, _upS, _rightUpS,
+        _rightS, _rightDownS, _DownS, _leftDownS;
+    [SerializeField] private Animator _animator;
+
+
+    [Header("Параметры эффекта")]
+    public Color trailColor = Color.white; // Базовый цвет полоски
+
+    private LineRenderer _lr;
+    private Material _trailMaterial;
 
     private ReactiveProperty<float> _currentHealth = new ReactiveProperty<float>();
     private ReactiveProperty<bool> _isDead = new ReactiveProperty<bool>();
@@ -27,9 +41,11 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
     private DynamicJoystick _joystick;
     private CompositeDisposable _disposables = new CompositeDisposable();
     private Mouse _mouse;
+    private SpriteRenderer _spriteRenderer;
 
     private float _speed;
     private float _health;
+    private float speed = 30f;
 
     [Inject]
     public void Construct(DynamicJoystick joystick)
@@ -39,6 +55,8 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
 
     void Awake()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+
         _currentHealth.Value = _entitySO.EnemyRows
             .Where(x => x.ID == 0)
             .Select(x => x.Health)
@@ -65,6 +83,11 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
             .AddTo(_disposables);
 
         _mouse = Mouse.current;
+
+        _lr = GetComponent<LineRenderer>();
+        _trailMaterial = _lr.material; // Копируем материал, чтобы не менять общий
+        _lr.material = Instantiate(_trailMaterial); // Инстанс для независимой анимации
+        _trailMaterial = _lr.material;
     }
 
     void Start()
@@ -106,21 +129,166 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
 
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            var playerData = _entitySO.EnemyRows.Where(x => x.ID == 0).FirstOrDefault();
+            EnemyTableRow playerData = _entitySO.EnemyRows.Where(x => x.ID == 0).FirstOrDefault();
 
-            var nearestEnemy = currentEnemis.Where(x=>x!=null)
-                .OrderBy(x => Vector3.Distance(transform.position, x.transform.position))
+            Vector3 distance=Vector3.zero;
+
+            Enemy nearestEnemy = currentEnemis.Where(x=>x!=null)
+                .OrderBy(x =>EnemyDistance(transform.position, x.transform.position,out distance))
                 .FirstOrDefault();
 
             if (nearestEnemy != null)
             {
-                nearestEnemy.Health -= playerData.ShootDamage;
+                
+                StartCoroutine( Shoot(nearestEnemy, distance,playerData));
+                Fire(transform.position, nearestEnemy.transform.position);
+
             }
         }
+
+
     }
+    private IEnumerator Shoot(Enemy enemy,Vector3 direction,EnemyTableRow playerData)
+    {
+        
+        yield return new WaitForSeconds(0.1f);
+        _lr.enabled = false;
+        if (enemy!=null&&IsEnemyCloseToLineSegment(transform.position, enemy.transform.position, direction))
+        {
+            enemy.Health -= playerData.ShootDamage;
+            
+            
+        }
+    }
+    public void Fire(Vector3 startPosition, Vector3 endPosition)
+    {
+        if (Vector3.Distance(startPosition, endPosition) > 10)
+            return;
+
+        _lr.enabled = true;
+        _animator.enabled = false;
+        _animationControl.ResetAllDirectionBools();
+        _animationControl.enabled = false;
+
+        // Определяем направление
+        Vector3 direction = (endPosition - startPosition).normalized;
+        SetSpriteByDirection(direction);
+
+        float segmentLength = 0.5f;
+        float duration = Vector3.Distance(startPosition, endPosition) / speed;
+        float currentTime = 0f;
+
+        DOTween.To(() => currentTime, x => currentTime = x, duration, duration)
+            .SetEase(Ease.Linear)
+            .OnUpdate(() =>
+            {
+                float progress = currentTime / duration;
+                float totalDistance = Vector3.Distance(startPosition, endPosition);
+                float segmentStartPos = Mathf.Clamp(progress * totalDistance - segmentLength, 0f, totalDistance);
+                float segmentEndPos = Mathf.Clamp(progress * totalDistance, segmentLength, totalDistance);
+
+                Vector3 segmentStart = Vector3.Lerp(startPosition, endPosition, segmentStartPos / totalDistance);
+                Vector3 segmentEnd = Vector3.Lerp(startPosition, endPosition, segmentEndPos / totalDistance);
+
+                _lr.SetPosition(0, segmentStart);
+                _lr.SetPosition(1, segmentEnd);
+            })
+            .OnComplete(() => {
+                _lr.enabled = false;
+                _animationControl.enabled = true;
+                _animator.enabled = true;
+            });
+    }
+
+    private void SetSpriteByDirection(Vector3 direction)
+    {
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        if (angle < 0) angle += 360;
+
+        if (angle >= 337.5f || angle < 22.5f)
+        {
+            _spriteRenderer.sprite = _rightS;
+        }
+        else if (angle >= 22.5f && angle < 67.5f)
+        {
+            _spriteRenderer.sprite = _rightUpS;
+        }
+        else if (angle >= 67.5f && angle < 112.5f)
+        {
+            _spriteRenderer.sprite = _upS;
+        }
+        else if (angle >= 112.5f && angle < 157.5f)
+        {
+            _spriteRenderer.sprite = _upLeftS;
+        }
+        else if (angle >= 157.5f && angle < 202.5f)
+        {
+            _spriteRenderer.sprite = _leftS;
+        }
+        else if (angle >= 202.5f && angle < 247.5f)
+        {
+            _spriteRenderer.sprite = _leftDownS;
+        }
+        else if (angle >= 247.5f && angle < 292.5f)
+        {
+            _spriteRenderer.sprite = _DownS;
+        }
+        else if (angle >= 292.5f && angle < 337.5f)
+        {
+            _spriteRenderer.sprite = _rightDownS;
+        }
+    }
+ 
     private void OnDestroy()
     {
         _disposables.Dispose();
+    }
+    public float EnemyDistance(Vector3 player, Vector3 enemy, out Vector3 distance)
+    {
+
+        distance = enemy - player;
+
+        return Vector3.Distance(player, enemy);
+    }
+    public static bool IsEnemyCloseToLineSegment(
+       Vector3 playerPosition,
+       Vector3 enemyPosition,
+       Vector3 direction,
+       float lineLength = 20f,
+       float maxDistance = 2f)
+    {
+        Vector3 start = playerPosition;
+
+        // Ранний выход: если враг слишком далеко в принципе
+        float totalDistSqr = (enemyPosition - start).sqrMagnitude;
+        float maxPossibleSqr = (lineLength + maxDistance) * (lineLength + maxDistance);
+        if (totalDistSqr > maxPossibleSqr)
+            return false;
+
+        // Вырожденный случай: отрезок выродился в точку
+        if (direction.sqrMagnitude == 0f || lineLength <= 0f)
+        {
+            return totalDistSqr <= maxDistance * maxDistance;
+        }
+
+        Vector3 normalizedDir = direction.normalized;
+        Vector3 end = start + normalizedDir * lineLength;
+        Vector3 segment = end - start;
+
+        float segSqrLen = segment.sqrMagnitude;
+
+        // Проекция врага на линию
+        float t = Vector3.Dot(enemyPosition - start, segment) / segSqrLen;
+        t = Mathf.Clamp01(t); // ближайшая точка строго на отрезке
+
+        Vector3 closestPoint = start + t * segment;
+
+        float sqrDistToLine = (enemyPosition - closestPoint).sqrMagnitude;
+        float sqrMaxDist = maxDistance * maxDistance;
+
+        return sqrDistToLine <= sqrMaxDist;
     }
 
     public void TakeDamage(float damage)
@@ -201,4 +369,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
             })
             .AddTo(_disposables);
     }
+
+
+    
 }

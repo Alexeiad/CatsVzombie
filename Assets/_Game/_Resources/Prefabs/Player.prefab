@@ -189,7 +189,7 @@ Transform:
   m_GameObject: {fileID: 3566195207501200857}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.990936, y: 1.093764, z: -11}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -351,6 +351,7 @@ GameObject:
   - component: {fileID: 4002396781526244415}
   - component: {fileID: 548096243579654796}
   - component: {fileID: 2067103372464614340}
+  - component: {fileID: 5692268628780874451}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -440,7 +441,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bb147f2a0687a24bbcd65842bff425c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentEnemis: []
   _entitySO: {fileID: 11400000, guid: fd5915f3c3625734997ef4887405096c, type: 2}
+  _animationControl: {fileID: 2067103372464614340}
+  _leftS: {fileID: 785824598, guid: 5fde551820b798743984058d9560ea78, type: 3}
+  _upLeftS: {fileID: -1122306897, guid: 9a64bac3170b6934a812c537e9de33bd, type: 3}
+  _upS: {fileID: 236102686, guid: 74caf3b4bfa82f34cae5653f994c778f, type: 3}
+  _rightUpS: {fileID: -1968703483, guid: e0e0b44f10b7bce418a6b1e8a9e576e6, type: 3}
+  _rightS: {fileID: -1942911241, guid: 25658fecf3f099b47aecaa3aa7b798f9, type: 3}
+  _rightDownS: {fileID: 141459927, guid: b49aaf36cde27cb40860a41109043d85, type: 3}
+  _DownS: {fileID: 1212059691, guid: 74caf3b4bfa82f34cae5653f994c778f, type: 3}
+  _leftDownS: {fileID: 702775933, guid: 19e920bd7c703aa49b5ff36c2927957e, type: 3}
+  _animator: {fileID: 548096243579654796}
+  trailColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!95 &548096243579654796
 Animator:
   serializedVersion: 5
@@ -475,6 +488,111 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 548096243579654796}
+  setStopAnimation: 0
+--- !u!120 &5692268628780874451
+LineRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3928872983729171847}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 0
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  m_Parameters:
+    serializedVersion: 3
+    widthMultiplier: 1
+    widthCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0.03390503
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    colorGradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 1}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 19468
+      atime3: 39514
+      atime4: 65535
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_ColorSpace: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    numCornerVertices: 0
+    numCapVertices: 0
+    alignment: 0
+    textureMode: 0
+    textureScale: {x: 1, y: 1}
+    shadowBias: 0.5
+    generateLightingData: 0
+  m_MaskInteraction: 0
+  m_UseWorldSpace: 1
+  m_Loop: 0
+  m_ApplyActiveColorSpace: 1
 --- !u!1001 &1508065968688127947
 PrefabInstance:
   m_ObjectHideFlags: 0
