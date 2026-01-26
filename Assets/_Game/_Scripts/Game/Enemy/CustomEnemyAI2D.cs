@@ -206,6 +206,7 @@ public class CustomEnemyAI2D : MonoBehaviour, IEnemyAIConfig
             case MeleeSubState.Approaching:
                 if (dist <= AttackDistance)
                 {
+                    AttackPlayer();
                     meleeSubState = MeleeSubState.Retreating;
                 }
                 return toTarget.normalized * Speed;
@@ -234,7 +235,10 @@ public class CustomEnemyAI2D : MonoBehaviour, IEnemyAIConfig
                 return Vector2.zero;
         }
     }
-
+    private void AttackPlayer()
+    {
+        _playerMovement.TakeDamage(_enemy.MeleeDamage);
+    }
     private Vector2 RangedPatrolDirection(Vector2 toTarget, float dist)
     {
         return GetPatrolVelocity(toTarget, dist, SafeDistance);

@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -16,12 +17,13 @@ public class StatsPreview : MonoBehaviour
     [SerializeField] private StatsBar _kentStats;
     [SerializeField] private StatsBar _enemyStats;
     [SerializeField] private GameObject _enemyStatsBar;
-    [SerializeField] private TextMeshProUGUI _enemyText;
-    [SerializeField] private TextMeshProUGUI _enemyHealthCount;
+    [SerializeField] private TextMeshProUGUI _enemyText,_playerText;
+    [SerializeField] private TextMeshProUGUI _enemyHealthCount,_playerHealthCount;
 
     [Inject] private EntityList _entities;
 
     private PlayerMovement _playerMovement;
+    private bool isStart;
 
     
 
@@ -35,6 +37,13 @@ public class StatsPreview : MonoBehaviour
     private void Start()
     {
         _enemyStatsBar.SetActive(false);
+        StartCoroutine(Init());
+
+    }
+    private IEnumerator Init()
+    {
+        yield return new WaitForSeconds(1);
+        
         enemys = _entities
         .Select(entity => entity.GetComponent<Enemy>())
         .Where(enemyAI => enemyAI != null)
@@ -42,12 +51,22 @@ public class StatsPreview : MonoBehaviour
 
         _playerStats.sliderHealth.maxValue = _playerMovement.CurrentHealth.Value;
 
+        isStart=true;
     }
 
     private void Update()
     {
-        
-        _playerStats.sliderHealth.value = _playerMovement.CurrentHealth.Value;
+        if (!isStart) return;
+
+        int maxHealth = _playerMovement.MaxHealth;
+        int health = _playerMovement.CurrentHealth.Value;
+
+        _playerStats.sliderHealth.maxValue = maxHealth;
+        _playerStats.sliderHealth.value = health;
+
+        _playerHealthCount.text = health.ToString() + "/" +
+            maxHealth.ToString();
+
 
         if (enemys == null || enemys.Count == 0)
         {
@@ -68,7 +87,7 @@ public class StatsPreview : MonoBehaviour
         Enemy closestEnemy = enemys.Where(enemy=>enemy!=null)
             .Select(enemy => enemy.GetComponent<Enemy>())
             .OfType<Enemy>()
-            .Where(enemyAI => Vector3.Distance(enemyAI.transform.position, _playerMovement.transform.position) <= 10f)
+            .Where(enemyAI => Vector3.Distance(enemyAI.transform.position, _playerMovement.transform.position) < 20f)
             .OrderBy(enemyAI => Vector3.Distance(enemyAI.transform.position, _playerMovement.transform.position))
             .FirstOrDefault();
         if (closestEnemy != null && closestEnemy.gameObject != null)
@@ -80,6 +99,7 @@ public class StatsPreview : MonoBehaviour
 
             _enemyHealthCount.text=closestEnemy.Health.ToString()+"/"+
                 closestEnemy.MaxHealth.ToString();
+
         }
         else
         {

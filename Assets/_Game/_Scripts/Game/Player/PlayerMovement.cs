@@ -10,13 +10,15 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-public class PlayerMovement : MonoBehaviour, IDamageable<float>
+public class PlayerMovement : MonoBehaviour, IDamageable<int>
 {
+    public int MaxHealth { get; private set; }
+
     public List<Enemy> currentEnemis;
 
     
     // Реактивные свойства
-    public IReadOnlyReactiveProperty<float> CurrentHealth => _currentHealth;
+    public IReadOnlyReactiveProperty<int> CurrentHealth => _currentHealth;
     public IReadOnlyReactiveProperty<bool> IsDead => _isDead;
     public IReadOnlyReactiveProperty<Vector2> MovementDirection => _movementDirection;
 
@@ -33,7 +35,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
     private LineRenderer _lr;
     private Material _trailMaterial;
 
-    private ReactiveProperty<float> _currentHealth = new ReactiveProperty<float>();
+    private ReactiveProperty<int> _currentHealth = new ReactiveProperty<int>();
     private ReactiveProperty<bool> _isDead = new ReactiveProperty<bool>();
     private ReactiveProperty<Vector2> _movementDirection = new ReactiveProperty<Vector2>();
 
@@ -44,7 +46,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
     private SpriteRenderer _spriteRenderer;
 
     private float _speed;
-    private float _health;
+    private int _health;
     private float speed = 30f;
 
     [Inject]
@@ -61,6 +63,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
             .Where(x => x.ID == 0)
             .Select(x => x.Health)
             .FirstOrDefault();
+        MaxHealth = _currentHealth.Value;
 
         _health = _currentHealth.Value;
 
@@ -162,7 +165,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
     }
     public void Fire(Vector3 startPosition, Vector3 endPosition)
     {
-        if (Vector3.Distance(startPosition, endPosition) > 10)
+        if (Vector3.Distance(startPosition, endPosition) > 15)
             return;
 
         _lr.enabled = true;
@@ -291,7 +294,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
         return sqrDistToLine <= sqrMaxDist;
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage)
     {
         if (_isDead.Value) return;
 
@@ -318,22 +321,24 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
     private System.Collections.IEnumerator DamageFlashCoroutine()
     {
         var renderer = GetComponent<SpriteRenderer>();
-        if (renderer != null)
-        {
-            Color originalColor = renderer.color;
-            renderer.color = Color.red;
-            yield return new WaitForSeconds(0.1f);
-            renderer.color = originalColor;
-        }
+
+        renderer.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        renderer.color = Color.white;
+        yield return new WaitForSeconds(0.1f);
+        renderer.color = Color.red;
+        yield return new WaitForSeconds(0.2f);
+        renderer.color = Color.white;
+
     }
 
     private void OnDeath()
     {
         // Отключаем управление и коллайдер
-        enabled = false;
+        GetComponent<SpriteRenderer>().enabled = false;
 
         // Визуальные эффекты смерти
-        Observable.Timer(TimeSpan.FromSeconds(2))
+        Observable.Timer(TimeSpan.FromSeconds(0.5f))
             .Subscribe(_ => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex))
             .AddTo(_disposables);
     }
@@ -345,12 +350,12 @@ public class PlayerMovement : MonoBehaviour, IDamageable<float>
     }
 
     // Реактивный метод для лечения
-    public void Heal(float amount)
+    public void Heal(int amount)
     {
         Observable.NextFrame()
             .Subscribe(_ =>
             {
-                _currentHealth.Value = Mathf.Min(_currentHealth.Value + amount, _health);
+                _currentHealth.Value = Mathf.Min(_currentHealth.Value + amount, (int)_health);
             })
             .AddTo(_disposables);
     }
