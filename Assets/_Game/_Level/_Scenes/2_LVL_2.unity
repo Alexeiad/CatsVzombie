@@ -247,9 +247,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 399592982228a0f44a6b763c9738c89f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <PauseState>k__BackingField: 0
   <PanelState>k__BackingField: 0
   <ElementType>k__BackingField: 1
   <ButtonType>k__BackingField: 0
+  <SetPause>k__BackingField: 0
 --- !u!1001 &476724141
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -722,9 +724,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 399592982228a0f44a6b763c9738c89f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <PauseState>k__BackingField: 0
   <PanelState>k__BackingField: 1
   <ElementType>k__BackingField: 0
   <ButtonType>k__BackingField: 0
+  <SetPause>k__BackingField: 1
 --- !u!114 &859451582
 MonoBehaviour:
   m_ObjectHideFlags: 0

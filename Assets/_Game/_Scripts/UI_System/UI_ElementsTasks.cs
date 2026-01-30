@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class UI_ElementsTasks : MonoBehaviour
 {
@@ -51,7 +52,15 @@ public class UI_ElementsTasks : MonoBehaviour
             if (lastUi != null)
             {
                 lastUi.PanelState = isSafeTask ? PanelState.Open : PanelState.Close;
+
                 lastUi.gameObject.SetActive(isSafeTask);
+
+                lastUi.PauseState = isSafeTask ? SetLevelPause()
+                    : OutLevelPause();
+
+                lastUi.PauseState = isSafeTask ? lastUi.PauseState=PauseState.Pause
+                    : lastUi.PauseState = PauseState.Play;
+
                 exceptSwith = false;
             }
         }
@@ -67,8 +76,21 @@ public class UI_ElementsTasks : MonoBehaviour
         relatedPanels.ForEach(panel => {
 
             panel.gameObject.SetActive(ActiveState(panel));
+
+            
+
             openUi_elements.Add(panel);
         });
+    }
+    private PauseState SetLevelPause()
+    {
+        Time.timeScale = 0f;
+        return PauseState.Pause;
+    }
+    private PauseState OutLevelPause()
+    {
+        Time.timeScale = 1f;
+        return PauseState.Play;
     }
     private bool ActiveState(UI_ElementBehaviour panel)
     {
@@ -78,11 +100,15 @@ public class UI_ElementsTasks : MonoBehaviour
         {
             case PanelState.Close:
                 panel.PanelState = PanelState.Open;
+                panel.PauseState = panel.SetPause ? SetLevelPause() 
+                    : panel.PauseState = PauseState.Play;
                 return true;
 
             case PanelState.Open:
                 
                 panel.PanelState = PanelState.Close;
+                panel.PauseState = OutLevelPause();
+
                 return false;
 
             default:
