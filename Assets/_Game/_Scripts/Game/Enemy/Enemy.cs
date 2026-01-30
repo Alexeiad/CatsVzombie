@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour, IEntity
 {
     public int entityID;
     public EntitiesDataSO entitiesDataSO;
+    public RewardDataSO rewardDataSO;
     public int MaxHealth { get; private set; }
 
     // Свойства из интерфейса IEntity
@@ -91,8 +92,18 @@ public class Enemy : MonoBehaviour, IEntity
 
         if (Health <= 0)
         {
-            Destroy(gameObject);
+            InstantiateReward();
         }   
+    }
+    private void InstantiateReward()
+    {
+        GameObject reward = new("reward");
+        reward.transform.position = transform.position;
+        reward.AddComponent<SpriteRenderer>();
+        var playerReward = reward.AddComponent<PlayerReward>();
+        playerReward.rewardDataSO = rewardDataSO;
+
+        Destroy(gameObject);
     }
 
     private void LateUpdate()

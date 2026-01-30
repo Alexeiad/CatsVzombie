@@ -7,6 +7,7 @@ public class UltraSensitiveDirectionController : MonoBehaviour
 
     private Vector3 previousPosition;
     private Vector2 currentDirection;
+    private Vector2 lastDirection = Vector2.zero;
 
     private const string UP_BOOL = "Up";
     private const string DOWN_BOOL = "Down";
@@ -31,20 +32,31 @@ public class UltraSensitiveDirectionController : MonoBehaviour
 
     private void UpdateAnimator()
     {
-        bool isMoving = currentDirection.magnitude > 0;
-        animator.SetBool(MOVING_BOOL, isMoving);
+        bool isMoving = currentDirection.magnitude > 0.01f; // небольшой порог, чтобы избежать дребезга
 
-        if (!isMoving)
+        animator.SetBool(MOVING_BOOL, isMoving);
+        animator.speed = isMoving ? 1f : 0f; // ключевой момент — заморозка
+
+        // Обновляем последнее направление только пока движемся
+        if (isMoving)
         {
-            ResetAllDirectionBools();
+            lastDirection = currentDirection.normalized;
+        }
+
+        // Всегда сбрасываем все directional-булки
+        ResetAllDirectionBools();
+
+        // Используем текущее направление, если движемся, иначе — последнее
+        Vector2 dirToUse = isMoving ? currentDirection.normalized : lastDirection;
+
+        // Если направления нет вообще (начало игры), остаёмся в idle
+        if (dirToUse.sqrMagnitude < 0.01f)
+        {
             return;
         }
 
-        ResetAllDirectionBools();
-
-        // Мгновенное определение направления без порогов
-        Vector2 normalizedDir = currentDirection.normalized;
-        float angle = Mathf.Atan2(normalizedDir.y, normalizedDir.x) * Mathf.Rad2Deg;
+        // Вычисляем угол и устанавливаем нужный directional-бул
+        float angle = Mathf.Atan2(dirToUse.y, dirToUse.x) * Mathf.Rad2Deg;
         if (angle < 0) angle += 360;
 
         if (angle >= 337.5f || angle < 22.5f) animator.SetBool(RIGHT_BOOL, true);

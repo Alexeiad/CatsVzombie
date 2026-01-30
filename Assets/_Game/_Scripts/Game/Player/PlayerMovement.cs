@@ -170,8 +170,8 @@ public class PlayerMovement : MonoBehaviour, IDamageable<int>
 
         _lr.enabled = true;
         _animator.enabled = false;
-        _animationControl.ResetAllDirectionBools();
-        _animationControl.enabled = false;
+        //_animationControl.ResetAllDirectionBools();
+        //_animationControl.enabled = false;
 
         // Определяем направление
         Vector3 direction = (endPosition - startPosition).normalized;
@@ -198,11 +198,17 @@ public class PlayerMovement : MonoBehaviour, IDamageable<int>
             })
             .OnComplete(() => {
                 _lr.enabled = false;
-                _animationControl.enabled = true;
-                _animator.enabled = true;
+                StartCoroutine(StartAnimation());
             });
     }
+    private IEnumerator StartAnimation()
+    {
+        yield return new WaitForSeconds(1f);
+        
+        _animationControl.enabled = true;
+        _animator.enabled = true;
 
+    }
     private void SetSpriteByDirection(Vector3 direction)
     {
 

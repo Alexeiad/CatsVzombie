@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityID: 5
   entitiesDataSO: {fileID: 11400000, guid: fd5915f3c3625734997ef4887405096c, type: 2}
+  rewardDataSO: {fileID: 11400000, guid: ad93f7420530f6546831f7826f30cfab, type: 2}
   isCreepingZombie: 0
   sortingUnitsPerMeter: 1
   enemySeparationDistance: 0.2
