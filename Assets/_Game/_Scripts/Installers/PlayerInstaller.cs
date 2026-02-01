@@ -11,6 +11,7 @@ public class PlayerInstaller : MonoInstaller
     [SerializeField] private GameObject _playerPrefab;
 
     [SerializeField] private DynamicJoystick _joystick;
+    [SerializeField] private Transform _spawnPoint;
 
     [Inject] private EntityList _entities;
 
@@ -30,7 +31,8 @@ public class PlayerInstaller : MonoInstaller
 
 
         //спавн и регистрация игрока
-        var player = Container.InstantiatePrefab(_playerPrefab, Vector3.zero, Quaternion.identity, null);
+        var player = Container.InstantiatePrefab(_playerPrefab, _spawnPoint!=null ? _spawnPoint.position:
+            Vector3.zero, Quaternion.identity, null);
 
         Container.Bind<PlayerMovement>().FromInstance(player.GetComponent<PlayerMovement>()).AsSingle().NonLazy();
 
