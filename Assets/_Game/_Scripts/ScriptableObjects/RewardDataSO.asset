@@ -17,20 +17,20 @@ MonoBehaviour:
     <Sprite>k__BackingField: {fileID: 21300000, guid: 5108cbfcb07c9614c8fc543572351ebe, type: 3}
     <InBox>k__BackingField: 0
     <Ease>k__BackingField: 0
-    Probability: 0.746
+    Probability: 1
   - <RevardType>k__BackingField: 1
     <Sprite>k__BackingField: {fileID: 21300000, guid: a223360239504bc4aaefab7dbb5bec88, type: 3}
     <InBox>k__BackingField: 0
     <Ease>k__BackingField: 0
-    Probability: 0.754
+    Probability: 1
   - <RevardType>k__BackingField: 2
     <Sprite>k__BackingField: {fileID: 21300000, guid: 5e8b38107b514dd44bca03b623273bc5, type: 3}
     <InBox>k__BackingField: 0
     <Ease>k__BackingField: 0
-    Probability: 0.575
+    Probability: 7
   - <RevardType>k__BackingField: 3
     <Sprite>k__BackingField: {fileID: 21300000, guid: 31568904bdd49344a849fb71888362f8, type: 3}
     <InBox>k__BackingField: 1
     <Ease>k__BackingField: 0
-    Probability: 0.485
+    Probability: 5
   <Box>k__BackingField: {fileID: 21300000, guid: e2daf725306d1814c9ddc002821303dd, type: 3}

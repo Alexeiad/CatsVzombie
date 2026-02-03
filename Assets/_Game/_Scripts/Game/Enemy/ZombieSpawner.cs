@@ -40,6 +40,8 @@ public class ZombieSpawner : MonoBehaviour
     [Header("Enemy Limits")]
     [SerializeField] private int _maxEnemiesOnMap = 30; // Максимальное количество зомби на карте
 
+    
+
     [Inject] private PlayerMovement _playerMovement;
     [Inject] private EntityList _entities;
 
@@ -225,6 +227,7 @@ public class ZombieSpawner : MonoBehaviour
 
                     var newEntity = Instantiate(entity.EntityPrefab, spawnPosition, Quaternion.identity);
                     enemies.Add(newEntity.GetComponent<Enemy>());
+
                     statsPreview.enemys.Add(newEntity.GetComponent<Enemy>());
 
                     newEntity.GetComponent<Enemy>().InstantiateConstructor(_playerMovement, _obstacleList,this);
@@ -233,6 +236,7 @@ public class ZombieSpawner : MonoBehaviour
                     {
                         spawnedCount++;
                     }
+                    
                 }
             }
 

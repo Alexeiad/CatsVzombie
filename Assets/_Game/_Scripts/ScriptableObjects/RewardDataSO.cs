@@ -17,5 +17,5 @@ public class RewardItem
     [field: SerializeField] public bool InBox { get; set; }
     [field: SerializeField] public Ease Ease { get; set; } = Ease.OutElastic;
 
-    [Range(0, 1)] [SerializeField] public float Probability;
+    [Range(0, 10)] [SerializeField] public int Probability;
 }

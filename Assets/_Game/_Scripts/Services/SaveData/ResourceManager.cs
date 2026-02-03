@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Zenject.ReflectionBaking.Mono.Cecil;
 
 [System.Serializable]
 public class ResourceData
@@ -21,12 +24,20 @@ public class ResourceData
 
 public class ResourceManager
 {
-    private ResourceData _resourceData;
+    
+    public int LevelFood;
+    public int LevelWater;
+    public int LevelMaterials;
+    public int LevelDiamond;
+    public int LevelCatsCount;
+
 
     public ResourceManager(int startFood, int startWater, int startMaterials)
     {
         _resourceData = new ResourceData(startFood, startWater, startMaterials);
     }
+
+   
 
     // Свойства для доступа к ресурсам
     public int Food => _resourceData.food;
@@ -41,6 +52,8 @@ public class ResourceManager
     public void AddMaterials(int amount) => _resourceData.materials += amount;
     public void AddDiamonds(int amount) => _resourceData.diamonds += amount;
     public void SetCatsCount(int count) => _resourceData.catsCount = count;
+
+    private ResourceData _resourceData;
 
     public void ClearData()
     {
@@ -84,3 +97,5 @@ public class ResourceManager
         return $"Food: {Food}, Water: {Water}, Materials: {Materials}, Diamonds: {Diamonds}, Cats: {CatsCount}";
     }
 }
+
+

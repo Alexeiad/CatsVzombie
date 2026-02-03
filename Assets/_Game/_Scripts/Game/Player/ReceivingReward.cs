@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Zenject;
+using Zenject.ReflectionBaking.Mono.Cecil;
 
 
 public class ReceivingReward : MonoBehaviour
@@ -57,12 +58,24 @@ public class ReceivingReward : MonoBehaviour
     }
     private void GetReward(RewardType rewardType)
     {
+        
+
         switch (rewardType)
-        {
-            case RewardType.Water:_resourceManager.AddWater(1);break;
-            case RewardType.Food: _resourceManager.AddFood(1); break;
-            case RewardType.Materials: _resourceManager.AddMaterials(1); break;
-            case RewardType.Diamond: _resourceManager.AddDiamonds(1); break;
+        { 
+            case RewardType.Water:_resourceManager.AddWater(1);
+                _resourceManager.LevelWater++;
+                break;
+            case RewardType.Food: _resourceManager.AddFood(1);
+                _resourceManager.LevelFood++;
+                break;
+            case RewardType.Materials: _resourceManager.AddMaterials(1);
+                _resourceManager.LevelMaterials++;
+                break;
+            case RewardType.Diamond: _resourceManager.AddDiamonds(1);
+                _resourceManager.LevelDiamond++;
+                break;
+
+                
         }
 
     }

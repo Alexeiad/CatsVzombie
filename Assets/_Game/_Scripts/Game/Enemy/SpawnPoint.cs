@@ -21,6 +21,7 @@ public class SpawnPoint : MonoBehaviour
 
     [Header("Entity Percentages")]
     [SerializeField] private List<EntitySpawnChance> _entityChances = new List<EntitySpawnChance>(); // Percentages for each type
+    [SerializeField] private GameObject _resultWindow;
 
     [Inject] private EntityList _entities;
 
@@ -32,6 +33,7 @@ public class SpawnPoint : MonoBehaviour
     private bool _hasSpawnedOnce = false; // Флаг для отслеживания разового спауна
     private ZombieSpawner _zombieSpawner;
     private StatsPreview _statsPreview;
+    private bool _isCorutineStared;
 
     public void Initialize(EntitiesDataSO entitiesDataSO, PlayerMovement playerMovement, List<Transform> obstacleList,ZombieSpawner zombieSpawner)
     {
@@ -70,13 +72,22 @@ public class SpawnPoint : MonoBehaviour
             }
         }
     }
+    private void Update()
+    {
+        _spawnedEntities.RemoveAll(e => e == null);
 
+        if (_spawnedEntities.Count == 0&&_isCorutineStared)
+        {
+            _resultWindow.SetActive(true);
+
+        }
+    }
     public IEnumerator SpawnRoutine()
     {
         while (true)
         {
             // Clean up destroyed entities
-            _spawnedEntities.RemoveAll(e => e == null);
+            
 
             // Если режим разового спауна и уже заспавнили - выходим из корутины
             if (_spawnOnce && _hasSpawnedOnce)
@@ -136,11 +147,15 @@ public class SpawnPoint : MonoBehaviour
                                 _zombieSpawner.enemies.Add(enemy);
                                 _statsPreview.enemys.Add(enemy);
                                 enemy.InstantiateConstructor(_playerMovement, _obstacleList,_zombieSpawner);
+
                             }
+                            _isCorutineStared = true;
                             _spawnedEntities.Add(newEntity);
+                            
                         }
                     }
                 }
+                
             }
 
             // Если режим разового спауна и уже заспавнили - выходим после спауна

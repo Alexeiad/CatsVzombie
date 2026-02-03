@@ -20,17 +20,14 @@ public class PlayerReward : MonoBehaviour
     private void Start()
     {
         
-        float nothingChance = 0.7f;
+        
 
-        if (Random.Range(0f, 1f) < nothingChance)
+        _rewardItem = GetWeightedRandomReward(rewardDataSO.RewardData);
+        if (_rewardItem == null)
         {
             Destroy(gameObject);
             return;
         }
-
-        int randomIndex = Random.Range(0, rewardDataSO.RewardData.Count);
-
-        _rewardItem = GetWeightedRandomReward(rewardDataSO.RewardData);
 
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.color = new Color(1, 1, 1, 0);
@@ -53,36 +50,39 @@ public class PlayerReward : MonoBehaviour
 
     private RewardItem GetWeightedRandomReward(List<RewardItem> rewardItems)
     {
-        if (rewardItems == null || rewardItems.Count == 0)
-            return null;
+        List<RewardItem> rewards = new List<RewardItem>();
 
-        // Проверяем, чтобы вероятности были неотрицательными
-        var validItems = rewardItems.Where(item => item.Probability > 0).ToList();
-
-        if (validItems.Count == 0)
-            return rewardItems.First(); // Возвращаем первый если все вероятности 0
-
-        // Используем кумулятивный метод
-        float totalProbability = validItems.Sum(item => item.Probability);
-
-        // Если сумма вероятностей слишком мала или равна 0
-        if (totalProbability <= 0.0001f)
+        foreach (var rewardItem in rewardItems)
         {
-            // Равномерное распределение
-            int randomIndex = Random.Range(0, validItems.Count);
-            return validItems[randomIndex];
+            // Если Probability от 1 до 10, то 10 - Probability дает обратную вероятность
+            // Например: Probability=1 -> 10-1=9 -> шанс 1 из 9
+            // Probability=10 -> 10-10=0 -> шанс 1 из 0 (всегда)
+            int range = 10 - rewardItem.Probability;
+
+            // Защита от деления на 0
+            if (range == 0)
+            {
+                rewards.Add(rewardItem);
+            }
+            else if (Random.Range(0, range) == 0)
+            {
+                rewards.Add(rewardItem);
+            }
         }
 
-        float randomPoint = Random.Range(0f, totalProbability);
-        float cumulative = 0f;
-
-        foreach (var item in validItems)
+        if (rewards.Count > 0)
         {
-            cumulative += item.Probability;
-            if (randomPoint <= cumulative)
-                return item;
+            if (rewards.Count == 1)
+            {
+                return rewards[0];
+            }
+            else
+            {
+                
+                return rewards.OrderByDescending(r => r.Probability).FirstOrDefault();
+            }
         }
 
-        return validItems.Last();
+        return null;
     }
 }
