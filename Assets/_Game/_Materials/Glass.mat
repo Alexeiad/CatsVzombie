@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Glass
+  m_Shader: {fileID: 4800000, guid: f8c9d81d942cf5a48bdc0fe9e44a9825, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BackgroundTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: da226140494d97849815ae1afb98bcf4, type: 3}
+        m_Scale: {x: 13, y: 1}
+        m_Offset: {x: 1.05, y: 0.5}
+    - _MaskTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
+        m_Texture: {fileID: 2800000, guid: f67021125bb29c34d81355e68915c874, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Blur: 1
+    - _BlurAmount: 0.005
+    - _BlurEdge: 0.1
+    - _BlurSamples: 16
+    - _BlurSize: 4.9
+    - _BorderWidth: 0.005
+    - _Brightness: 1.2
+    - _ChromaticAberration: 0.0015
+    - _CornerRadius: 0
+    - _EdgeSoftness: 0.0398
+    - _EnableExternalAlpha: 0
+    - _FresnelIntensity: 2
+    - _FresnelPower: 10
+    - _FrostAmount: 0.344
+    - _GlowSpeed: 5
+    - _Intensity: 2
+    - _NoiseAmount: 0.02
+    - _NoiseScale: 1
+    - _NoiseSpeed: 0.5
+    - _Opacity: 0.8
+    - _PulseAmount: 0.02
+    - _PulseSpeed: 3
+    - _Radius: 0.233
+    - _RimIntensity: 0.93
+    - _RimPower: 1.98
+    - _RoundedCorners: 0.5
+    - _Samples: 16
+    - _Saturation: 1.1
+    - _StencilComp: 8
+    - _StencilRef: 0
+    - _Transparency: 0.8
+    m_Colors:
+    - _BaseColor: {r: 0, g: 0.38461542, b: 1, a: 1}
+    - _BorderColor: {r: 1, g: 1, b: 1, a: 0.15}
+    - _Color: {r: 0.6117647, g: 0.7137255, b: 0.47058827, a: 0.5372549}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _HighlightColor: {r: 1, g: 0, b: 0, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShadowColor: {r: 0, g: 0.326087, b: 1, a: 1}
+    - _Tint: {r: 0, g: 1, b: 0.51351357, a: 0.3137255}
+    - _TintColor: {r: 0.9, g: 0.95, b: 1, a: 1}
+    - _WidthHeight: {r: 400, g: 400, b: 0, a: 0}
+  m_BuildTextureStacks: []

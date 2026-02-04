@@ -5,5 +5,6 @@ public enum ButtonType
     Settings,
     StaffPanel,
     BuildPanel,
-
+    Resultwindow,
+    Map
 }

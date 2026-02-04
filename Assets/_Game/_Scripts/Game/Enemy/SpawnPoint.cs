@@ -33,7 +33,7 @@ public class SpawnPoint : MonoBehaviour
     private bool _hasSpawnedOnce = false; // Флаг для отслеживания разового спауна
     private ZombieSpawner _zombieSpawner;
     private StatsPreview _statsPreview;
-    private bool _isCorutineStared;
+    private bool _isCorutineStared,_isShowOnce;
 
     public void Initialize(EntitiesDataSO entitiesDataSO, PlayerMovement playerMovement, List<Transform> obstacleList,ZombieSpawner zombieSpawner)
     {
@@ -76,10 +76,13 @@ public class SpawnPoint : MonoBehaviour
     {
         _spawnedEntities.RemoveAll(e => e == null);
 
-        if (_spawnedEntities.Count == 0&&_isCorutineStared)
+        if (_spawnedEntities.Count == 0&&_isCorutineStared&& !_isShowOnce)
         {
+            FindObjectsByType<PlayerReward>(FindObjectsSortMode.None)
+                .ToList().ForEach(o=>o.gameObject.SetActive(false));
             _resultWindow.SetActive(true);
-
+            _isShowOnce = true;
+            Time.timeScale = 0;
         }
     }
     public IEnumerator SpawnRoutine()
