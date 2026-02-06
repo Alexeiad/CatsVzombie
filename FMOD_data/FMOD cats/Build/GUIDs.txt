@@ -1,0 +1,5 @@
+{a8eb4359-a6a7-40d2-9810-d424522e1b96} bank:/Master
+{30f6638d-d7dc-0c90-1e59-5edaa3dd1d0e} bank:/Master.strings
+{547c69b3-b659-4475-9656-35d8f4ecfca6} bus:/
+{2e335b5d-71ee-4f63-a973-ea9aee01a8a1} bus:/Reverb
+{abf8769f-bb52-4c66-870c-ae278e5b55b2} event:/pop-up-text-notification
