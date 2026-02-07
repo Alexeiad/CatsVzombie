@@ -84,6 +84,7 @@ public class SpawnPoint : MonoBehaviour
             _isShowOnce = true;
             Time.timeScale = 0;
         }
+        
     }
     public IEnumerator SpawnRoutine()
     {
@@ -154,7 +155,7 @@ public class SpawnPoint : MonoBehaviour
                             }
                             _isCorutineStared = true;
                             _spawnedEntities.Add(newEntity);
-                            
+                            _entities.Add(newEntity.transform);
                         }
                     }
                 }

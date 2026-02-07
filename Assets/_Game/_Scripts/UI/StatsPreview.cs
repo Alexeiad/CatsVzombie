@@ -87,7 +87,7 @@ public class StatsPreview : MonoBehaviour
         Enemy closestEnemy = enemys.Where(enemy=>enemy!=null)
             .Select(enemy => enemy.GetComponent<Enemy>())
             .OfType<Enemy>()
-            .Where(enemyAI => Vector3.Distance(enemyAI.transform.position, _playerMovement.transform.position) < 20f)
+            .Where(enemyAI => Vector3.Distance(enemyAI.transform.position, _playerMovement.transform.position) < 8f)
             .OrderBy(enemyAI => Vector3.Distance(enemyAI.transform.position, _playerMovement.transform.position))
             .FirstOrDefault();
         if (closestEnemy != null && closestEnemy.gameObject != null)

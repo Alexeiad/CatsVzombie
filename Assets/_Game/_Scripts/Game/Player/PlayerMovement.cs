@@ -12,9 +12,12 @@ using Zenject;
 
 public class PlayerMovement : MonoBehaviour, IDamageable<int>
 {
+    public Action OnDie;
     public int MaxHealth { get; private set; }
 
     public List<Enemy> currentEnemis;
+
+   
 
     
     // Реактивные свойства
@@ -159,7 +162,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable<int>
         if (enemy!=null&&IsEnemyCloseToLineSegment(transform.position, enemy.transform.position, direction))
         {
             enemy.Health -= playerData.ShootDamage;
-            
+
             
         }
     }
@@ -338,17 +341,14 @@ public class PlayerMovement : MonoBehaviour, IDamageable<int>
 
     }
 
+    // Создаем Action через лямбду
     private void OnDeath()
     {
-        // Отключаем управление и коллайдер
+        
         GetComponent<SpriteRenderer>().enabled = false;
+        OnDie?.Invoke();
 
-        // Визуальные эффекты смерти
-        Observable.Timer(TimeSpan.FromSeconds(0.5f))
-            .Subscribe(_ => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex))
-            .AddTo(_disposables);
     }
-
     private void OnMovement()
     {
         // Здесь можно добавить эффекты движения (частицы, звуки и т.д.)

@@ -6,5 +6,6 @@ public enum ButtonType
     StaffPanel,
     BuildPanel,
     Resultwindow,
-    Map
+    Map,
+    CostOfLevel
 }

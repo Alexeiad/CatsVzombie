@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-[RequireComponent(typeof(EventTrigger))]
+
 public class UI_ElementBehaviour : MonoBehaviour
 {
     public Action OnClick { get; set; }
@@ -20,6 +20,9 @@ public class UI_ElementBehaviour : MonoBehaviour
 
     private void Awake()
     {
+        if(ElementType==ElementType.Panel) return;
+
+
         EventTrigger.Entry entry = new();
 
 

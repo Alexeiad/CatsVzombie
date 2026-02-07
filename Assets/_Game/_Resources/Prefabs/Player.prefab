@@ -454,7 +454,7 @@ MonoBehaviour:
   _DownS: {fileID: 1212059691, guid: 74caf3b4bfa82f34cae5653f994c778f, type: 3}
   _leftDownS: {fileID: 702775933, guid: 19e920bd7c703aa49b5ff36c2927957e, type: 3}
   _animator: {fileID: 548096243579654796}
-  trailColor: {r: 1, g: 1, b: 1, a: 1}
+  trailColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!95 &548096243579654796
 Animator:
   serializedVersion: 5
@@ -534,7 +534,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 2}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -543,7 +543,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.03390503
+        value: 0.07627869
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -617,6 +617,10 @@ PrefabInstance:
     - target: {fileID: 2056668481506627188, guid: 2514c0c9baad56241a8b899110c249c2, type: 3}
       propertyPath: m_Name
       value: Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 2056668481506627188, guid: 2514c0c9baad56241a8b899110c249c2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4269896800463609838, guid: 2514c0c9baad56241a8b899110c249c2, type: 3}
       propertyPath: m_Enabled
