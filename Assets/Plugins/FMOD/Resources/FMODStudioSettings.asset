@@ -453,8 +453,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: ../../../Program Files/FMOD cats/FMOD cats.fspro
-  sourceBankPath: ../../../Program Files/FMOD cats/Build
+  sourceProjectPath: ../FMOD cats/FMOD cats.fspro
+  sourceBankPath: ../FMOD cats/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
