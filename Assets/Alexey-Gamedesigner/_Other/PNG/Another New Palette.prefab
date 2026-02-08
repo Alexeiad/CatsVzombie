@@ -656,24 +656,6 @@ Tilemap:
       e31: 0
       e32: 0
       e33: 1
-  - m_RefCount: 0
-    m_Data:
-      e00: -0.000000013896283
-      e01: 8e-45
-      e02: -126252.875
-      e03: 0
-      e10: 1.88e-43
-      e11: NaN
-      e12: 4.5905e-41
-      e13: 0
-      e20: NaN
-      e21: 0
-      e22: -0.000000013896269
-      e23: 0
-      e30: 0
-      e31: 7.34684e-40
-      e32: 1.88e-43
-      e33: 1
   m_TileColorArray:
   - m_RefCount: 44
     m_Data: {r: 1, g: 1, b: 1, a: 1}
@@ -795,7 +777,7 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 2
   m_CellSwizzle: 0
---- !u!114 &4273558917461488574
+--- !u!114 &8826746331851163065
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
