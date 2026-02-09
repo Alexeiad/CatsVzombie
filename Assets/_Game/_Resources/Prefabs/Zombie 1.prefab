@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7385110953258304678}
   - component: {fileID: 7894260318138710997}
   - component: {fileID: 8376854097551028901}
+  - component: {fileID: 2944389683162597683}
   m_Layer: 0
   m_Name: Zombie 1
   m_TagString: Untagged
@@ -163,3 +164,15 @@ MonoBehaviour:
   patrolOscillationFrequency: 0.8
   enemySeparationDistance: 1
   enemySeparationStrength: 100
+--- !u!114 &2944389683162597683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997929004700043616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47f56cecfec16224da98b1a30dab793a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using Zenject;
-using UnityEngine.Timeline;
-using Unity.VisualScripting;
+
 
 /// <summary>
 /// Кастомный 2D AI без NavMesh и без поворота объекта.

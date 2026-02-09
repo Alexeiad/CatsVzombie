@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering; // Для SortingGroup
 
 public class Enemy : MonoBehaviour, IEntity
 {

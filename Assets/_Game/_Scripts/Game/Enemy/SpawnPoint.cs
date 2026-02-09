@@ -74,9 +74,11 @@ public class SpawnPoint : MonoBehaviour
     }
     private void Update()
     {
-        _spawnedEntities.RemoveAll(e => e == null);
+        if (_zombieSpawner == null)
+            return;
+        _zombieSpawner.enemies.RemoveAll(e => e == null);
 
-        if (_spawnedEntities.Count == 0&&_isCorutineStared&& !_isShowOnce)
+        if (_zombieSpawner.enemies.Count == 0&&_isCorutineStared&& !_isShowOnce)
         {
             FindObjectsByType<PlayerReward>(FindObjectsSortMode.None)
                 .ToList().ForEach(o=>o.gameObject.SetActive(false));
@@ -153,7 +155,7 @@ public class SpawnPoint : MonoBehaviour
                                 enemy.InstantiateConstructor(_playerMovement, _obstacleList,_zombieSpawner);
 
                             }
-                            _isCorutineStared = true;
+                            
                             _spawnedEntities.Add(newEntity);
                             _entities.Add(newEntity.transform);
                         }
@@ -165,6 +167,7 @@ public class SpawnPoint : MonoBehaviour
             // ≈сли режим разового спауна и уже заспавнили - выходим после спауна
             if (_spawnOnce && _hasSpawnedOnce)
             {
+                _isCorutineStared = true;
                 yield break; // ѕрерываем корутину
             }
 

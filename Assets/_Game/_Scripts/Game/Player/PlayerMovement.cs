@@ -157,14 +157,16 @@ public class PlayerMovement : MonoBehaviour, IDamageable<int>
     private IEnumerator Shoot(Enemy enemy,Vector3 direction,EnemyTableRow playerData)
     {
         
-        yield return new WaitForSeconds(0.1f);
-        _lr.enabled = false;
+        yield return new WaitForEndOfFrame();
+        
         if (enemy!=null&&IsEnemyCloseToLineSegment(transform.position, enemy.transform.position, direction))
         {
             enemy.Health -= playerData.ShootDamage;
 
             
         }
+        yield return new WaitForSeconds(0.5f);
+        _lr.enabled = false;
     }
     public void Fire(Vector3 startPosition, Vector3 endPosition)
     {
@@ -180,7 +182,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable<int>
         Vector3 direction = (endPosition - startPosition).normalized;
         SetSpriteByDirection(direction);
 
-        float segmentLength = 0.5f;
+        float segmentLength = 0.2f;
         float duration = Vector3.Distance(startPosition, endPosition) / speed;
         float currentTime = 0f;
 
@@ -206,7 +208,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable<int>
     }
     private IEnumerator StartAnimation()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.3f);
         
         _animationControl.enabled = true;
         _animator.enabled = true;

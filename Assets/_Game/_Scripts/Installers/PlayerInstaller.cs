@@ -14,10 +14,12 @@ public class PlayerInstaller : MonoInstaller
     [SerializeField] private Transform _spawnPoint;
 
     [Inject] private EntityList _entities;
-
+    
 
     public override void InstallBindings()
     {
+
+
         _entities.Clear();
 
         //регистрация джойтика
@@ -25,6 +27,7 @@ public class PlayerInstaller : MonoInstaller
             .FromInstance(_joystick)
             .AsSingle();
 
+        
 
         if (!IsMobilePlatform())
             _joystick.gameObject.SetActive(false);//если это пк
@@ -43,7 +46,7 @@ public class PlayerInstaller : MonoInstaller
         
 
     }
-
+    
     private bool IsMobilePlatform()
     {
 

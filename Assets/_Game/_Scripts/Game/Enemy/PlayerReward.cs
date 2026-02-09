@@ -1,11 +1,9 @@
 using DG.Tweening;
-using System.Collections;
+
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering;
-using Zenject;
-using Zenject.ReflectionBaking.Mono.Cecil;
+
 
 public class PlayerReward : MonoBehaviour
 {
