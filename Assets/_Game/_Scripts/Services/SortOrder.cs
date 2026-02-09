@@ -8,14 +8,16 @@ using UnityEngine;
 
 public class SortOrder : MonoBehaviour
 {
-
-    public List<GameObject> _decorSprites;
+    /*
+    public List<DecorData> _decorSprites;
+    public bool _isPlayer;
     private GameObject _previousClosestSprite;
+
 
     private void Start()
     {
  
-        GameObject[] decors = GameObject.FindGameObjectsWithTag("Decor");
+        DecorData[] decors = FindObjectsByType<DecorData>(FindObjectsSortMode.None);
 
         foreach (var decor in decors)
         {
@@ -27,17 +29,20 @@ public class SortOrder : MonoBehaviour
         var playerY = transform.position.y;
 
         var closestBelow = _decorSprites
-            .Where(sprite => sprite.transform.position.y < playerY)
-            .OrderBy(sprite => Vector3.Distance(sprite.transform.position, transform.position))
+            .Where(decor => DecorPosition(decor).y < playerY)
+            .OrderBy(decor => Vector3.Distance(DecorPosition(decor), transform.position))
             .FirstOrDefault();
 
         if (_previousClosestSprite != null && _previousClosestSprite != closestBelow)
         {
             var decor = _previousClosestSprite.GetComponent<SpriteRenderer>();
                 decor.sortingOrder = 0;
+            
             var color = decor.color;
-            color.a = 1f;
-            decor.color = color;
+                color.a = 1f;
+                decor.color = color;    
+            
+            
         }
 
     
@@ -45,10 +50,30 @@ public class SortOrder : MonoBehaviour
         {
 
             closestBelow.GetComponent<SpriteRenderer>().sortingOrder = 2;
-            var color = closestBelow.GetComponent<SpriteRenderer>().color;
-            color.a = 0.5f;
-            closestBelow.GetComponent<SpriteRenderer>().color = color;
-            _previousClosestSprite = closestBelow;
+            if (_isPlayer)
+            {
+                var color = closestBelow.GetComponent<SpriteRenderer>().color;
+
+                color.a = 0.5f;
+                closestBelow.GetComponent<SpriteRenderer>().color = color;
+                _previousClosestSprite = closestBelow.gameObject; 
+            }
         }
+
     }
+    
+    private Vector3 DecorPosition(DecorData decor)
+    {
+        Vector3 decorPosition = decor.transform.position;
+        switch (decor.DecorType) 
+        {
+            case DecorType.tree: return SumVector(decorPosition,-decor.transform.localScale.y*5);
+            case DecorType.house: return decorPosition;
+            default: return decorPosition;
+        }
+        Vector3 SumVector(Vector3 vector,float Y)
+        {
+            return vector+new Vector3(0,Y);
+        }
+    }*/
 }
