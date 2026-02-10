@@ -50,7 +50,7 @@ public class UltraSensitiveDirectionController : MonoBehaviour
         Vector2 dirToUse = isMoving ? currentDirection.normalized : lastDirection;
 
         // Если направления нет вообще (начало игры), остаёмся в idle
-        if (dirToUse.sqrMagnitude < 0.01f)
+        if (dirToUse.sqrMagnitude < 0.5f)
         {
             return;
         }

@@ -156,21 +156,20 @@ public class PlayerMovement : MonoBehaviour, IDamageable<int>
     }
     private IEnumerator Shoot(Enemy enemy,Vector3 direction,EnemyTableRow playerData)
     {
-        
-        yield return new WaitForEndOfFrame();
-        
+        enemy.Health -= playerData.ShootDamage;
+        /*
         if (enemy!=null&&IsEnemyCloseToLineSegment(transform.position, enemy.transform.position, direction))
         {
+
             enemy.Health -= playerData.ShootDamage;
 
-            
-        }
+        }*/
         yield return new WaitForSeconds(0.5f);
         _lr.enabled = false;
     }
     public void Fire(Vector3 startPosition, Vector3 endPosition)
     {
-        if (Vector3.Distance(startPosition, endPosition) > 15)
+        if (Vector3.Distance(startPosition, endPosition) > 8)
             return;
 
         _lr.enabled = true;
