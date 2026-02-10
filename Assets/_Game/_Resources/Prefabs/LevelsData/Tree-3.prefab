@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6705644749623303684}
   - component: {fileID: 3280629323416281349}
   - component: {fileID: 4075175788556562806}
+  - component: {fileID: 4925688982494139364}
   m_Layer: 0
   m_Name: Tree-3
   m_TagString: Untagged
@@ -148,3 +149,77 @@ PolygonCollider2D:
       - {x: 0.30355072, y: -6.513836}
       - {x: 0.87, y: -6.055}
   m_UseDelaunayMesh: 0
+--- !u!114 &4925688982494139364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2363999993376516732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 1
+  m_LightType: 1
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.769
+  m_Color: {r: 0.553, g: 0.553, b: 0.553, a: 1}
+  m_Intensity: 1
+  m_LightVolumeIntensity: 1
+  m_LightVolumeIntensityEnabled: 0
+  m_ApplyToSortingLayers: 00000000
+  m_LightCookieSprite: {fileID: 0}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 1
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowIntensityEnabled: 0
+  m_ShadowIntensity: 1
+  m_ShadowVolumeIntensityEnabled: 1
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: 3.5800998, y: -4.2746, z: 0}
+    m_Extent: {x: 6.1787996, y: 4.0759, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 1.93
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: 0.32250977, y: -6.41951, z: 0}
+  - {x: 2.9708176, y: -5.820717, z: 0}
+  - {x: 3.18882, y: -5.532856, z: 0}
+  - {x: 4.27742, y: -5.24638, z: 0}
+  - {x: 4.477951, y: -5.0172043, z: 0}
+  - {x: 5.401108, y: -4.9457397, z: 0}
+  - {x: 5.6824646, y: -4.5760574, z: 0}
+  - {x: 6.3113785, y: -4.3010216, z: 0}
+  - {x: 6.4546127, y: -4.1004906, z: 0}
+  - {x: 6.9283066, y: -3.946972, z: 0}
+  - {x: 7.1091843, y: -3.6517906, z: 0}
+  - {x: 7.3724136, y: -3.2169151, z: 0}
+  - {x: 7.644699, y: -2.8295403, z: 0}
+  - {x: 7.828491, y: -2.2567635, z: 0}
+  - {x: 7.4010468, y: -2.129036, z: 0}
+  - {x: 6.8528214, y: -2.2508621, z: 0}
+  - {x: 6.1827774, y: -2.3117752, z: 0}
+  - {x: 5.3244247, y: -2.4784698, z: 0}
+  - {x: 4.802124, y: -2.3440247, z: 0}
+  - {x: 4.264, y: -2.5554314, z: 0}
+  - {x: 3.7565231, y: -2.4865303, z: 0}
+  - {x: 3.190506, y: -2.8550415, z: 0}
+  - {x: 2.6863327, y: -2.7924995, z: 0}
+  - {x: 2.4532852, y: -3.1591644, z: 0}
+  - {x: 1.9488144, y: -3.327324, z: 0}
+  - {x: 1.3913269, y: -4.0266075, z: 0}
+  - {x: 0.8473816, y: -4.1939735, z: 0}
+  - {x: -0.67105865, y: -6.2202873, z: 0}
