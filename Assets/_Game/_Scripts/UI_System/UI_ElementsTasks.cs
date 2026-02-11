@@ -34,8 +34,13 @@ public class UI_ElementsTasks : MonoBehaviour
             .Where(ui => ui.ElementType == ElementType.Button).ToList()
             .ForEach(button => {
                 button.OnClick += () => HandleButtonClick(button.ButtonType);
+                
             });
     }
+
+
+
+
     private void Update()
     {
         if (Keyboard.current.escapeKey.wasPressedThisFrame 
