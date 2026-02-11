@@ -52,6 +52,8 @@ public class PlayerMovement : MonoBehaviour, IDamageable<int>
     private int _health;
     private float speed = 30f;
 
+    private float _enemyDistance = 15f;
+
     [Inject]
     public void Construct(DynamicJoystick joystick)
     {
@@ -169,7 +171,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable<int>
     }
     public void Fire(Vector3 startPosition, Vector3 endPosition)
     {
-        if (Vector3.Distance(startPosition, endPosition) > 8)
+        if (Vector3.Distance(startPosition, endPosition) > _enemyDistance)
             return;
 
         _lr.enabled = true;

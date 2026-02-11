@@ -25,7 +25,9 @@ public class StatsPreview : MonoBehaviour
     private PlayerMovement _playerMovement;
     private bool isStart;
 
-    
+    private float _enemyDistance = 15f;
+
+
 
     private float _playerHealth;
 
@@ -87,7 +89,7 @@ public class StatsPreview : MonoBehaviour
         Enemy closestEnemy = enemys.Where(enemy=>enemy!=null)
             .Select(enemy => enemy.GetComponent<Enemy>())
             .OfType<Enemy>()
-            .Where(enemyAI => Vector3.Distance(enemyAI.transform.position, _playerMovement.transform.position) < 8f)
+            .Where(enemyAI => Vector3.Distance(enemyAI.transform.position, _playerMovement.transform.position) < _enemyDistance)
             .OrderBy(enemyAI => Vector3.Distance(enemyAI.transform.position, _playerMovement.transform.position))
             .FirstOrDefault();
         if (closestEnemy != null && closestEnemy.gameObject != null)

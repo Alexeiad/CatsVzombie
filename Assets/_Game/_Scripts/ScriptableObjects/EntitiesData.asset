@@ -23,11 +23,11 @@ MonoBehaviour:
     <ShootDamage>k__BackingField: 8
     <MeleeDamage>k__BackingField: 1
     <Health>k__BackingField: 200
-    <DetectionRadius>k__BackingField: 6
+    <DetectionRadius>k__BackingField: 15
     <AttackRange>k__BackingField: 2
     <ShootRange>k__BackingField: 5
     <Armor>k__BackingField: 0
-    pursuitDistance: 10
+    pursuitDistance: 30
     speed: 10
     avoidanceStrength: 15
     avoidanceDistance: 3
@@ -52,11 +52,11 @@ MonoBehaviour:
     <ShootDamage>k__BackingField: 0
     <MeleeDamage>k__BackingField: 20
     <Health>k__BackingField: 40
-    <DetectionRadius>k__BackingField: 6
+    <DetectionRadius>k__BackingField: 15
     <AttackRange>k__BackingField: 2
     <ShootRange>k__BackingField: 5
     <Armor>k__BackingField: 0
-    pursuitDistance: 10
+    pursuitDistance: 30
     speed: 4
     avoidanceStrength: 15
     avoidanceDistance: 3
@@ -81,11 +81,11 @@ MonoBehaviour:
     <ShootDamage>k__BackingField: 0
     <MeleeDamage>k__BackingField: 20
     <Health>k__BackingField: 40
-    <DetectionRadius>k__BackingField: 6
+    <DetectionRadius>k__BackingField: 15
     <AttackRange>k__BackingField: 2
     <ShootRange>k__BackingField: 5
     <Armor>k__BackingField: 0
-    pursuitDistance: 10
+    pursuitDistance: 30
     speed: 4
     avoidanceStrength: 15
     avoidanceDistance: 3
@@ -110,11 +110,11 @@ MonoBehaviour:
     <ShootDamage>k__BackingField: 0
     <MeleeDamage>k__BackingField: 20
     <Health>k__BackingField: 40
-    <DetectionRadius>k__BackingField: 6
+    <DetectionRadius>k__BackingField: 15
     <AttackRange>k__BackingField: 2
     <ShootRange>k__BackingField: 5
     <Armor>k__BackingField: 0
-    pursuitDistance: 10
+    pursuitDistance: 30
     speed: 4
     avoidanceStrength: 15
     avoidanceDistance: 3
@@ -138,11 +138,11 @@ MonoBehaviour:
     <ShootDamage>k__BackingField: 0
     <MeleeDamage>k__BackingField: 10
     <Health>k__BackingField: 20
-    <DetectionRadius>k__BackingField: 6
+    <DetectionRadius>k__BackingField: 15
     <AttackRange>k__BackingField: 2
     <ShootRange>k__BackingField: 5
     <Armor>k__BackingField: 0
-    pursuitDistance: 10
+    pursuitDistance: 30
     speed: 1
     avoidanceStrength: 15
     avoidanceDistance: 3
@@ -166,11 +166,11 @@ MonoBehaviour:
     <ShootDamage>k__BackingField: 0
     <MeleeDamage>k__BackingField: 60
     <Health>k__BackingField: 20
-    <DetectionRadius>k__BackingField: 6
+    <DetectionRadius>k__BackingField: 15
     <AttackRange>k__BackingField: 2
     <ShootRange>k__BackingField: 5
     <Armor>k__BackingField: 0
-    pursuitDistance: 10
+    pursuitDistance: 30
     speed: 4
     avoidanceStrength: 15
     avoidanceDistance: 3
@@ -194,11 +194,11 @@ MonoBehaviour:
     <ShootDamage>k__BackingField: 0
     <MeleeDamage>k__BackingField: 30
     <Health>k__BackingField: 50
-    <DetectionRadius>k__BackingField: 6
+    <DetectionRadius>k__BackingField: 15
     <AttackRange>k__BackingField: 2
     <ShootRange>k__BackingField: 5
     <Armor>k__BackingField: 0
-    pursuitDistance: 10
+    pursuitDistance: 30
     speed: 4
     avoidanceStrength: 15
     avoidanceDistance: 3
@@ -222,11 +222,11 @@ MonoBehaviour:
     <ShootDamage>k__BackingField: 40
     <MeleeDamage>k__BackingField: 0
     <Health>k__BackingField: 80
-    <DetectionRadius>k__BackingField: 6
+    <DetectionRadius>k__BackingField: 15
     <AttackRange>k__BackingField: 2
     <ShootRange>k__BackingField: 5
     <Armor>k__BackingField: 0.2
-    pursuitDistance: 10
+    pursuitDistance: 30
     speed: 4
     avoidanceStrength: 15
     avoidanceDistance: 3

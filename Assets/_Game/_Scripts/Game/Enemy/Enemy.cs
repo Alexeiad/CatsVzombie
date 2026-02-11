@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour, IEntity
     public int ShootDamage { get; set; }
     public int MeleeDamage { get; set; }
     public int Health { get; set; }
-    public float DetectionRadius { get; set; } = 6f;
+    public float DetectionRadius { get; set; } = 15f;
     public float AttackRange { get; set; } = 2f;
     public float ShootRange { get; set; } = 5f;
     public float Armor { get; set; }
