@@ -98,8 +98,11 @@ public class DecorData : MonoBehaviour
         {
             case DecorType.tree: return -transform.localScale.y*5f;
             case DecorType.house: return -transform.localScale.y * 1.3f;
-            case DecorType.police: return -transform.localScale.y * 1.5f;
-            case DecorType.store: return -transform.localScale.y * 1.5f;
+            case DecorType.bigHouse: return -transform.localScale.y * 1.7f;
+            case DecorType.police: return -transform.localScale.y * 1.7f;
+            case DecorType.store: return -transform.localScale.y * 1.6f;
+            case DecorType.bigStore: return -transform.localScale.y * 1.7f;
+            case DecorType.hospital: return -transform.localScale.y * 1.7f;
             default: return 0;
         }
     }
@@ -111,5 +114,7 @@ public enum DecorType
     house,
     bigHouse,
     store,
-    police
+    bigStore,
+    police,
+    hospital
 }
