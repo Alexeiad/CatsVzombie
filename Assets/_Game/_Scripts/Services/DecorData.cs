@@ -116,5 +116,9 @@ public enum DecorType
     store,
     bigStore,
     police,
-    hospital
+    hospital,
+    stone1,
+    stone2,
+    timber,
+
 }
