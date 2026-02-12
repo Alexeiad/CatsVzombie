@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7544427557000664130}
   - component: {fileID: 3830103842883669651}
   - component: {fileID: 8408831578014348798}
-  - component: {fileID: 3432467863856068865}
   m_Layer: 0
   m_Name: Stone-7
   m_TagString: Untagged
@@ -74,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -900
   m_Sprite: {fileID: 21300000, guid: e2871c52af6a7284fa5f008f75916eca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -120,8 +119,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 1
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.6428001, y: 0.0070500374, z: 0}
-    m_Extent: {x: 6.0439997, y: 4.14795, z: 0}
+    m_Center: {x: 0.63100004, y: 0.0068998337, z: 0}
+    m_Extent: {x: 6.0323, y: 4.1478, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -139,13 +138,14 @@ MonoBehaviour:
   - {x: 1.2927643, y: -0.9792706, z: 0}
   - {x: 2.107758, y: -0.41637385, z: 0}
   - {x: 3.9664965, y: -0.8662466, z: 0}
-  - {x: 4.7588634, y: -0.29818362, z: 0}
+  - {x: 4.7331853, y: -0.2468269, z: 0}
   - {x: 4.6699266, y: 0.34597707, z: 0}
-  - {x: 3.4566786, y: 0.9802632, z: 0}
+  - {x: 3.944088, y: 1.00653, z: 0}
   - {x: 2.31458, y: 0.61590505, z: 0}
   - {x: 1.8898625, y: -0.33051047, z: 0}
   - {x: 0.7301073, y: -1.068796, z: 0}
-  - {x: 1.3945186, y: 0.4047452, z: 0}
+  - {x: 0.5718083, y: -0.2165491, z: 0}
+  - {x: 1.4674556, y: -0.03285508, z: 0}
   - {x: 1.6763703, y: 1.1887418, z: 0}
   - {x: 1.1730918, y: 1.5474541, z: 0}
   - {x: 0.5927782, y: 1.4553128, z: 0}
@@ -163,16 +163,3 @@ MonoBehaviour:
   - {x: -2.0038755, y: -1.6001943, z: 0}
   - {x: -1.3089901, y: -1.3588874, z: 0}
   - {x: 0.27879593, y: -1.7054145, z: 0}
---- !u!114 &3432467863856068865
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8897854846800345853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a38084745bb86554eb56d877faa28892, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _decorType: 7

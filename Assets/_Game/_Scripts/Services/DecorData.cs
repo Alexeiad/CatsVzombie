@@ -103,6 +103,7 @@ public class DecorData : MonoBehaviour
             case DecorType.store: return -transform.localScale.y * 1.6f;
             case DecorType.bigStore: return -transform.localScale.y * 1.7f;
             case DecorType.hospital: return -transform.localScale.y * 1.7f;
+            case DecorType.stone: return transform.localScale.y * 1.5f;
             default: return 0;
         }
     }
@@ -117,8 +118,7 @@ public enum DecorType
     bigStore,
     police,
     hospital,
-    stone1,
-    stone2,
+    stone,
     timber,
-
+    bush,
 }
