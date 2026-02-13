@@ -15,6 +15,10 @@ public class ResourceCollector : MonoBehaviour
     [SerializeField] private int _minutes = 0;
     [SerializeField] private int _seconds = 1;
 
+    [Header("Настройки оффлайн расчета")]
+    [SerializeField] private bool _useHourlyOfflineCalculation = true; // Использовать почасовой расчет
+    [SerializeField] private int _maxOfflineHours = 168; // Максимум часов для расчета (7 дней)
+
     [Inject] private ResourceManager _resourceManager;
     [Inject] private List<BuildingBehaviour> _buildingsBehaviours;
 
@@ -176,26 +180,75 @@ public class ResourceCollector : MonoBehaviour
             double totalSecondsPassed = timePassed.TotalSeconds + savedTimer;
 
             // Ограничиваем максимальное время оффлайн (например, 7 дней)
-            double maxOfflineSeconds = 7 * 24 * 60 * 60; // 7 дней
+            double maxOfflineSeconds = _maxOfflineHours * 60 * 60;
             totalSecondsPassed = Math.Min(totalSecondsPassed, maxOfflineSeconds);
 
             if (totalSecondsPassed > 0 && _actualInterval > 0)
             {
-                // Рассчитываем сколько полных циклов прошло
-                int fullCycles = Mathf.FloorToInt((float)totalSecondsPassed / _actualInterval);
+                int fullCycles;
+                float remainingTime;
 
-                // Рассчитываем остаток времени для текущего цикла
-                float remainingTime = (float)totalSecondsPassed % _actualInterval;
+                if (_useHourlyOfflineCalculation)
+                {
+                    // ПОЧАСОВОЙ РАСЧЕТ
+                    // Рассчитываем сколько полных часов прошло
+                    double totalHoursPassed = totalSecondsPassed / 3600.0;
+                    int fullHours = Mathf.FloorToInt((float)totalHoursPassed);
+
+                    // Ограничиваем максимальное количество часов
+                    fullHours = Mathf.Min(fullHours, _maxOfflineHours);
+
+                    // Рассчитываем сколько полных циклов (интервалов) прошло за эти часы
+                    // Используем почасовой коэффициент
+                    int cyclesPerHour = Mathf.RoundToInt(3600f / _actualInterval);
+
+                    // Если интервал меньше часа, то за час проходит несколько циклов
+                    if (_actualInterval < 3600)
+                    {
+                        fullCycles = fullHours * cyclesPerHour;
+                    }
+                    else
+                    {
+                        // Если интервал больше или равен часу
+                        fullCycles = Mathf.FloorToInt(fullHours * (3600f / _actualInterval));
+                    }
+
+                    // Рассчитываем остаток времени в секундах от последнего неполного часа
+                    float remainingSeconds = (float)totalSecondsPassed - (fullHours * 3600);
+
+                    // Добавляем остаток от последнего часа к текущему таймеру
+                    remainingTime = (savedTimer + remainingSeconds) % _actualInterval;
+
+                    Debug.Log($"Почасовой расчет: {fullHours} часов прошло, " +
+                             $"циклов за час: {cyclesPerHour}, всего циклов: {fullCycles}, " +
+                             $"остаток: {remainingTime:0.##} сек");
+                }
+                else
+                {
+                    // СТАНДАРТНЫЙ РАСЧЕТ (по времени)
+                    // Рассчитываем сколько полных циклов прошло
+                    fullCycles = Mathf.FloorToInt((float)totalSecondsPassed / _actualInterval);
+
+                    // Рассчитываем остаток времени для текущего цикла
+                    remainingTime = (float)totalSecondsPassed % _actualInterval;
+
+                    Debug.Log($"Стандартный расчет: {timePassed.TotalHours:0.##} часов прошло, " +
+                             $"{fullCycles} полных циклов");
+                }
 
                 // Ограничиваем максимальное количество циклов для обработки
-                int maxCycles = 1000; // Максимум 1000 циклов за раз
+                int maxCycles = 100000; // Увеличиваем для поддержки большого количества часов
                 fullCycles = Mathf.Min(fullCycles, maxCycles);
 
                 if (fullCycles > 0)
                 {
                     if (_isFirstLaunch)
                     {
-                        Debug.Log($"Оффлайн прогресс: {timePassed.TotalHours:0.##} часов прошло, " +
+                        string timeDescription = _useHourlyOfflineCalculation
+                            ? $"{fullCycles / (3600f / _actualInterval):0.##} часов"
+                            : $"{timePassed.TotalHours:0.##} часов";
+
+                        Debug.Log($"Оффлайн прогресс: {timeDescription} прошло, " +
                                  $"{fullCycles} полных циклов, остаток: {remainingTime:0.##} секунд");
 
                         // Здесь можно показать UI-уведомление
@@ -223,8 +276,11 @@ public class ResourceCollector : MonoBehaviour
     private void ShowOfflineRewardNotification(TimeSpan timePassed, int cycles)
     {
         // Визуальное уведомление для игрока
-        // Здесь можно реализовать UI-уведомление о полученных ресурсах
-        Debug.Log($"Вы отсутствовали {FormatTimeSpan(timePassed)} и получили ресурсы за {cycles} циклов!");
+        string timeDescription = _useHourlyOfflineCalculation
+            ? $"{cycles / (3600f / _actualInterval):0.##} часов"
+            : FormatTimeSpan(timePassed);
+
+        Debug.Log($"Вы отсутствовали {timeDescription} и получили ресурсы за {cycles} циклов!");
     }
 
     private string FormatTimeSpan(TimeSpan timeSpan)
@@ -273,5 +329,17 @@ public class ResourceCollector : MonoBehaviour
             return $"{(int)(remaining / 60)} мин. {(int)(remaining % 60)} сек.";
         else
             return $"{(int)remaining} сек.";
+    }
+
+    // Метод для переключения режима расчета
+    public void SetHourlyOfflineCalculation(bool useHourly)
+    {
+        _useHourlyOfflineCalculation = useHourly;
+    }
+
+    // Метод для установки максимального количества часов оффлайн
+    public void SetMaxOfflineHours(int hours)
+    {
+        _maxOfflineHours = Mathf.Max(1, hours);
     }
 }

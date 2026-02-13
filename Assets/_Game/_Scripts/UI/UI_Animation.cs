@@ -11,6 +11,8 @@ public class SimpleUIAnimator : MonoBehaviour
     [SerializeField] private float animationDuration = 0.2f;
 
     [SerializeField] private Canvas _canvas;
+    [SerializeField] private AudioSettings _audio;
+    [SerializeField] private MusicClip _clip;
 
     private Dictionary<GameObject, Vector3> _originalScales = new Dictionary<GameObject, Vector3>();
     
@@ -19,7 +21,7 @@ public class SimpleUIAnimator : MonoBehaviour
     
     private void Awake()
     {
-        
+        _audio.Initialize(_clip);
         // Устанавливаем частоту обновления для всех твинов
         DOTween.SetTweensCapacity(500, 50); // Опционально: увеличиваем capacity
         DOTween.defaultUpdateType = UpdateType.Normal;

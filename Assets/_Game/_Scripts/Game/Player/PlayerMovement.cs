@@ -97,7 +97,14 @@ public class PlayerMovement : MonoBehaviour, IDamageable<int>
         _lr.material = Instantiate(_trailMaterial); // Инстанс для независимой анимации
         _trailMaterial = _lr.material;
     }
-
+    private void OnEnable()
+    {
+        StatsPreview.OnClick += AttackZombie;
+    }
+    private void OnDisable()
+    {
+        StatsPreview.OnClick -= AttackZombie;
+    }
     void Start()
     {
         _playerInput = new PlayerInput(_joystick);
@@ -129,31 +136,28 @@ public class PlayerMovement : MonoBehaviour, IDamageable<int>
     }
     private void Update()
     {
-        AttackZombie();
+        if (currentEnemis == null) return;
+        if (Mouse.current.leftButton.wasPressedThisFrame)
+            AttackZombie();
     }
     private void AttackZombie()
     {
-        if(currentEnemis==null) return;
 
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        EnemyTableRow playerData = _entitySO.EnemyRows.Where(x => x.ID == 0).FirstOrDefault();
+
+        Vector3 distance = Vector3.zero;
+
+        Enemy nearestEnemy = currentEnemis.Where(x => x != null)
+            .OrderBy(x => EnemyDistance(transform.position, x.transform.position, out distance))
+            .FirstOrDefault();
+
+        if (nearestEnemy != null)
         {
-            EnemyTableRow playerData = _entitySO.EnemyRows.Where(x => x.ID == 0).FirstOrDefault();
 
-            Vector3 distance=Vector3.zero;
+            StartCoroutine(Shoot(nearestEnemy, distance, playerData));
+            Fire(transform.position, nearestEnemy.transform.position);
 
-            Enemy nearestEnemy = currentEnemis.Where(x=>x!=null)
-                .OrderBy(x =>EnemyDistance(transform.position, x.transform.position,out distance))
-                .FirstOrDefault();
-
-            if (nearestEnemy != null)
-            {
-                
-                StartCoroutine( Shoot(nearestEnemy, distance,playerData));
-                Fire(transform.position, nearestEnemy.transform.position);
-
-            }
         }
-
 
     }
     private IEnumerator Shoot(Enemy enemy,Vector3 direction,EnemyTableRow playerData)

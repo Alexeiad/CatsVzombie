@@ -16,4 +16,8 @@ public class StartGame : MonoBehaviour
     {
         SceneManager.LoadScene(2);
     }
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

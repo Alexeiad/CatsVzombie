@@ -46,7 +46,7 @@ public class UI_ElementsTasks : MonoBehaviour
         if (Keyboard.current.escapeKey.wasPressedThisFrame 
             || (Gamepad.current != null && Gamepad.current.buttonEast.wasPressedThisFrame))
         {
-            isSafeTask = !isSafeTask;
+            
             exceptSwith = true;
         }
 
@@ -56,16 +56,20 @@ public class UI_ElementsTasks : MonoBehaviour
 
             if (lastUi != null)
             {
-                lastUi.PanelState = isSafeTask ? PanelState.Open : PanelState.Close;
-
-                lastUi.gameObject.SetActive(isSafeTask);
-
-                lastUi.PauseState = isSafeTask ? SetLevelPause()
-                    : OutLevelPause();
-
-                lastUi.PauseState = isSafeTask ? lastUi.PauseState=PauseState.Pause
-                    : lastUi.PauseState = PauseState.Play;
-
+                switch (lastUi.PanelState)
+                {
+                    case PanelState.Open:
+                        lastUi.PanelState=PanelState.Close;
+                        lastUi.gameObject.SetActive(false);
+                        lastUi.PauseState = OutLevelPause();
+                        break;
+                    case PanelState.Close:
+                        lastUi.PanelState = PanelState.Open;
+                        lastUi.gameObject.SetActive(true);
+                        lastUi.PauseState = lastUi.SetPause ? SetLevelPause()
+                        : OutLevelPause();
+                        break;
+                }
                 exceptSwith = false;
             }
         }
@@ -81,8 +85,9 @@ public class UI_ElementsTasks : MonoBehaviour
         relatedPanels.ForEach(panel => {
 
             panel.gameObject.SetActive(ActiveState(panel));
+            panel.PauseState = panel.SetPause ? SetLevelPause() : OutLevelPause();
 
-            
+
 
             openUi_elements.Add(panel);
         });

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{c8b8c3ab-60fb-4d66-9fa1-f1b1baf931ac}">
+		<property name="assetPath">
+			<value>Music/epic with attack choir ends.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>52.532244897959181</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a4731088-62fe-4ac2-8cd8-4c8f877f54eb}</destination>
+		</relationship>
+	</object>
+</objects>

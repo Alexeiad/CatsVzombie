@@ -717,6 +717,8 @@ MonoBehaviour:
   clickScale: 0.9
   animationDuration: 0.8
   _canvas: {fileID: 0}
+  _audio: {fileID: 767213951}
+  _clip: 0
 --- !u!1 &519626049
 GameObject:
   m_ObjectHideFlags: 0
@@ -1084,6 +1086,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3134492963607634312, guid: e7a64abdd52ecdf49b66049094335bd6, type: 3}
   m_PrefabInstance: {fileID: 3370716195076075880}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &767213951 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3725976342789610493, guid: e7a64abdd52ecdf49b66049094335bd6, type: 3}
+  m_PrefabInstance: {fileID: 3370716195076075880}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767213949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f271f22d6387e10439e6468dbf14fe37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &852646814
 GameObject:
   m_ObjectHideFlags: 0
@@ -1231,6 +1244,7 @@ GameObject:
   - component: {fileID: 1164489179}
   - component: {fileID: 1164489178}
   - component: {fileID: 1164489181}
+  - component: {fileID: 1164489182}
   m_Layer: 5
   m_Name: Play_Quit
   m_TagString: Untagged
@@ -1314,6 +1328,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1164489182}
+        m_TargetAssemblyTypeName: StartGame, Assembly-CSharp
+        m_MethodName: Quit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1164489179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1365,6 +1391,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Delegates: []
+--- !u!114 &1164489182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1164489176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88bff3d97f259b94ca339b52d6b34bfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1231847462
 GameObject:
   m_ObjectHideFlags: 0
@@ -1378,7 +1416,7 @@ GameObject:
   - component: {fileID: 1231847464}
   - component: {fileID: 1231847466}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Version
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1401,7 +1439,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -290.1}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 243.72, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1231847464
 MonoBehaviour:
@@ -1423,7 +1461,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '     v. 0.0.1 beta'
+  m_text: '  b.  0.1.1 Build 1'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1432,8 +1470,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 721420287
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.16470589}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2652,7 +2690,7 @@ GameObject:
   - component: {fileID: 2007332333}
   - component: {fileID: 2007332332}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Link
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

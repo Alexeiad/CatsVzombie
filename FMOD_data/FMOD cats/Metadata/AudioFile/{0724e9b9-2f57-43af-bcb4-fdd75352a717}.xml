@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{0724e9b9-2f57-43af-bcb4-fdd75352a717}">
+		<property name="assetPath">
+			<value>Music/pirates theme with long intro.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>108.40816326530613</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a4731088-62fe-4ac2-8cd8-4c8f877f54eb}</destination>
+		</relationship>
+	</object>
+</objects>

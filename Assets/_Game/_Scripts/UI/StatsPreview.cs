@@ -44,8 +44,8 @@ public class StatsPreview : MonoBehaviour
     }
     private IEnumerator Init()
     {
-        yield return new WaitForSeconds(1);
-        
+        yield return new WaitForSeconds(0.5f);
+
         enemys = _entities
         .Select(entity => entity.GetComponent<Enemy>())
         .Where(enemyAI => enemyAI != null)

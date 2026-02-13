@@ -20,19 +20,35 @@ public class AudioSettings : MonoBehaviour
     public Slider musicSlider;
     public Slider sfxSlider;
 
-    void Awake()
+    private bool _isInit;
+
+    public void Initialize(MusicClip clip)
     {
         // Инициализируем шины. Пути должны совпадать с путями в вашем проекте FMOD!
         masterBus = FMODUnity.RuntimeManager.GetBus("bus:/");
-        musicBus = FMODUnity.RuntimeManager.GetBus("bus:/BACK");
+        musicBus = FMODUnity.RuntimeManager.GetBus("bus:/");
         sfxBus = FMODUnity.RuntimeManager.GetBus("bus:/SFX");
 
-        FMODUnity.RuntimeManager.PlayOneShot("event:/C413");
-        
-    }
+        SelectClip(clip);
 
+
+        _isInit =true;
+    }
+    private void SelectClip(MusicClip clip)
+    {
+        musicBus.stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        switch (clip) 
+        {
+            
+            case MusicClip.Menu: FMODUnity.RuntimeManager.PlayOneShot("event:/Menu");break;
+            case MusicClip.Base: FMODUnity.RuntimeManager.PlayOneShot("event:/Base"); break;
+            case MusicClip.Level: FMODUnity.RuntimeManager.PlayOneShot("event:/Level"); break;
+        }
+
+    }
     void Update()
     {
+        if (!_isInit) return;
         // Постоянно применяем текущие значения громкости к шинам FMOD
         masterBus.setVolume(masterSlider.value);
         musicBus.setVolume(musicSlider.value);
@@ -54,4 +70,14 @@ public class AudioSettings : MonoBehaviour
     {
         sfxVolume = newVolume;
     }
+}
+public enum MusicClip
+{
+    Menu,
+    Base,
+    Level,
+    Forest,
+    Willage,
+    Town,
+    City,
 }
