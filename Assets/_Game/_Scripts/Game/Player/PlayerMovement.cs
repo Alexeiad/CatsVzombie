@@ -162,7 +162,9 @@ public class PlayerMovement : MonoBehaviour, IDamageable<int>
     }
     private IEnumerator Shoot(Enemy enemy,Vector3 direction,EnemyTableRow playerData)
     {
-        enemy.Health -= playerData.ShootDamage;
+        if (Vector3.Distance(transform.position, enemy.transform.position) < _enemyDistance*0.5f)
+           
+            enemy.Health -= playerData.ShootDamage;
         /*
         if (enemy!=null&&IsEnemyCloseToLineSegment(transform.position, enemy.transform.position, direction))
         {
