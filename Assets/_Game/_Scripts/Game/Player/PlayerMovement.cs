@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable<int>
     [SerializeField] private Sprite _leftS, _upLeftS, _upS, _rightUpS,
         _rightS, _rightDownS, _DownS, _leftDownS;
     [SerializeField] private Animator _animator;
+    [SerializeField] private float _shootSpeedInterval=0.1f;
 
 
     [Header("Параметры эффекта")]
@@ -96,14 +97,16 @@ public class PlayerMovement : MonoBehaviour, IDamageable<int>
         _trailMaterial = _lr.material; // Копируем материал, чтобы не менять общий
         _lr.material = Instantiate(_trailMaterial); // Инстанс для независимой анимации
         _trailMaterial = _lr.material;
+
+        StartCoroutine(AutomaticShoot());
     }
     private void OnEnable()
     {
-        StatsPreview.OnClick += AttackZombie;
+        //StatsPreview.OnClick += AttackZombie;
     }
     private void OnDisable()
     {
-        StatsPreview.OnClick -= AttackZombie;
+        //StatsPreview.OnClick -= AttackZombie;
     }
     void Start()
     {
@@ -212,6 +215,16 @@ public class PlayerMovement : MonoBehaviour, IDamageable<int>
                 _lr.enabled = false;
                 StartCoroutine(StartAnimation());
             });
+    }
+    private IEnumerator AutomaticShoot()
+    {
+        while (true)
+        {
+            AttackZombie();
+            yield return new WaitForSeconds(_shootSpeedInterval);
+            
+            
+        }
     }
     private IEnumerator StartAnimation()
     {
