@@ -355,6 +355,7 @@ GameObject:
   - component: {fileID: 4992064260124746015}
   - component: {fileID: -5015773008075577135}
   - component: {fileID: -2514708979480600178}
+  - component: {fileID: 5831603670194104672}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -402,7 +403,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -682,6 +683,66 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &5831603670194104672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3928872983729171847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 1
+  m_LightType: 1
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.89
+  m_Color: {r: 0.9150943, g: 0.9150943, b: 0.9150943, a: 1}
+  m_Intensity: 1
+  m_LightVolumeIntensity: 1
+  m_LightVolumeIntensityEnabled: 0
+  m_ApplyToSortingLayers: 00000000
+  m_LightCookieSprite: {fileID: 0}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 1
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowIntensityEnabled: 0
+  m_ShadowIntensity: 1
+  m_ShadowVolumeIntensityEnabled: 1
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: 0.91005003, y: -0.75095, z: 0}
+    m_Extent: {x: 3.0787501, y: 2.49935, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 1.9
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.2713069, y: -1.128449, z: 0}
+  - {x: 0.2900889, y: -1.2544792, z: 0}
+  - {x: 0.67339116, y: -1.3533775, z: 0}
+  - {x: 1.1190226, y: -1.3038777, z: 0}
+  - {x: 1.4272971, y: -1.1129385, z: 0}
+  - {x: 1.7279422, y: -0.9501797, z: 0}
+  - {x: 2.0908065, y: -0.8760407, z: 0}
+  - {x: 1.9218433, y: -0.5427304, z: 0}
+  - {x: 1.7839376, y: -0.15103398, z: 0}
+  - {x: 1.3916986, y: -0.24257277, z: 0}
+  - {x: 0.94358325, y: -0.15339983, z: 0}
+  - {x: 0.43152025, y: -0.167026, z: 0}
+  - {x: -0.05282452, y: -0.36407602, z: 0}
+  - {x: 0.005425909, y: -0.83361137, z: 0}
 --- !u!1 &4333674635540112598
 GameObject:
   m_ObjectHideFlags: 0

@@ -1984,6 +1984,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5859008393805010413, guid: ec0cc4519b4e7e44f8f939fcf7ab0aab, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[8].x
+      value: -0.6624029
+      objectReference: {fileID: 0}
+    - target: {fileID: 5859008393805010413, guid: ec0cc4519b4e7e44f8f939fcf7ab0aab, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[8].y
+      value: -1.3005568
+      objectReference: {fileID: 0}
     - target: {fileID: 7130657763660811731, guid: ec0cc4519b4e7e44f8f939fcf7ab0aab, type: 3}
       propertyPath: m_Name
       value: Ruined house-1
