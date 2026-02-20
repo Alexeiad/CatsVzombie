@@ -29,7 +29,7 @@ public class StoryBackgroundSlides : MonoBehaviour
     }
     public void StartWith(int startIndex = 0,int stopOnIn=0)
     {
-        stopOnIn = stopOnIn == 0 ? _slides.Count : stopOnIn;
+        _stopOnIn = stopOnIn == 0 ? _slides.Count : stopOnIn;
         Time.timeScale = 0;
         _canvasStory.SetActive(true);
         _targetImage.sprite = _slides[startIndex];
