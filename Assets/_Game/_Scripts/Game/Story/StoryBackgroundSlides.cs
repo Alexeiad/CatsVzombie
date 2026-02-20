@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +15,7 @@ public class StoryBackgroundSlides : MonoBehaviour
 
     [Header("Auto")]
     [SerializeField] private float _autoNextDelay = 3f;
+    [SerializeField] private int _stopOnIn=3;
 
     public UnityAction OnFinished;
 
@@ -27,9 +27,9 @@ public class StoryBackgroundSlides : MonoBehaviour
     {
         _targetImage.sprite = NextSprite();
     }
-    public void StartWith(int startIndex = 0)
+    public void StartWith(int startIndex = 0,int stopOnIn=0)
     {
-
+        stopOnIn = stopOnIn == 0 ? _slides.Count : stopOnIn;
         Time.timeScale = 0;
         _canvasStory.SetActive(true);
         _targetImage.sprite = _slides[startIndex];
@@ -53,7 +53,7 @@ public class StoryBackgroundSlides : MonoBehaviour
     }
     private Sprite NextSprite() =>
     
-         (_index < _slides.Count) ? _slides[_index++] : SpriteFinish();
+         (_index < _slides.Count&&_index<=_stopOnIn) ? _slides[_index++] : SpriteFinish();
     
     
     private Sprite SpriteFinish()
