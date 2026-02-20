@@ -82,7 +82,7 @@ public class SpawnPoint : MonoBehaviour
         {
             FindObjectsByType<PlayerReward>(FindObjectsSortMode.None)
                 .ToList().ForEach(o=>o.gameObject.SetActive(false));
-            _resultWindow.SetActive(true);
+            _resultWindow?.SetActive(true);
             _isShowOnce = true;
             Time.timeScale = 0;
         }
