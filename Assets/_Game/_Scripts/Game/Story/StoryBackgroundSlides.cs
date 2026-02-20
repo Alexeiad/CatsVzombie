@@ -15,55 +15,119 @@ public class StoryBackgroundSlides : MonoBehaviour
 
     [Header("Auto")]
     [SerializeField] private float _autoNextDelay = 3f;
-    [SerializeField] private int _stopOnIn=3;
+    [SerializeField] private int _stopOnIn = 3;
 
     public UnityAction OnFinished;
 
     public delegate void UnityAction();
 
     private int _index;
+    private bool _isActive;
+    private Coroutine _nextSlideCoroutine;
 
     public void NextSlide()
     {
+        if (!_isActive) return;
         _targetImage.sprite = NextSprite();
     }
-    public void StartWith(int startIndex = 0,int stopOnIn=0)
+
+    public void StartWith(int startIndex = 0, int stopOnIn = 0)
     {
-        _stopOnIn = stopOnIn == 0 ? _slides.Count : stopOnIn;
+        // Останавливаем предыдущую сессию, если она была активна
+        if (_isActive)
+        {
+            StopSlides();
+        }
+
+        _stopOnIn = stopOnIn > 0 ? stopOnIn : _stopOnIn;
+        _index = startIndex;
+        _isActive = true;
+
         Time.timeScale = 0;
         _canvasStory.SetActive(true);
-        _targetImage.sprite = _slides[startIndex];
-        StartCoroutine(NextTo());
+
+        if (_slides != null && _slides.Count > 0 && startIndex < _slides.Count)
+        {
+            _targetImage.sprite = _slides[startIndex];
+        }
+
+        _nextSlideCoroutine = StartCoroutine(NextTo());
+    }
+
+    public void StopSlides()
+    {
+        if (_nextSlideCoroutine != null)
+        {
+            StopCoroutine(_nextSlideCoroutine);
+            _nextSlideCoroutine = null;
+        }
+
+        if (_isActive)
+        {
+            _isActive = false;
+            Time.timeScale = 1;
+            _canvasStory.SetActive(false);
+            OnFinished?.Invoke();
+        }
     }
 
     private void Start()
     {
-        StartWith();
+        // Не запускаем автоматически в Start, 
+        // чтобы избежать неожиданного поведения
+         StartWith();
     }
-    
-    private IEnumerator NextTo()
+
+    private void OnDisable()
     {
-       
-        while (true)
+        // Принудительно восстанавливаем timeScale при отключении
+        if (_isActive)
         {
-            _targetImage.sprite = NextSprite();
-            yield return new WaitForSecondsRealtime(_autoNextDelay);
-            
+            _isActive = false;
+            Time.timeScale = 1;
+            OnFinished?.Invoke();
         }
     }
-    private Sprite NextSprite() =>
-    
-         (_index < _slides.Count&&_index<=_stopOnIn) ? _slides[_index++] : SpriteFinish();
-    
-    
+
+    private void OnDestroy()
+    {
+        // Гарантированно восстанавливаем timeScale при уничтожении объекта
+        Time.timeScale = 1;
+    }
+
+    private IEnumerator NextTo()
+    {
+        while (_isActive)
+        {
+            yield return new WaitForSecondsRealtime(_autoNextDelay);
+
+            if (_isActive) // Проверяем, не остановили ли слайды во время ожидания
+            {
+                _targetImage.sprite = NextSprite();
+            }
+        }
+    }
+
+    private Sprite NextSprite()
+    {
+        if (_index < _stopOnIn && _index < _slides.Count)
+        {
+            return _slides[_index++];
+        }
+        else
+        {
+            return SpriteFinish();
+        }
+    }
+
     private Sprite SpriteFinish()
     {
-        Time.timeScale = 1;
-        _canvasStory.SetActive(false); 
-        _targetImage.sprite = _slides.First();
-
-        OnFinished?.Invoke();
+        StopSlides();
         return null;
     }
 
+    // Публичные свойства для проверки состояния
+    public bool IsActive => _isActive;
+    public int CurrentIndex => _index;
+    public int TotalSlides => _slides?.Count ?? 0;
 }
