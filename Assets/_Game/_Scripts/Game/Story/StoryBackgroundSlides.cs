@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class StoryBackgroundSlides : MonoBehaviour
 {
@@ -15,7 +16,8 @@ public class StoryBackgroundSlides : MonoBehaviour
 
     [Header("Auto")]
     [SerializeField] private float _autoNextDelay = 3f;
-    [SerializeField] private int _stopOnIn = 3;
+    [SerializeField] private int _stopOnIn = 4;
+    [SerializeField] private int _sceneBase=1;
 
     public UnityAction OnFinished;
 
@@ -33,7 +35,6 @@ public class StoryBackgroundSlides : MonoBehaviour
 
     public void StartWith(int startIndex = 0, int stopOnIn = 0)
     {
-        // Останавливаем предыдущую сессию, если она была активна
         if (_isActive)
         {
             StopSlides();
@@ -46,11 +47,8 @@ public class StoryBackgroundSlides : MonoBehaviour
         Time.timeScale = 0;
         _canvasStory.SetActive(true);
 
-        if (_slides != null && _slides.Count > 0 && startIndex < _slides.Count)
-        {
-            _targetImage.sprite = _slides[startIndex];
-        }
-
+        _targetImage.sprite = _slides[startIndex];
+        
         _nextSlideCoroutine = StartCoroutine(NextTo());
     }
 
@@ -73,14 +71,19 @@ public class StoryBackgroundSlides : MonoBehaviour
 
     private void Start()
     {
-        // Не запускаем автоматически в Start, 
-        // чтобы избежать неожиданного поведения
+
          StartWith();
     }
-
+    private void Update()
+    {
+        if (_targetImage.sprite == _slides[_slides.Count - 1])
+        {
+            SceneManager.LoadScene(_sceneBase);
+        }
+    }
     private void OnDisable()
     {
-        // Принудительно восстанавливаем timeScale при отключении
+
         if (_isActive)
         {
             _isActive = false;
@@ -91,7 +94,6 @@ public class StoryBackgroundSlides : MonoBehaviour
 
     private void OnDestroy()
     {
-        // Гарантированно восстанавливаем timeScale при уничтожении объекта
         Time.timeScale = 1;
     }
 
@@ -101,7 +103,7 @@ public class StoryBackgroundSlides : MonoBehaviour
         {
             yield return new WaitForSecondsRealtime(_autoNextDelay);
 
-            if (_isActive) // Проверяем, не остановили ли слайды во время ожидания
+            if (_isActive) 
             {
                 _targetImage.sprite = NextSprite();
             }
@@ -110,14 +112,23 @@ public class StoryBackgroundSlides : MonoBehaviour
 
     private Sprite NextSprite()
     {
-        if (_index < _stopOnIn && _index < _slides.Count)
+
+
+        
+        if (_index <_stopOnIn)
         {
             return _slides[_index++];
         }
-        else
+        else if (_index == _stopOnIn)
         {
             return SpriteFinish();
         }
+        else return null;
+        
+
+           
+
+        
     }
 
     private Sprite SpriteFinish()
@@ -125,8 +136,6 @@ public class StoryBackgroundSlides : MonoBehaviour
         StopSlides();
         return null;
     }
-
-    // Публичные свойства для проверки состояния
     public bool IsActive => _isActive;
     public int CurrentIndex => _index;
     public int TotalSlides => _slides?.Count ?? 0;

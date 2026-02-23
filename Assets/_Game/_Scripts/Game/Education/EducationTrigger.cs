@@ -7,12 +7,22 @@ public class EducationTrigger : MonoBehaviour
 {
     public UnityAction<EducationTheme> OnEnter,OnExit;
     [SerializeField] private EducationTheme _theme;
+    [SerializeField] private bool _startStory;
+    [SerializeField] private StoryBackgroundSlides _storyBackgroundSlides;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<PlayerMovement>())
         {
-            OnEnter?.Invoke(_theme);
+            if (_startStory)
+            {
+                _storyBackgroundSlides?.StartWith(5,6);
+            }
+            else
+            {
+                OnEnter?.Invoke(_theme);
+            }    
+            
 
         }
     }

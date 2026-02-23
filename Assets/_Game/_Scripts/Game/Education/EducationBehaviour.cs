@@ -47,7 +47,7 @@ public class EducationBehaviour : MonoBehaviour
             .Where(x => x.CanShow)
             .Select(x => x.Data)
             .DefaultIfEmpty(null)
-            .First();
+            .FirstOrDefault();
 
         if (result == null) return;
 
@@ -64,7 +64,7 @@ public class EducationBehaviour : MonoBehaviour
 
     private void CloseEducationWindow(EducationTheme theme)
     {
-        _educationWindow.SetActive(false);
+        _educationWindow?.SetActive(false);
         ExitPause();
     }
         
