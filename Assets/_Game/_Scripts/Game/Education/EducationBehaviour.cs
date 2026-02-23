@@ -25,10 +25,19 @@ public class EducationBehaviour : MonoBehaviour
     }
     public void NextWindow()
     {
-        //if ((int)_startWith < (int)EducationTheme.BuildPoints) return;
+        var themeValues = System.Enum.GetValues(typeof(EducationTheme));
+        int currentIndex = (int)_startWith;
+        int nextIndex = currentIndex + 1;
 
-        StartCoroutine(ShowEducation((EducationTheme)(int)_startWith++));
-
+        if (nextIndex <= (int)EducationTheme.Resources)
+        {
+            _startWith = (EducationTheme)nextIndex;
+            StartCoroutine(ShowEducation(_startWith));
+        }
+        else
+        {
+            _educationWindow.SetActive(false);
+        }
     }
 
     private void OnEnable()
@@ -87,7 +96,7 @@ public class EducationBehaviour : MonoBehaviour
 
     private void CloseEducationWindow(EducationTheme theme)
     {
-        //_educationWindow?.SetActive(false);
+        _educationWindow?.SetActive(false);
         ExitPause();
     }
         

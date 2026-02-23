@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2477042368145872635}
   - component: {fileID: 553448847598082528}
   - component: {fileID: 2174292234771336460}
+  - component: {fileID: -5676198239844926978}
   m_Layer: 0
   m_Name: Tire
   m_TagString: Untagged
@@ -97,8 +98,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a9a9c0c3702289488c2517de5f2b409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GridPosition: {x: 0, y: 0}
+  Size: {x: 0, y: 0}
   baseType: 3
+  levelType: 0
   isAheadOfThePlayer: 0
   safeDistance: 1
   pushForce: 20
   teleportDuration: 0.25
+--- !u!58 &-5676198239844926978
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8346101613348907668}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.2
