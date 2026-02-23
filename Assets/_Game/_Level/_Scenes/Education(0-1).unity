@@ -2385,7 +2385,7 @@ MonoBehaviour:
   <PanelState>k__BackingField: 1
   <ElementType>k__BackingField: 0
   <ButtonType>k__BackingField: 0
-  <SetPause>k__BackingField: 1
+  <SetPause>k__BackingField: 0
 --- !u!1001 &601300729
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4463,7 +4463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8df92c395984de849ab24f26c3c23fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _theme: 3
+  _theme: 13
   _startStory: 1
   _storyBackgroundSlides: {fileID: 2039041677}
 --- !u!60 &1162029738
@@ -293128,14 +293128,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -58.69191, y: 8.09774}
-      - {x: -47.862473, y: 11.281166}
-      - {x: -44.35285, y: 12.058559}
-      - {x: -37.318542, y: 10.404785}
+    - - {x: -55.277588, y: 3.545311}
+      - {x: -51.656174, y: 4.1996}
+      - {x: -48.140175, y: 3.2193565}
+      - {x: -42.123886, y: 0.035346985}
       - {x: -33.004044, y: 1.5392685}
       - {x: -35.837097, y: -2.944538}
-      - {x: -42.41327, y: -6.7776756}
-      - {x: -52.6109, y: -8.157215}
+      - {x: -41.022247, y: -3.2368965}
+      - {x: -47.29973, y: -2.7195854}
       - {x: -58.994232, y: -0.31621933}
   m_UseDelaunayMesh: 0
 --- !u!114 &1946243978

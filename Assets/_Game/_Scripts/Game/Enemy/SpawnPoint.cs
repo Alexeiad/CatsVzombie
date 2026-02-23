@@ -78,11 +78,13 @@ public class SpawnPoint : MonoBehaviour
             return;
         _zombieSpawner.enemies.RemoveAll(e => e == null);
 
-        if (_zombieSpawner.enemies.Count == 0&&_isCorutineStared&& !_isShowOnce)
+        if (_zombieSpawner.enemies.Count == 0&&_isCorutineStared&& !_isShowOnce
+            &&_resultWindow != null)
         {
             FindObjectsByType<PlayerReward>(FindObjectsSortMode.None)
                 .ToList().ForEach(o=>o.gameObject.SetActive(false));
-            _resultWindow?.SetActive(true);
+            
+            _resultWindow.SetActive(true);
             _isShowOnce = true;
             Time.timeScale = 0;
         }

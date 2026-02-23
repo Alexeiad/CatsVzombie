@@ -47,6 +47,7 @@ public class EducationBehaviour : MonoBehaviour
 
     private void OnEnable()
     {
+
         if (PlayerPrefs.GetString(_educationKey) == _educationKey) return;
         _triggers.ForEach(trigger => trigger.OnEnter += ShowEducationWindow);
         _triggers.ForEach(trigger => trigger.OnExit += CloseEducationWindow);
@@ -55,7 +56,7 @@ public class EducationBehaviour : MonoBehaviour
     }
     private void OnDisable()
     {
-        PlayerPrefs.SetString(_educationKey,_educationKey);
+        
         _triggers.ForEach(trigger => trigger.OnEnter -= ShowEducationWindow);
         _triggers.ForEach(trigger => trigger.OnExit -= CloseEducationWindow);
         ExitPause();

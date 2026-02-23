@@ -27,7 +27,7 @@ public class StartGame : MonoBehaviour
     }
     public void SceneReset()
     {
-        PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteKey(_key);
     }
     public void Quit()
     {

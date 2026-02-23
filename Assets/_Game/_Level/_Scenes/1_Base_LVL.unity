@@ -433,17 +433,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6126105525994779007, guid: ffc5c95d90be7dd46a96e8d2cdeaa5e4, type: 3}
-      propertyPath: m_HorizontalAlignment
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9084672752559877231, guid: ffc5c95d90be7dd46a96e8d2cdeaa5e4, type: 3}
       propertyPath: m_Name
       value: Canvas_Education
-      objectReference: {fileID: 0}
-    - target: {fileID: 9084672752559877231, guid: ffc5c95d90be7dd46a96e8d2cdeaa5e4, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
