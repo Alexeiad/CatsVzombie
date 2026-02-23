@@ -12,28 +12,49 @@ public class EducationBehaviour : MonoBehaviour
     [SerializeField] private GameObject _educationWindow;
     [SerializeField] private TextMeshProUGUI _educationText;
     [SerializeField] private StoryBackgroundSlides _story;
+    [SerializeField] private EducationTheme _startWith=EducationTheme.Clear;
+    [SerializeField] private bool _isNotEducationScene;
 
     private List<EducationTheme> _openedThemes;
 
     public void PointerDown()
     {
         _educationWindow.SetActive(false);
-        ExitPause();
+
+        CloseEducationWindow(_startWith);
     }
-   
+    public void NextWindow()
+    {
+        //if ((int)_startWith < (int)EducationTheme.BuildPoints) return;
+
+        StartCoroutine(ShowEducation((EducationTheme)(int)_startWith++));
+
+    }
 
     private void OnEnable()
     {
         _triggers.ForEach(trigger => trigger.OnEnter += ShowEducationWindow);
         _triggers.ForEach(trigger => trigger.OnExit += CloseEducationWindow);
+        if (_story == null) return;
         _story.OnFinished += SetPause;
     }
     private void OnDisable()
     {
         _triggers.ForEach(trigger => trigger.OnEnter -= ShowEducationWindow);
         _triggers.ForEach(trigger => trigger.OnExit -= CloseEducationWindow);
-        _story.OnFinished -= SetPause;
         ExitPause();
+        if (_story == null) return;
+        _story.OnFinished -= SetPause;
+    }
+
+    private IEnumerator ShowEducation(EducationTheme theme)
+    {
+        float seconds = _educationDataSO.data
+            .Where(e=>e.theme==theme)
+            .Select(e=>e.timeBefore).FirstOrDefault();
+
+        yield return new WaitForSecondsRealtime(seconds);
+        ShowEducationWindow(theme);
     }
     private void ShowEducationWindow(EducationTheme theme)
     {
@@ -49,6 +70,8 @@ public class EducationBehaviour : MonoBehaviour
             .DefaultIfEmpty(null)
             .FirstOrDefault();
 
+        
+
         if (result == null) return;
 
         _educationWindow.SetActive(true);
@@ -58,13 +81,13 @@ public class EducationBehaviour : MonoBehaviour
             .Append(theme)
             .Distinct()
             .ToList();
-
+       
         SetPause();
     }
 
     private void CloseEducationWindow(EducationTheme theme)
     {
-        _educationWindow?.SetActive(false);
+        //_educationWindow?.SetActive(false);
         ExitPause();
     }
         
