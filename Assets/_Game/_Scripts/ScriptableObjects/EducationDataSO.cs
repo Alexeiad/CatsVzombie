@@ -8,6 +8,7 @@ public class EducationDataItem
     [TextArea]
     public string text;
     public float timeBefore;
+    public Sprite sprite;
     public EducationTheme theme;
 }
 

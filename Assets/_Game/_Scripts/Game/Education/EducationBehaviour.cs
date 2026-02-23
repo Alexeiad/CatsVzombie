@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EducationBehaviour : MonoBehaviour
 {
@@ -11,20 +12,24 @@ public class EducationBehaviour : MonoBehaviour
 
     [SerializeField] private GameObject _educationWindow;
     [SerializeField] private TextMeshProUGUI _educationText;
+    [SerializeField] private Image _educationImage;
     [SerializeField] private StoryBackgroundSlides _story;
     [SerializeField] private EducationTheme _startWith=EducationTheme.Clear;
     [SerializeField] private bool _isNotEducationScene;
 
     private List<EducationTheme> _openedThemes;
+    private string _educationKey = "base";
 
     public void PointerDown()
     {
+        if (PlayerPrefs.GetString(_educationKey) == _educationKey) return;
         _educationWindow.SetActive(false);
 
         CloseEducationWindow(_startWith);
     }
     public void NextWindow()
     {
+        if (PlayerPrefs.GetString(_educationKey) == _educationKey) return;
         var themeValues = System.Enum.GetValues(typeof(EducationTheme));
         int currentIndex = (int)_startWith;
         int nextIndex = currentIndex + 1;
@@ -42,6 +47,7 @@ public class EducationBehaviour : MonoBehaviour
 
     private void OnEnable()
     {
+        if (PlayerPrefs.GetString(_educationKey) == _educationKey) return;
         _triggers.ForEach(trigger => trigger.OnEnter += ShowEducationWindow);
         _triggers.ForEach(trigger => trigger.OnExit += CloseEducationWindow);
         if (_story == null) return;
@@ -49,11 +55,13 @@ public class EducationBehaviour : MonoBehaviour
     }
     private void OnDisable()
     {
+        PlayerPrefs.SetString(_educationKey,_educationKey);
         _triggers.ForEach(trigger => trigger.OnEnter -= ShowEducationWindow);
         _triggers.ForEach(trigger => trigger.OnExit -= CloseEducationWindow);
         ExitPause();
         if (_story == null) return;
         _story.OnFinished -= SetPause;
+
     }
 
     private IEnumerator ShowEducation(EducationTheme theme)
@@ -85,6 +93,7 @@ public class EducationBehaviour : MonoBehaviour
 
         _educationWindow.SetActive(true);
         _educationText.text = result.text;
+        _educationImage.sprite=result?.sprite;
 
         _openedThemes = (_openedThemes ?? Enumerable.Empty<EducationTheme>())
             .Append(theme)

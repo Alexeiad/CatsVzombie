@@ -346,14 +346,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 1242735428}
     m_Modifications:
     - target: {fileID: 3180749988184848552, guid: ffc5c95d90be7dd46a96e8d2cdeaa5e4, type: 3}
-      propertyPath: m_Delegates.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3180749988184848552, guid: ffc5c95d90be7dd46a96e8d2cdeaa5e4, type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3180749988184848552, guid: ffc5c95d90be7dd46a96e8d2cdeaa5e4, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2082796293}
@@ -361,26 +353,6 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 2082796293}
-    - target: {fileID: 3180749988184848552, guid: ffc5c95d90be7dd46a96e8d2cdeaa5e4, type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PointerDown
-      objectReference: {fileID: 0}
-    - target: {fileID: 3180749988184848552, guid: ffc5c95d90be7dd46a96e8d2cdeaa5e4, type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: NextWindow
-      objectReference: {fileID: 0}
-    - target: {fileID: 3180749988184848552, guid: ffc5c95d90be7dd46a96e8d2cdeaa5e4, type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: EducationBehaviour, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3180749988184848552, guid: ffc5c95d90be7dd46a96e8d2cdeaa5e4, type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 3180749988184848552, guid: ffc5c95d90be7dd46a96e8d2cdeaa5e4, type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 5701606375555221113, guid: ffc5c95d90be7dd46a96e8d2cdeaa5e4, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -461,13 +433,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6126105525994779007, guid: ffc5c95d90be7dd46a96e8d2cdeaa5e4, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9084672752559877231, guid: ffc5c95d90be7dd46a96e8d2cdeaa5e4, type: 3}
       propertyPath: m_Name
       value: Canvas_Education
       objectReference: {fileID: 0}
     - target: {fileID: 9084672752559877231, guid: ffc5c95d90be7dd46a96e8d2cdeaa5e4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -286282,6 +286258,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1841257719085088430, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
   m_PrefabInstance: {fileID: 1242735424}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1250820718 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2900105466458559605, guid: ffc5c95d90be7dd46a96e8d2cdeaa5e4, type: 3}
+  m_PrefabInstance: {fileID: 646768028}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1252258007
 GameObject:
   m_ObjectHideFlags: 0
@@ -472059,6 +472046,7 @@ MonoBehaviour:
   _educationDataSO: {fileID: 11400000, guid: 871047edc43db0a48b79bfbec7819351, type: 2}
   _educationWindow: {fileID: 646768031}
   _educationText: {fileID: 646768029}
+  _educationImage: {fileID: 1250820718}
   _story: {fileID: 0}
   _startWith: 3
   _isNotEducationScene: 1

@@ -6032,7 +6032,10 @@ MonoBehaviour:
   _educationDataSO: {fileID: 11400000, guid: 871047edc43db0a48b79bfbec7819351, type: 2}
   _educationWindow: {fileID: 303741844}
   _educationText: {fileID: 786122961}
+  _educationImage: {fileID: 8826239417216749202}
   _story: {fileID: 2039041677}
+  _startWith: 3
+  _isNotEducationScene: 0
 --- !u!1001 &1476298217
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -293883,6 +293886,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffc5c95d90be7dd46a96e8d2cdeaa5e4, type: 3}
+--- !u!114 &8826239417216749202 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2900105466458559605, guid: ffc5c95d90be7dd46a96e8d2cdeaa5e4, type: 3}
+  m_PrefabInstance: {fileID: 8826239417216749201}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
