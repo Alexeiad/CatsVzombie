@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -8743079911283230470}
   - component: {fileID: -8394686148902645854}
   - component: {fileID: 6881247100568506323}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ZombieCreeping
   m_TagString: Untagged
   m_Icon: {fileID: 0}

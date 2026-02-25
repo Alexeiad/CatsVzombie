@@ -145154,11 +145154,11 @@ PrefabInstance:
       objectReference: {fileID: 1709550513}
     - target: {fileID: 1877674581125766119, guid: a8c5773db99fff44c9f078386ea8b043, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1877674581125766119, guid: a8c5773db99fff44c9f078386ea8b043, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2363805840902495218, guid: a8c5773db99fff44c9f078386ea8b043, type: 3}
       propertyPath: tilemap
@@ -145194,7 +145194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7730393889079585951, guid: a8c5773db99fff44c9f078386ea8b043, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8068775877595493096, guid: a8c5773db99fff44c9f078386ea8b043, type: 3}
       propertyPath: m_LocalPosition.x
@@ -145238,11 +145238,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8446901008606501257, guid: a8c5773db99fff44c9f078386ea8b043, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8446901008606501257, guid: a8c5773db99fff44c9f078386ea8b043, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -3974713812981134701}
   - component: {fileID: 2138635165147689595}
   - component: {fileID: -2348099256627362964}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ZombieCop
   m_TagString: Untagged
   m_Icon: {fileID: 0}

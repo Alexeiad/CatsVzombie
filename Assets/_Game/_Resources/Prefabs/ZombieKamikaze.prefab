@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -8769065437318684763}
   - component: {fileID: 2431258456976304664}
   - component: {fileID: -8478345205892415382}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ZombieKamikaze
   m_TagString: Untagged
   m_Icon: {fileID: 0}

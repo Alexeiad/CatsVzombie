@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 16427866673215121}
   - component: {fileID: 7103546309851014858}
   - component: {fileID: 8737101787762699526}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ZombieJock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
