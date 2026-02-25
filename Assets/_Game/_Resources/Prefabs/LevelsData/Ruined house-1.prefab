@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3629281576275296167}
   - component: {fileID: 5859008393805010413}
   - component: {fileID: 641803945849242002}
-  - component: {fileID: 2388322799057215139}
   m_Layer: 0
   m_Name: Ruined house-1
   m_TagString: Untagged
@@ -131,18 +130,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -1.9049962, y: -0.88033277}
-      - {x: -1.9052337, y: -0.61156}
-      - {x: 0.3020844, y: 0.69299483}
-      - {x: 1.6835077, y: -0.057971098}
-      - {x: 1.4757043, y: -0.37119275}
-      - {x: 1.0206292, y: -0.46069473}
-      - {x: -0.4345404, y: -1.2585814}
-      - {x: -0.4952368, y: -1.2867566}
-      - {x: -0.6232734, y: -1.2877226}
-      - {x: -0.7690923, y: -1.313864}
-      - {x: -1.084699, y: -1.4981503}
-      - {x: -1.471849, y: -1.2408236}
+    - - {x: -8.811854, y: -3.3078067}
+      - {x: 3.529629, y: 3.0082474}
+      - {x: 9.878885, y: -0.3832786}
+      - {x: -0.90336, y: -6.9200673}
   m_UseDelaunayMesh: 0
 --- !u!114 &641803945849242002
 MonoBehaviour:
@@ -156,62 +147,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a38084745bb86554eb56d877faa28892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2388322799057215139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7130657763660811731}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ComponentVersion: 1
-  m_LightType: 1
-  m_BlendStyleIndex: 0
-  m_FalloffIntensity: 1
-  m_Color: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 1}
-  m_Intensity: 1
-  m_LightVolumeIntensity: 1
-  m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000
-  m_LightCookieSprite: {fileID: 0}
-  m_DeprecatedPointLightCookieSprite: {fileID: 0}
-  m_LightOrder: 0
-  m_AlphaBlendOnOverlap: 0
-  m_OverlapOperation: 1
-  m_NormalMapDistance: 3
-  m_NormalMapQuality: 2
-  m_UseNormalMap: 0
-  m_ShadowIntensityEnabled: 0
-  m_ShadowIntensity: 1
-  m_ShadowVolumeIntensityEnabled: 1
-  m_ShadowVolumeIntensity: 0.75
-  m_LocalBounds:
-    m_Center: {x: -0.5299001, y: -0.08135009, z: 0}
-    m_Extent: {x: 2.7544, y: 2.56635, z: 0}
-  m_PointLightInnerAngle: 360
-  m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 1
-  m_ShapeLightParametricSides: 5
-  m_ShapeLightParametricAngleOffset: 0
-  m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 1.93
-  m_ShapeLightFalloffOffset: {x: 0, y: 0}
-  m_ShapePath:
-  - {x: -0.9823159, y: 0.28423154, z: 0.00000017283188}
-  - {x: -0.50027853, y: -0.11210483, z: 0.00000017283188}
-  - {x: -0.8751015, y: -0.7194596, z: 0.00000017283188}
-  - {x: -0.3678841, y: -0.5966904, z: -2.159739e-11}
-  - {x: -0.25208822, y: -0.22319034, z: -2.159739e-11}
-  - {x: -0.30001912, y: -0.01386722, z: -2.159739e-11}
-  - {x: 0.29518047, y: 0.55434567, z: 0.00000017283188}
-  - {x: -0.22337727, y: 0.4887985, z: 0.00000017283188}
-  - {x: -0.7116799, y: 0.41981503, z: 0.00000017283188}
-  - {x: -1.095353, y: 0.446022, z: -0.000000017902991}
-  - {x: -1.209504, y: 0.26978603, z: 0.00000017283188}
-  - {x: -1.3539193, y: 0.13437039, z: 0.00000017283188}
-  - {x: -1.0882027, y: 0.14844815, z: 0.00000017283188}
