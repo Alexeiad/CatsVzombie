@@ -156,7 +156,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable<int>
 
         if (nearestEnemy != null)
         {
-
+            
             StartCoroutine(Shoot(nearestEnemy, distance, playerData));
             Fire(transform.position, nearestEnemy.transform.position);
 
@@ -182,7 +182,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable<int>
     {
         if (Vector3.Distance(startPosition, endPosition) > _enemyDistance)
             return;
-
+        FMODUnity.RuntimeManager.PlayOneShot("event:/shoot");
         _lr.enabled = true;
         _animator.enabled = false;
         //_animationControl.ResetAllDirectionBools();

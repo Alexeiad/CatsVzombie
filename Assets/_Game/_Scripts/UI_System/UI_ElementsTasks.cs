@@ -1,169 +1,144 @@
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class UI_ElementsTasks : MonoBehaviour
 {
     private List<UI_ElementBehaviour> ui_elements = new();
-    private List<UI_ElementBehaviour> openUi_elements = new();
-    private UI_Animation ui_animation;
-    private bool isSafeTask,exceptSwith;
+
+    // Стек открытых панелей — вершина = текущая активная
+    private readonly Stack<UI_ElementBehaviour> panelHistory = new();
+
+    // Последняя закрытая панель — для возврата через Escape
+    private UI_ElementBehaviour lastClosedPanel;
 
     private void Awake()
     {
-        ui_animation = new();
-
         ui_elements = FindObjectsByType<UI_ElementBehaviour>(
             FindObjectsInactive.Include,
             FindObjectsSortMode.None
         ).ToList();
-        
     }
+
     private void OnEnable()
     {
-        if (ui_elements.Count <= 0)
+        if (ui_elements.Count == 0)
         {
-            Debug.LogError("��������� � ������: " + ui_elements.Count);
+            Debug.LogError("UI элементов не найдено!");
+            return;
         }
-        ui_elements
-            .Where(ui => ui.ElementType == ElementType.Button).ToList()
-            .ForEach(button => {
-                button.OnClick += () => HandleButtonClick(button.ButtonType);
-                
-            });
+
+        foreach (var button in ui_elements.Where(ui => ui.ElementType == ElementType.Button))
+        {
+            button.OnClick += () => HandleButtonClick(button.ButtonType);
+        }
     }
 
-
-
+    private void OnDisable()
+    {
+        foreach (var button in ui_elements.Where(ui => ui.ElementType == ElementType.Button))
+        {
+            button.OnClick -= () => HandleButtonClick(button.ButtonType);
+        }
+    }
 
     private void Update()
     {
-        if (Keyboard.current.escapeKey.wasPressedThisFrame 
-            || (Gamepad.current != null && Gamepad.current.buttonEast.wasPressedThisFrame))
-        {
-            
-            exceptSwith = true;
-        }
+        bool backPressed =
+            Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame ||
+            Gamepad.current != null && Gamepad.current.buttonEast.wasPressedThisFrame;
 
-        if (exceptSwith)
-        {
-            var lastUi = openUi_elements?.LastOrDefault();
+        if (!backPressed) return;
 
-            if (lastUi != null)
-            {
-                switch (lastUi.PanelState)
-                {
-                    case PanelState.Open:
-                        lastUi.PanelState=PanelState.Close;
-                        lastUi.gameObject.SetActive(false);
-                        lastUi.PauseState = OutLevelPause();
-                        break;
-                    case PanelState.Close:
-                        lastUi.PanelState = PanelState.Open;
-                        lastUi.gameObject.SetActive(true);
-                        lastUi.PauseState = lastUi.SetPause ? SetLevelPause()
-                        : OutLevelPause();
-                        break;
-                }
-                exceptSwith = false;
-            }
+        if (panelHistory.Count > 0)
+        {
+            // Закрыть текущую верхнюю панель
+            lastClosedPanel = panelHistory.Pop();
+            ClosePanel(lastClosedPanel);
+
+            // Закрыть всё остальное в стеке (если вдруг что-то осталось)
+            CloseAllPanelsInStack();
         }
-           
+        else if (lastClosedPanel != null)
+        {
+            // Все панели закрыты — открыть последнюю закрытую
+            OpenPanel(lastClosedPanel);
+            lastClosedPanel = null;
+        }
     }
+
     private void HandleButtonClick(ButtonType clickedButtonType)
     {
+        var targetPanel = ui_elements.FirstOrDefault(ui =>
+            ui.ElementType == ElementType.Panel &&
+            ui.ButtonType == clickedButtonType);
 
-        var relatedPanels = ui_elements
-            .Where(ui => ui.ElementType == ElementType.Panel &&
-                         ui.ButtonType == clickedButtonType).ToList();
+        if (targetPanel == null) return;
 
-        relatedPanels.ForEach(panel => {
+        // Найти кнопку которая вызвала клик — чтобы проверить isInner
+        var sourceButton = ui_elements.FirstOrDefault(ui =>
+            ui.ElementType == ElementType.Button &&
+            ui.ButtonType == clickedButtonType);
 
-            panel.gameObject.SetActive(ActiveState(panel));
-            panel.PauseState = panel.SetPause ? SetLevelPause() : OutLevelPause();
+        bool inner = sourceButton != null && sourceButton.isInner;
 
-
-
-            openUi_elements.Add(panel);
-        });
+        if (targetPanel.PanelState == PanelState.Open)
+        {
+            // Повторный клик — закрыть панель
+            lastClosedPanel = panelHistory.Count > 0 ? panelHistory.Pop() : null;
+            if (!inner) CloseAllPanelsInStack();
+            ClosePanel(targetPanel);
+        }
+        else
+        {
+            // Если вложенная — не трогаем родительские панели, просто открываем сверху
+            if (!inner) CloseAllPanelsInStack();
+            OpenPanel(targetPanel);
+        }
     }
+
+    // ─── Приватные методы ──────────────────────────────────────────────────────
+
+    private void OpenPanel(UI_ElementBehaviour panel)
+    {
+        panel.PanelState = PanelState.Open;
+        panel.gameObject.SetActive(true);
+        panelHistory.Push(panel);
+
+        panel.PauseState = panel.SetPause ? SetLevelPause() : OutLevelPause();
+    }
+
+    private void ClosePanel(UI_ElementBehaviour panel)
+    {
+        panel.PanelState = PanelState.Close;
+        panel.gameObject.SetActive(false);
+
+        // Снимаем паузу только если больше нет открытых панелей с паузой
+        bool anyPausedOpen = panelHistory.Any(p => p.SetPause);
+        panel.PauseState = anyPausedOpen ? SetLevelPause() : OutLevelPause();
+    }
+
+    private void CloseAllPanelsInStack()
+    {
+        while (panelHistory.Count > 0)
+        {
+            var panel = panelHistory.Pop();
+            panel.PanelState = PanelState.Close;
+            panel.gameObject.SetActive(false);
+        }
+        OutLevelPause();
+    }
+
     private PauseState SetLevelPause()
     {
         Time.timeScale = 0f;
         return PauseState.Pause;
     }
+
     private PauseState OutLevelPause()
     {
         Time.timeScale = 1f;
         return PauseState.Play;
-    }
-    private bool ActiveState(UI_ElementBehaviour panel)
-    {
-        var sprite = panel.GetComponent<Image>();
-
-        switch (panel.PanelState)
-        {
-            case PanelState.Close:
-                panel.PanelState = PanelState.Open;
-                panel.PauseState = panel.SetPause ? SetLevelPause() 
-                    : panel.PauseState = PauseState.Play;
-                return true;
-
-            case PanelState.Open:
-                
-                panel.PanelState = PanelState.Close;
-                panel.PauseState = OutLevelPause();
-
-                return false;
-
-            default:
-                return false;
-        }
-    }
-
-    private async Task HandleButtonClickAsync(ButtonType clickedButtonType)
-    {
-         
-        var relatedPanels = ui_elements
-            .Where(ui => ui.ElementType == ElementType.Panel &&
-                         ui.ButtonType == clickedButtonType).ToList();
-
-        relatedPanels.ForEach(async panel => {
-            
-            panel.gameObject.SetActive(await ActiveStateAsync(panel));
-            openUi_elements.Add(panel);
-            });
-    }
-    private async Task<bool> ActiveStateAsync(UI_ElementBehaviour panel)
-    {
-        var sprite = panel.GetComponent<Image>();
-
-        switch (panel.PanelState)
-        {
-            case PanelState.Close:
-                ui_animation.ToAppear(sprite);
-                panel.PanelState = PanelState.Open;
-                return true;
-
-            case PanelState.Open:
-                
-                var tcs = new TaskCompletionSource<bool>();
-
-                ui_animation.ToDesappear(sprite, () =>
-                {
-                    panel.PanelState = PanelState.Close;
-                    tcs.SetResult(false);
-                });
-
-                return await tcs.Task;
-
-            default:
-                return false;
-        }
     }
 }

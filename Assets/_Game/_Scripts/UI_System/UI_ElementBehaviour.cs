@@ -15,6 +15,7 @@ public class UI_ElementBehaviour : MonoBehaviour
     
     [field: SerializeField] public ButtonType ButtonType { get; private set; }
     [field: SerializeField] public bool SetPause { get; set; }
+    [field: SerializeField] public bool isInner { get; set; }
 
     private EventTrigger _eventTrigger;
 

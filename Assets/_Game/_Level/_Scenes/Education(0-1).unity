@@ -2386,6 +2386,7 @@ MonoBehaviour:
   <ElementType>k__BackingField: 0
   <ButtonType>k__BackingField: 0
   <SetPause>k__BackingField: 0
+  <isInner>k__BackingField: 0
 --- !u!1001 &601300729
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5352,7 +5353,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6431901784087033574, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1841257719085088430, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       insertIndex: 5
@@ -293586,12 +293588,12 @@ MonoBehaviour:
   _targetImage: {fileID: 912976953}
   _canvasStory: {fileID: 1940218646}
   _slides:
-  - {fileID: 21300000, guid: 4fa7663d57e085b42b84df2f30489077, type: 3}
-  - {fileID: 21300000, guid: fbf88f47d977af94fbffc981f5d603fa, type: 3}
-  - {fileID: 21300000, guid: bb4f25ceb0fda3e4ea8648c7e47e9803, type: 3}
-  - {fileID: 21300000, guid: 512c9492f1d0e9647880ce88522f3e4f, type: 3}
-  - {fileID: 21300000, guid: 38efff8418c4e8047b3a7d04df34ddf9, type: 3}
-  - {fileID: 21300000, guid: 38efff8418c4e8047b3a7d04df34ddf9, type: 3}
+  - {fileID: 21300000, guid: e64e5503d8f6738468cc98fb65d4ddd1, type: 3}
+  - {fileID: 21300000, guid: 885b292630c03fd4e88895e69eb1b1f7, type: 3}
+  - {fileID: 21300000, guid: 28d29aa9c59507041998816630fe6386, type: 3}
+  - {fileID: 21300000, guid: bcc5bd2aefe21a744870549e98e7d3ab, type: 3}
+  - {fileID: 21300000, guid: bcc5bd2aefe21a744870549e98e7d3ab, type: 3}
+  - {fileID: 21300000, guid: 9b9368851af872344bdaeefbbec83d1c, type: 3}
   _autoNextDelay: 3
   _stopOnIn: 4
   _sceneBase: 1
