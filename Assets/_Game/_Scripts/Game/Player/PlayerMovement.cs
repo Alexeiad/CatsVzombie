@@ -31,7 +31,8 @@ public class PlayerMovement : MonoBehaviour, IDamageable<int>
         _rightS, _rightDownS, _DownS, _leftDownS;
     [SerializeField] private Animator _animator;
     [SerializeField] private float _shootSpeedInterval=0.1f;
-
+    [SerializeField] private ParticleSystem _particleSystem;
+ 
 
     [Header("Параметры эффекта")]
     public Color trailColor = Color.white; // Базовый цвет полоски
@@ -183,6 +184,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable<int>
         if (Vector3.Distance(startPosition, endPosition) > _enemyDistance)
             return;
         FMODUnity.RuntimeManager.PlayOneShot("event:/shoot");
+        _particleSystem.Play();
         _lr.enabled = true;
         _animator.enabled = false;
         //_animationControl.ResetAllDirectionBools();
