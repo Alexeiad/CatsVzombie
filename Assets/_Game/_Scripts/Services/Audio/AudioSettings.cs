@@ -24,9 +24,8 @@ public class AudioSettings : MonoBehaviour
 
     public void Initialize(MusicClip clip)
     {
-        // Инициализируем шины. Пути должны совпадать с путями в вашем проекте FMOD!
         masterBus = FMODUnity.RuntimeManager.GetBus("bus:/");
-        musicBus = FMODUnity.RuntimeManager.GetBus("bus:/");
+        musicBus = FMODUnity.RuntimeManager.GetBus("bus:/Music");
         sfxBus = FMODUnity.RuntimeManager.GetBus("bus:/SFX");
 
         SelectClip(clip);

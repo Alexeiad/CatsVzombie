@@ -47,7 +47,6 @@ MonoBehaviour:
     Data4: -449826572
   Banks:
   - {fileID: 231441920009905804}
-  - {fileID: -1999486190889674717}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -70,10 +69,10 @@ MonoBehaviour:
   Path: FMOD_data/FMOD cats/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639078314402508619
+  lastModified: 639080515532876616
   FileSizes:
   - Name: Desktop
-    Value: 6186912
+    Value: 6177344
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -103,7 +102,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 7294520905164057594}
   cacheVersion: 131849
-  cacheTime: 639078314402738776
+  cacheTime: 639080515532896603
   SerializableEventsDict:
   - key: event:/Level
     index: 0
@@ -130,7 +129,7 @@ MonoBehaviour:
   Path: FMOD_data/FMOD cats/Build/Desktop/Fx.bank
   Name: Fx
   StudioPath: bank:/Fx
-  lastModified: 639078314402738776
+  lastModified: 639080515532109788
   FileSizes:
   - Name: Desktop
     Value: 10528
@@ -182,7 +181,6 @@ MonoBehaviour:
     Data4: -1107488657
   Banks:
   - {fileID: 231441920009905804}
-  - {fileID: -1999486190889674717}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -205,10 +203,10 @@ MonoBehaviour:
   Path: FMOD_data/FMOD cats/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639078314402528606
+  lastModified: 639080515532896603
   FileSizes:
   - Name: Desktop
-    Value: 1040
+    Value: 1076
   Exists: 1
 --- !u!114 &7747664405501699327
 MonoBehaviour:

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.03.00">
 	<object class="Bank" id="{d5ec001c-cdee-42c3-958a-17ff97215184}">
+		<property name="note">
+			<value>Fx</value>
+		</property>
 		<property name="name">
 			<value>Fx</value>
 		</property>
