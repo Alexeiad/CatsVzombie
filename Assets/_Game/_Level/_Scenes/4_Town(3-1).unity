@@ -5580,15 +5580,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4593168757332701288, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4593168757332701288, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4593168757332701288, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4755728438152663684, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_IsActive
@@ -5652,15 +5652,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6273166003142008298, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6273166003142008298, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6273166003142008298, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6440484903811076737, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       propertyPath: m_Value
@@ -5930,6 +5930,7 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 5619000950234169060, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
     - {fileID: 4995269410797022519, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
+    - {fileID: 6431901784087033574, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2014395041513230596, guid: dc6b3c26f0910d64aafecad2a131e35d, type: 3}
       insertIndex: 0
