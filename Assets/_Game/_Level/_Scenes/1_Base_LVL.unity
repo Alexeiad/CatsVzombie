@@ -286630,6 +286630,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 277385008638087013, guid: 3e4939e975d0b8d4d98d6a7dbafd32b1, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 277385008638087013, guid: 3e4939e975d0b8d4d98d6a7dbafd32b1, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[1]
+      value: 1118752945
+      objectReference: {fileID: 0}
     - target: {fileID: 318418878557234927, guid: 3e4939e975d0b8d4d98d6a7dbafd32b1, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.8
