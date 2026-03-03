@@ -30,13 +30,23 @@ public class EducationBehaviour : MonoBehaviour
     public void NextWindow()
     {
         if (PlayerPrefs.GetString(_educationKey) == _educationKey) return;
-        var themeValues = System.Enum.GetValues(typeof(EducationTheme));
-        int currentIndex = (int)_startWith;
-        int nextIndex = currentIndex + 1;
 
-        if (nextIndex <= (int)EducationTheme.Resources)
+        // Получаем все реальные значения enum по порядку
+        var themeValues = System.Enum.GetValues(typeof(EducationTheme))
+            .Cast<EducationTheme>()
+            .OrderBy(t => (int)t)
+            .ToList();
+
+        int currentPos = themeValues.IndexOf(_startWith);
+        int nextPos = currentPos + 1;
+
+        // Снимаем паузу перед переходом
+        ExitPause();
+        _educationWindow.SetActive(false);
+
+        if (nextPos < themeValues.Count)
         {
-            _startWith = (EducationTheme)nextIndex;
+            _startWith = themeValues[nextPos];
             StartCoroutine(ShowEducation(_startWith));
         }
         else
@@ -106,7 +116,8 @@ public class EducationBehaviour : MonoBehaviour
 
     private void CloseEducationWindow(EducationTheme theme)
     {
-        _educationWindow?.SetActive(false);
+        if( _educationWindow != null )
+        _educationWindow.SetActive(false);
         ExitPause();
     }
         

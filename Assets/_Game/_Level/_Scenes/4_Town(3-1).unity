@@ -3315,6 +3315,7 @@ MonoBehaviour:
   <ElementType>k__BackingField: 0
   <ButtonType>k__BackingField: 0
   <SetPause>k__BackingField: 0
+  <isInner>k__BackingField: 0
 --- !u!114 &859451582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7968,6 +7969,10 @@ PrefabInstance:
       propertyPath: _maxGroupSize
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 881943074990668711, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
+      propertyPath: _resultWindow
+      value: 
+      objectReference: {fileID: 1346659931}
     - target: {fileID: 1074138385779739279, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
       propertyPath: _maxAlive
       value: 1
@@ -7988,6 +7993,10 @@ PrefabInstance:
       propertyPath: _maxGroupSize
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1074138385779739279, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
+      propertyPath: _resultWindow
+      value: 
+      objectReference: {fileID: 1346659931}
     - target: {fileID: 2009133563918844001, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.11
@@ -8048,6 +8057,10 @@ PrefabInstance:
       propertyPath: _maxGroupSize
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 2224519842678886716, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
+      propertyPath: _resultWindow
+      value: 
+      objectReference: {fileID: 1346659931}
     - target: {fileID: 2503089916275061646, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
       propertyPath: m_LocalPosition.x
       value: 245.6
@@ -8076,6 +8089,10 @@ PrefabInstance:
       propertyPath: _maxGroupSize
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3267364214278998961, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
+      propertyPath: _resultWindow
+      value: 
+      objectReference: {fileID: 1346659931}
     - target: {fileID: 3800948558913312838, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
       propertyPath: _maxAlive
       value: 1
@@ -8096,6 +8113,10 @@ PrefabInstance:
       propertyPath: _maxGroupSize
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3800948558913312838, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
+      propertyPath: _resultWindow
+      value: 
+      objectReference: {fileID: 1346659931}
     - target: {fileID: 4041984147385980752, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
       propertyPath: _maxAlive
       value: 1
@@ -8116,6 +8137,10 @@ PrefabInstance:
       propertyPath: _maxGroupSize
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4041984147385980752, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
+      propertyPath: _resultWindow
+      value: 
+      objectReference: {fileID: 1346659931}
     - target: {fileID: 4107884842052398284, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
       propertyPath: _maxAlive
       value: 1
@@ -8136,6 +8161,10 @@ PrefabInstance:
       propertyPath: _maxGroupSize
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4107884842052398284, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
+      propertyPath: _resultWindow
+      value: 
+      objectReference: {fileID: 1346659931}
     - target: {fileID: 4757410849955724165, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
       propertyPath: _maxAlive
       value: 1
@@ -8156,6 +8185,10 @@ PrefabInstance:
       propertyPath: _maxGroupSize
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4757410849955724165, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
+      propertyPath: _resultWindow
+      value: 
+      objectReference: {fileID: 1346659931}
     - target: {fileID: 5003946639605516967, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
       propertyPath: _maxAlive
       value: 1
@@ -8176,6 +8209,10 @@ PrefabInstance:
       propertyPath: _maxGroupSize
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5003946639605516967, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
+      propertyPath: _resultWindow
+      value: 
+      objectReference: {fileID: 1346659931}
     - target: {fileID: 5026233646428984803, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
       propertyPath: _maxAlive
       value: 1
@@ -8196,6 +8233,10 @@ PrefabInstance:
       propertyPath: _maxGroupSize
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5026233646428984803, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
+      propertyPath: _resultWindow
+      value: 
+      objectReference: {fileID: 1346659931}
     - target: {fileID: 5107613518772128582, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
       propertyPath: _maxAlive
       value: 1
@@ -8216,6 +8257,10 @@ PrefabInstance:
       propertyPath: _maxGroupSize
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5107613518772128582, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
+      propertyPath: _resultWindow
+      value: 
+      objectReference: {fileID: 1346659931}
     - target: {fileID: 5266443125823539436, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
       propertyPath: _maxAlive
       value: 1
@@ -8236,6 +8281,10 @@ PrefabInstance:
       propertyPath: _maxGroupSize
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5266443125823539436, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
+      propertyPath: _resultWindow
+      value: 
+      objectReference: {fileID: 1346659931}
     - target: {fileID: 5355741065140056570, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
       propertyPath: m_LocalPosition.x
       value: 228.6
@@ -8284,6 +8333,10 @@ PrefabInstance:
       propertyPath: _maxGroupSize
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6242924252100422392, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
+      propertyPath: _resultWindow
+      value: 
+      objectReference: {fileID: 1346659931}
     - target: {fileID: 6267367657745814799, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
       propertyPath: m_LocalPosition.x
       value: 226.8
@@ -8320,6 +8373,10 @@ PrefabInstance:
       propertyPath: _maxGroupSize
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7362841581616043297, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
+      propertyPath: _resultWindow
+      value: 
+      objectReference: {fileID: 1346659931}
     - target: {fileID: 7667615023008682865, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
       propertyPath: _maxAlive
       value: 1
@@ -8340,6 +8397,10 @@ PrefabInstance:
       propertyPath: _maxGroupSize
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7667615023008682865, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
+      propertyPath: _resultWindow
+      value: 
+      objectReference: {fileID: 1346659931}
     - target: {fileID: 7681451750879344573, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
       propertyPath: _maxAlive
       value: 1
@@ -8360,6 +8421,10 @@ PrefabInstance:
       propertyPath: _maxGroupSize
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7681451750879344573, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
+      propertyPath: _resultWindow
+      value: 
+      objectReference: {fileID: 1346659931}
     - target: {fileID: 8516513714917348168, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
       propertyPath: _maxAlive
       value: 1
@@ -8380,6 +8445,10 @@ PrefabInstance:
       propertyPath: _maxGroupSize
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8516513714917348168, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
+      propertyPath: _resultWindow
+      value: 
+      objectReference: {fileID: 1346659931}
     - target: {fileID: 8557575369566077831, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
       propertyPath: _maxAlive
       value: 1
@@ -8400,6 +8469,10 @@ PrefabInstance:
       propertyPath: _maxGroupSize
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8557575369566077831, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
+      propertyPath: _resultWindow
+      value: 
+      objectReference: {fileID: 1346659931}
     - target: {fileID: 8724106838283610133, guid: 76e9f940a3d0d544ebeee55714adf531, type: 3}
       propertyPath: m_LocalPosition.x
       value: 141.4

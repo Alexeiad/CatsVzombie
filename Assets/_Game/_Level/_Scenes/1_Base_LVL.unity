@@ -199,13 +199,22 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -5.76503, y: 3.5093002}
-      - {x: -8.106636, y: -0.26439667}
-      - {x: -11.313675, y: -3.4788857}
-      - {x: -3.7413254, y: -9.201912}
-      - {x: -4.6101, y: -10.694092}
+    - - {x: -8.448616, y: 1.9390869}
+      - {x: -2.5375366, y: 5.125366}
+      - {x: 6.7254105, y: -3.061798}
+      - {x: -2.6986008, y: -10.244633}
+      - {x: -5.444275, y: -12.049629}
       - {x: -13.48037, y: -5.121315}
       - {x: -16.50712, y: -3.260723}
+    - - {x: -6.3521194, y: 14.910568}
+      - {x: -10.706993, y: 21.471096}
+      - {x: 13.846451, y: 31.77274}
+      - {x: 18.373299, y: 28.472374}
+      - {x: 16.182457, y: 24.29607}
+      - {x: 10.304832, y: 19.646374}
+      - {x: 7.5591583, y: 18.179121}
+      - {x: 1.0520859, y: 1.8072052}
+      - {x: -2.5893116, y: 4.1972313}
   m_UseDelaunayMesh: 0
 --- !u!114 &513193662
 MonoBehaviour:
@@ -567,6 +576,26 @@ PolygonCollider2D:
       - {x: 5.0891495, y: -3.4301605}
       - {x: -2.7453384, y: -7.857355}
       - {x: -11.276918, y: -2.8270721}
+    - - {x: 13.124992, y: 31.39875}
+      - {x: 19.073753, y: 27.977894}
+      - {x: -1.7824173, y: 16.121035}
+      - {x: -8.261843, y: 20.228367}
+    - - {x: 20.677513, y: 8.50518}
+      - {x: 23.429756, y: 6.3872757}
+      - {x: 20.94455, y: 4.568159}
+      - {x: 17.93595, y: 6.775448}
+    - - {x: 40.867912, y: 19.11808}
+      - {x: 45.94982, y: 15.964767}
+      - {x: 40.746674, y: 12.980822}
+      - {x: 35.66726, y: 16.09409}
+    - - {x: 58.474648, y: 1.3135109}
+      - {x: 62.96308, y: -1.839798}
+      - {x: 56.177307, y: -6.2085476}
+      - {x: 50.702217, y: -2.8974533}
+    - - {x: 27.901924, y: -14.788124}
+      - {x: 33.817085, y: -17.737614}
+      - {x: 25.808395, y: -22.71782}
+      - {x: 20.129494, y: -19.202908}
   m_UseDelaunayMesh: 0
 --- !u!114 &710638693
 MonoBehaviour:
@@ -774,6 +803,7 @@ GameObject:
   - component: {fileID: 851629139}
   - component: {fileID: 851629141}
   - component: {fileID: 851629140}
+  - component: {fileID: 851629142}
   m_Layer: 0
   m_Name: Tilemap (1)
   m_TagString: Untagged
@@ -285475,6 +285505,42 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!19719996 &851629142
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 851629138}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0
+  m_UseDelaunayMesh: 0
 --- !u!1 &990506668
 GameObject:
   m_ObjectHideFlags: 0
@@ -286763,6 +286829,10 @@ PrefabInstance:
     - target: {fileID: 1606320132034419725, guid: 3e4939e975d0b8d4d98d6a7dbafd32b1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 12.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 1680062632926311635, guid: 3e4939e975d0b8d4d98d6a7dbafd32b1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1765323512651972898, guid: 3e4939e975d0b8d4d98d6a7dbafd32b1, type: 3}
       propertyPath: m_SortingOrder
@@ -471635,6 +471705,10 @@ PrefabInstance:
     - target: {fileID: 5539913502925724749, guid: 3e4939e975d0b8d4d98d6a7dbafd32b1, type: 3}
       propertyPath: m_SortingOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5799996610436435592, guid: 3e4939e975d0b8d4d98d6a7dbafd32b1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5869637575885213252, guid: 3e4939e975d0b8d4d98d6a7dbafd32b1, type: 3}
       propertyPath: m_SortingOrder

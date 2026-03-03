@@ -1,8 +1,7 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
 using UnityEngine.SceneManagement;
 
 public class StoryBackgroundSlides : MonoBehaviour
@@ -14,128 +13,150 @@ public class StoryBackgroundSlides : MonoBehaviour
     [Header("Slides")]
     [SerializeField] private List<Sprite> _slides = new List<Sprite>();
 
-    [Header("Auto")]
-    [SerializeField] private float _autoNextDelay = 3f;
-    [SerializeField] private int _stopOnIn = 4;
-    [SerializeField] private int _sceneBase=1;
+    [Header("Timing")]
+    [SerializeField] private float _slideDelay = 3f;        // задержка между слайдами
+    [SerializeField] private float _lastSlideHold = 10f;    // сколько висит ПОСЛЕДНИЙ слайд перед загрузкой
 
-    public UnityAction OnFinished;
+    [Header("Default Range (auto-start)")]
+    [SerializeField] private int _defaultFrom = 0;
+    [SerializeField] private int _defaultTo = 3;
+
+    [Header("Scene")]
+    [SerializeField] private int _sceneToLoad = 1;
 
     public delegate void UnityAction();
+    public UnityAction OnFinished;
 
+    private int _currentFrom;
+    private int _currentTo;
     private int _index;
     private bool _isActive;
-    private Coroutine _nextSlideCoroutine;
+    private bool _sceneLoading;
+    private Coroutine _slideCoroutine;
 
-    public void NextSlide()
+    // ─────────────────────────────────────────────────────────
+    //  Публичный запуск: можно вызвать с любыми индексами
+    // ─────────────────────────────────────────────────────────
+    public void StartWith(int from, int to)
     {
-        if (!_isActive) return;
-        _targetImage.sprite = NextSprite();
-    }
+        // Защита от кривых аргументов
+        from = Mathf.Clamp(from, 0, _slides.Count - 1);
+        to = Mathf.Clamp(to, from, _slides.Count - 1);
 
-    public void StartWith(int startIndex = 0, int stopOnIn = 0)
-    {
-        if (_isActive)
-        {
-            StopSlides();
-        }
+        if (_isActive) ForceStop();
 
-        _stopOnIn = stopOnIn > 0 ? stopOnIn : _stopOnIn;
-        _index = startIndex;
+        _currentFrom = from;
+        _currentTo = to;
+        _index = from;
         _isActive = true;
+        _sceneLoading = false;
 
-        Time.timeScale = 0;
+        Time.timeScale = 0f;
         _canvasStory.SetActive(true);
 
-        _targetImage.sprite = _slides[startIndex];
-        
-        _nextSlideCoroutine = StartCoroutine(NextTo());
+        _slideCoroutine = StartCoroutine(SlideLoop());
     }
 
-    public void StopSlides()
+    // Остановить принудительно (без OnFinished и без загрузки сцены)
+    public void ForceStop()
     {
-        if (_nextSlideCoroutine != null)
+        if (_slideCoroutine != null)
         {
-            StopCoroutine(_nextSlideCoroutine);
-            _nextSlideCoroutine = null;
+            StopCoroutine(_slideCoroutine);
+            _slideCoroutine = null;
         }
-
-        if (_isActive)
-        {
-            _isActive = false;
-            Time.timeScale = 1;
-            _canvasStory.SetActive(false);
-            OnFinished?.Invoke();
-        }
+        _isActive = false;
+        Time.timeScale = 1f;
+        _canvasStory.SetActive(false);
     }
 
+    // ─────────────────────────────────────────────────────────
     private void Start()
     {
+        StartWith(_defaultFrom, _defaultTo);
+    }
 
-         StartWith();
-    }
-    private void Update()
-    {
-        if (_targetImage.sprite == _slides[_slides.Count - 1])
-        {
-            SceneManager.LoadScene(_sceneBase);
-        }
-    }
     private void OnDisable()
     {
-
         if (_isActive)
         {
             _isActive = false;
-            Time.timeScale = 1;
+            Time.timeScale = 1f;
             OnFinished?.Invoke();
         }
     }
 
     private void OnDestroy()
     {
-        Time.timeScale = 1;
+        Time.timeScale = 1f;
     }
 
-    private IEnumerator NextTo()
+    // ─────────────────────────────────────────────────────────
+    //  Основная корутина
+    // ─────────────────────────────────────────────────────────
+    private IEnumerator SlideLoop()
     {
+        bool isLastSlideInList = (_currentTo == _slides.Count - 1);
+
         while (_isActive)
         {
-            yield return new WaitForSecondsRealtime(_autoNextDelay);
+            // Показываем текущий слайд
+            _targetImage.sprite = _slides[_index];
 
-            if (_isActive) 
+            bool isLastInRange = (_index == _currentTo);
+
+            if (isLastInRange)
             {
-                _targetImage.sprite = NextSprite();
+                // Если это финальный слайд всего списка — ждём дольше, потом грузим сцену
+                if (isLastSlideInList)
+                {
+                    yield return new WaitForSecondsRealtime(_lastSlideHold);
+                    LoadNextScene();
+                }
+                else
+                {
+                    // Обычный финал диапазона — ждём обычную задержку, вызываем OnFinished
+                    yield return new WaitForSecondsRealtime(_slideDelay);
+                    FinishSlides();
+                }
+                yield break;
             }
+
+            // Не последний — просто ждём и двигаемся дальше
+            yield return new WaitForSecondsRealtime(_slideDelay);
+
+            if (!_isActive) yield break;
+            _index++;
         }
     }
 
-    private Sprite NextSprite()
+    // ─────────────────────────────────────────────────────────
+    private void FinishSlides()
     {
-
-
-        
-        if (_index <_stopOnIn)
-        {
-            return _slides[_index++];
-        }
-        else if (_index == _stopOnIn)
-        {
-            return SpriteFinish();
-        }
-        else return null;
-        
-
-           
-
-        
+        _isActive = false;
+        Time.timeScale = 1f;
+        _canvasStory.SetActive(false);
+        _slideCoroutine = null;
+        OnFinished?.Invoke();
     }
 
-    private Sprite SpriteFinish()
+    private void LoadNextScene()
     {
-        StopSlides();
-        return null;
+        if (_sceneLoading) return;
+        _sceneLoading = true;
+        _isActive = false;
+        Time.timeScale = 1f;
+
+ 
+
+        OnFinished?.Invoke();
+
+        DG.Tweening.DOTween.KillAll();
+
+        SceneManager.LoadScene(_sceneToLoad);
     }
+
+    // ─────────────────────────────────────────────────────────
     public bool IsActive => _isActive;
     public int CurrentIndex => _index;
     public int TotalSlides => _slides?.Count ?? 0;
